@@ -1044,24 +1044,24 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
   };
 
   const rowSurfaceClassName = cn(
-    "group/sidebar-row relative w-full cursor-pointer overflow-hidden rounded-md text-left outline-none select-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+    "group/sidebar-row relative w-full cursor-pointer overflow-hidden rounded-2xl text-left outline-none select-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
     variantAction === "unsettle" &&
       !props.isActive &&
       "[&:not(:hover):not(:focus-within)_*:not(.live-activity-focus_*)]:text-secondary-label",
     props.isActive
-      ? "bg-sidebar-row-active text-sidebar-foreground light:ring-1 light:ring-inset light:ring-sidebar-border/70"
+      ? "glass-fill glass-edge text-sidebar-foreground"
       : isSelected || props.sweepAction !== null
         ? "bg-sidebar-row-selected text-sidebar-foreground light:ring-1 light:ring-inset light:ring-sidebar-border/70"
         : hasUnsentDraft
           ? cn(draftSurfaceClassName, "text-sidebar-foreground")
           : shouldRecede
-            ? "text-sidebar-muted-foreground/75 hover:bg-sidebar-row-hover hover:text-sidebar-foreground"
-            : "bg-transparent text-sidebar-foreground hover:bg-sidebar-row-hover",
+            ? "text-sidebar-muted-foreground/75 hover:glass-fill hover:text-sidebar-foreground"
+            : "bg-transparent text-sidebar-foreground hover:glass-fill",
     shouldRecede &&
       (status === "preparing" || status === "working") &&
       "opacity-70 transition-opacity hover:opacity-100 focus-within:opacity-100 motion-reduce:transition-none",
     isFileDragOver && "ring-1 ring-inset ring-primary/70",
-    isFileDragOver && !props.isActive && !isSelected && "bg-sidebar-row-hover",
+    isFileDragOver && !props.isActive && !isSelected && "glass-fill",
     props.sortable?.isDragging &&
       "bg-sidebar bg-linear-to-b from-sidebar-row-active to-sidebar-row-active text-sidebar-foreground opacity-100 shadow-lg",
   );
@@ -1934,12 +1934,14 @@ export const SidebarSearchResultRow = memo(function SidebarSearchResultRow(props
               );
             }}
             className={cn(
-              "group/sidebar-row group/v2-row flex min-h-9 w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-1 text-left text-sm outline-none",
-              props.isHighlighted || props.isRouteActive
-                ? "bg-sidebar-row-active text-sidebar-foreground"
-                : "text-sidebar-muted-foreground/75 hover:bg-sidebar-row-hover hover:text-sidebar-foreground",
+              "group/sidebar-row group/v2-row flex min-h-9 w-full cursor-pointer items-center gap-2.5 rounded-2xl px-2.5 py-1 text-left text-sm outline-none",
+              props.isRouteActive
+                ? "glass-fill glass-edge text-sidebar-foreground"
+                : props.isHighlighted
+                  ? "glass-fill text-sidebar-foreground"
+                  : "text-sidebar-muted-foreground/75 hover:glass-fill hover:text-sidebar-foreground",
               isFileDragOver && "ring-1 ring-inset ring-primary/70",
-              isFileDragOver && !props.isRouteActive && "bg-sidebar-row-hover",
+              isFileDragOver && !props.isRouteActive && "glass-fill",
             )}
           />
         }

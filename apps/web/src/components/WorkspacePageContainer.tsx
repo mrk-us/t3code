@@ -18,10 +18,11 @@ export function WorkspacePageContainer({
   return (
     <div
       className={cn(
-        "mx-auto flex w-full flex-col gap-6 px-5 pt-6 pb-12 sm:px-6",
+        "workspace-page-container mx-auto flex w-full flex-col gap-6 pe-5 pt-6 pb-12 sm:pe-6",
         WIDTH_CLASS[width],
         className,
       )}
+      data-workspace-page-width={width}
       {...props}
     />
   );

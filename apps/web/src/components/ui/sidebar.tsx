@@ -294,7 +294,8 @@ function Sidebar({
   ...props
 }: React.ComponentProps<"div"> & {
   side?: "left" | "right";
-  variant?: "sidebar" | "floating" | "inset";
+  /** `panel` floats over the content without reserving space, background, or border. */
+  variant?: "sidebar" | "floating" | "inset" | "panel";
   collapsible?: "offcanvas" | "icon" | "none";
   resizable?: boolean | SidebarResizableOptions;
 }) {
@@ -397,6 +398,7 @@ function Sidebar({
             "[[data-panel-animations=true]_&]:transition-[width] [[data-panel-animations=true]_&]:[transition-duration:var(--panel-animation-duration)] [[data-panel-animations=true]_&]:ease-out",
             "group-data-[collapsible=offcanvas]:w-0",
             "group-data-[side=right]:rotate-180",
+            variant === "panel" && "w-0",
             variant === "floating" || variant === "inset"
               ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4)))]"
               : "group-data-[collapsible=icon]:w-(--sidebar-width-icon)",
@@ -405,21 +407,24 @@ function Sidebar({
         />
         <div
           className={cn(
-            "fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) md:flex",
+            "fixed z-10 hidden w-(--sidebar-width) md:flex",
+            variant !== "panel" && "inset-y-0 h-svh",
             "[[data-panel-animations=true]_&]:transition-[left,right,width] [[data-panel-animations=true]_&]:[transition-duration:var(--panel-animation-duration)] [[data-panel-animations=true]_&]:ease-out",
             side === "left"
               ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
               : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",
-            variant === "floating" || variant === "inset"
-              ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
-              : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
+            variant === "panel"
+              ? "top-[calc(var(--workspace-controls-top)+var(--workspace-topbar-height))] bottom-(--sidebar-panel-bottom-inset,0px)"
+              : variant === "floating" || variant === "inset"
+                ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]"
+                : "group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l",
             className,
           )}
           data-slot="sidebar-container"
           {...props}
         >
           <div
-            className="flex h-full w-full flex-col bg-sidebar surface-grain group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm/5"
+            className="flex h-full w-full flex-col bg-sidebar surface-grain group-data-[variant=panel]:bg-transparent group-data-[variant=panel]:[background-image:none] group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow-sm/5"
             data-sidebar="sidebar"
             data-slot="sidebar-inner"
           >
@@ -495,6 +500,7 @@ function SidebarRestoreHandle({ options }: { options: SidebarResolvedResizableOp
     const container = sidebar?.querySelector<HTMLElement>('[data-slot="sidebar-container"]');
     const gap = sidebar?.querySelector<HTMLElement>('[data-slot="sidebar-gap"]');
     if (!wrapper || !container || !gap) return null;
+    const reservesSpace = sidebar?.dataset.variant !== "panel";
     let restorePending = false;
     wrapper.dataset.sidebarDragState = "collapsed";
     return {
@@ -511,7 +517,7 @@ function SidebarRestoreHandle({ options }: { options: SidebarResolvedResizableOp
         const width = clampSidebarWidth(nextWidth, options);
         container.style.left = restorePending ? "0px" : `${-width}px`;
         for (const element of [container, gap]) {
-          element.style.width = `${restorePending || element === container ? width : 0}px`;
+          element.style.width = `${element === container || (restorePending && reservesSpace) ? width : 0}px`;
           element.style.transitionDuration = "0ms";
         }
         return width;
@@ -608,7 +614,9 @@ function SidebarRail({
     // Write width only to gap/container during drag; inherited --sidebar-width restyles the whole app, so
     // update it at commit.
     const widthTargets = [
-      sidebarRoot.querySelector<HTMLElement>("[data-slot='sidebar-gap']"),
+      sidebarRoot.dataset.variant === "panel"
+        ? null
+        : sidebarRoot.querySelector<HTMLElement>("[data-slot='sidebar-gap']"),
       sidebarContainer,
     ].filter((element): element is HTMLElement => element !== null);
     const setTargetWidth = (value: number) => {
