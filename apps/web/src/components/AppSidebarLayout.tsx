@@ -411,7 +411,7 @@ function SidebarControl({
             toggleZenMode({
               sidebarOpen,
               setSidebarOpen,
-              threadRef: resolveThreadRouteRef(router.state.matches.at(-1)?.params ?? {}),
+              routeParams: router.state.matches.at(-1)?.params ?? {},
               animated: panelMotionActive,
             });
           },

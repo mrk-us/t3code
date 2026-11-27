@@ -1,3 +1,4 @@
+import { scopeThreadRef } from "@t3tools/client-runtime/environment";
 import type { ScopedThreadRef } from "@t3tools/contracts";
 import { animate } from "motion";
 
@@ -13,6 +14,8 @@ import {
   useRightPanelStore,
 } from "./rightPanelStore";
 import { selectThreadTerminalUiState, useTerminalUiStateStore } from "./terminalUiStateStore";
+import { useComposerDraftStore } from "./composerDraftStore";
+import { resolveThreadRouteTarget } from "./threadRoutes";
 
 interface OpenPanels {
   readonly sidebar: boolean;
@@ -29,6 +32,17 @@ const ZEN_CHROME = "[data-zen-chrome]";
 const ZEN_OFFSET_PX = 12;
 // The breadcrumb and composer that zen mode moves into the freed space.
 const ZEN_FLIP = "[data-zen-flip]";
+
+type RouteParams = Parameters<typeof resolveThreadRouteTarget>[0];
+
+// A new thread's route names its draft; its panels are keyed by the draft's thread.
+function resolveRouteThreadRef(params: RouteParams): ScopedThreadRef | null {
+  const target = resolveThreadRouteTarget(params);
+  if (target?.kind === "server") return target.threadRef;
+  if (target?.kind !== "draft") return null;
+  const draft = useComposerDraftStore.getState().getDraftSession(target.draftId);
+  return draft ? scopeThreadRef(draft.environmentId, draft.threadId) : null;
+}
 
 function readOpenPanels(sidebarOpen: boolean, threadRef: ScopedThreadRef | null): OpenPanels {
   const rightPanels = useRightPanelStore.getState();
@@ -110,11 +124,11 @@ function animateChrome(hidden: boolean, animated: boolean) {
 export function toggleZenMode(input: {
   readonly sidebarOpen: boolean;
   readonly setSidebarOpen: (open: boolean) => void;
-  readonly threadRef: ScopedThreadRef | null;
+  readonly routeParams: RouteParams;
   readonly animated: boolean;
 }) {
   if (zenPanels === null) {
-    zenPanels = readOpenPanels(input.sidebarOpen, input.threadRef);
+    zenPanels = readOpenPanels(input.sidebarOpen, resolveRouteThreadRef(input.routeParams));
     setPanels(zenPanels, false, input.setSidebarOpen);
     animateChrome(true, input.animated);
     return;
