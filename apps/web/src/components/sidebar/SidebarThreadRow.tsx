@@ -57,6 +57,7 @@ import {
   UserRoundIcon,
   XIcon,
 } from "lucide-react";
+import { animate } from "motion";
 import {
   memo,
   useRef,
@@ -125,6 +126,7 @@ import { ProjectFavicon, type ProjectFaviconProject } from "../ProjectFavicon";
 import { ThreadSearchMatchExcerpt } from "../ThreadSearchMatch";
 import { makeWorkspaceFileDropHandlers } from "../chat/workspaceFileDrop";
 import { ProviderInstanceIcon } from "../chat/ProviderInstanceIcon";
+import { fadeTransition, prefersReducedMotion, SPRING_SNAPPY } from "~/lib/motionTokens";
 import { getTriggerDisplayModelName } from "../chat/providerIconUtils";
 import { shouldShowInstanceBadge, type ProviderInstanceEntry } from "../../providerInstances";
 import { useThreadRunningTerminalIds } from "../../state/terminalSessions";
@@ -869,6 +871,16 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
   );
 
   const intentPrefetch = useThreadIntentPrefetch(threadRef);
+  const rowActionsRef = useRef<HTMLSpanElement>(null);
+  // The status slot swaps in CSS; the actions cascade in on a mouse hover so moving down the list stays quiet.
+  const handleRowPointerEnter = (event: ReactPointerEvent) => {
+    intentPrefetch.onPointerEnter(event);
+    const items = rowActionsRef.current ? Array.from(rowActionsRef.current.children) : [];
+    if (event.pointerType !== "mouse" || items.length === 0) return;
+    const delay = (index: number) => index * 0.03;
+    animate(items, { opacity: [0, 1] }, { ...fadeTransition(0.15), delay });
+    if (!prefersReducedMotion()) animate(items, { x: [4, 0] }, { ...SPRING_SNAPPY, delay });
+  };
   const handleClick = (event: ReactMouseEvent) => {
     onThreadClick(event, threadRef);
   };
@@ -1518,7 +1530,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
             aria-busy={isRegeneratingTitle || undefined}
             className={rowSurfaceClassName}
             onClick={handleClick}
-            onPointerEnter={intentPrefetch.onPointerEnter}
+            onPointerEnter={handleRowPointerEnter}
             onPointerLeave={intentPrefetch.onPointerLeave}
             onPointerDown={intentPrefetch.onPointerDown}
             onDoubleClick={handleDoubleClick}
@@ -1564,7 +1576,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                   className={cn(
                     isWokeStatus
                       ? "pointer-events-auto"
-                      : "pointer-events-none group-has-[:focus-visible]/sidebar-status-slot:absolute group-has-[:focus-visible]/sidebar-status-slot:right-0 group-has-[:focus-visible]/sidebar-status-slot:opacity-0 group-any-hover/sidebar-row:absolute group-any-hover/sidebar-row:right-0 group-any-hover/sidebar-row:opacity-0",
+                      : "pointer-events-none transition-opacity duration-100 ease-out-strong group-has-[:focus-visible]/sidebar-status-slot:absolute group-has-[:focus-visible]/sidebar-status-slot:right-0 group-has-[:focus-visible]/sidebar-status-slot:opacity-0 group-any-hover/sidebar-row:absolute group-any-hover/sidebar-row:right-0 group-any-hover/sidebar-row:opacity-0",
                     "flex items-center self-center justify-self-end tabular-nums text-secondary-label",
                     snoozeMenuOpen && "pointer-events-none absolute right-0 opacity-0",
                   )}
@@ -1629,6 +1641,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                 </span>
                 {props.settlementSupported || showSnoozeButton || hasUnsentDraft ? (
                   <span
+                    ref={rowActionsRef}
                     className={cn(
                       // Mouse clicks leave Settle focused; focus-within would pin controls over
                       // the status label after the pointer leaves. Use focus-visible instead.

@@ -24,7 +24,9 @@ Turn on **Settings → Appearance → Render math** (per device) to render LaTeX
 
 ## Motion
 
-Sidebars, the right panel, and the terminal drawer open immediately by default. Adjust **Settings → Appearance → Panel animations** (0–400 ms) to enable transitions, unless OS reduced motion is enabled.
+Sidebars, the right panel, and the terminal drawer animate as they open and close. Turn off **Settings → Appearance → Panel animations** to open them instantly; OS reduced motion also turns them off.
+
+Buttons and links show the arrow cursor. Turn on **Settings → Appearance → Pointer cursor** (web and desktop) to show the hand cursor instead.
 
 ## Custom themes
 

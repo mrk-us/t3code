@@ -1,4 +1,11 @@
-const motionTiming = { duration: 150, easing: "ease-out" };
+import { animate as motionAnimate } from "motion";
+
+import { fadeTransition, SPRING_SNAPPY } from "~/lib/motionTokens";
+
+// Reorders read eased WAAPI progress mid-flight to retarget, so they stay on WAAPI.
+const motionTiming = { duration: 200, easing: "cubic-bezier(0.23, 1, 0.32, 1)" };
+// Rows revealed or hidden by a section toggle cascade top to bottom, capped so long sections stay quick.
+const sectionDelay = (index: number, step: number) => Math.min(index, 8) * step;
 const rowTravel = (height: number) => Math.min(height, 40);
 // Fades clone removed rows and animate clones and entries; intervening layout reads force reflows.
 const MAX_FADED_ROWS_PER_UPDATE = 40;
@@ -20,7 +27,7 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
   );
   const running = new Map<HTMLElement, { animation: Animation; offset: number }>();
   const entering = new Map<HTMLElement, { animation: Animation; travel: number }>();
-  const exiting = new Map<HTMLElement, Animation>();
+  const exiting = new Map<HTMLElement, { cancel(): void }>();
   let released: Map<HTMLElement, number> | null = null;
   const scroller = parent.closest<HTMLElement>('[data-slot="scroll-area-viewport"]');
   let scrollTop = scroller?.scrollTop ?? 0;
@@ -43,7 +50,13 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
     entering.clear();
     exiting.clear();
   };
-  const fadeOut = (node: HTMLElement, position: RowPosition, travel: number, shift: number) => {
+  const fadeOut = (
+    node: HTMLElement,
+    position: RowPosition,
+    travel: number,
+    shift: number,
+    sectionIndex: number | null,
+  ) => {
     if (position.height === 0) return;
     const clone = node.cloneNode(true) as HTMLElement;
     for (const element of [clone, ...clone.querySelectorAll("*")]) {
@@ -74,6 +87,19 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
       pointerEvents: "none",
     });
     parent.append(clone);
+    if (sectionIndex !== null) {
+      const controls = motionAnimate(
+        clone,
+        { opacity: 0 },
+        { ...fadeTransition(0.15), delay: sectionDelay(sectionIndex, 0.015) },
+      );
+      exiting.set(clone, controls);
+      void controls.finished.then(() => {
+        clone.remove();
+        exiting.delete(clone);
+      });
+      return;
+    }
     const entry = entering.get(node);
     const entryProgress = entry ? progress(entry.animation) : 1;
     const animation = clone.animate(
@@ -124,7 +150,10 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
   };
 
   return {
-    update(animate: boolean) {
+    update(animate: boolean, options?: { readonly section?: boolean }) {
+      const section = options?.section === true;
+      const sectionEntering: HTMLElement[] = [];
+      let sectionExitCount = 0;
       if (disposed) return;
       // A hidden list (the closed narrow sheet stays mounted) reports zero
       // offsets, which would make the first pass after it opens animate every row.
@@ -193,7 +222,15 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
         for (const [node, position] of positions!) {
           if (next.has(node)) continue;
           const delta = ridingDelta(oldOrder, oldOrder.indexOf(node), (n) => next.has(n));
-          fadeOut(node, position, delta === undefined ? rowTravel(position.height) : -delta, shift);
+          if (section) fadeOut(node, position, 0, shift, sectionExitCount++);
+          else
+            fadeOut(
+              node,
+              position,
+              delta === undefined ? rowTravel(position.height) : -delta,
+              shift,
+              null,
+            );
         }
       }
       for (const [node, entry] of entering) {
@@ -210,6 +247,10 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
           const position = next.get(node)!;
           const previousTop = positions!.get(node)?.top;
           if (previousTop === undefined) {
+            if (position.height > 0 && section) {
+              sectionEntering.push(node);
+              continue;
+            }
             if (position.height > 0) {
               const delta = ridingDelta(nextOrder, index, (n) => positions!.has(n));
               const travel = delta === undefined ? -rowTravel(position.height) : delta;
@@ -236,6 +277,23 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
           // transforms.
           if (delta !== undefined) move(node, delta);
         }
+      }
+      if (sectionEntering.length > 0) {
+        // Hold delayed rows at their start until their turn comes.
+        for (const node of sectionEntering) {
+          node.style.opacity = "0";
+          node.style.translate = "0px -6px";
+        }
+        motionAnimate(
+          sectionEntering,
+          { opacity: [0, 1] },
+          { ...fadeTransition(0.2), delay: (index) => sectionDelay(index, 0.025) },
+        );
+        motionAnimate(
+          sectionEntering,
+          { translate: ["0px -6px", "0px 0px"] },
+          { ...SPRING_SNAPPY, delay: (index) => sectionDelay(index, 0.025) },
+        );
       }
       if (released !== null) {
         if (!reducedMotion?.matches) {

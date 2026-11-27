@@ -10,10 +10,8 @@ import {
   type EnvironmentIdentificationMode,
   MAX_APPEARANCE_CONTRAST,
   MAX_GLASS_OPACITY,
-  MAX_PANEL_ANIMATION_DURATION_MS,
   MIN_APPEARANCE_CONTRAST,
   MIN_GLASS_OPACITY,
-  MIN_PANEL_ANIMATION_DURATION_MS,
 } from "@t3tools/contracts/settings";
 import {
   resolveSidebarStageBackdropVariant,
@@ -35,7 +33,6 @@ import {
 } from "./settingsLayout";
 import { useSearchableSetting } from "./settingsSearch";
 import { AdvancedSettings } from "./AdvancedSettings";
-import { PanelAnimationsPreview } from "./PanelAnimationsPreview";
 import { TypographySection } from "./TypographySettings";
 import { ThreadDetailsItemsRow } from "./ThreadDetailsItemsRow";
 
@@ -145,13 +142,6 @@ export function AppearanceSettingsPanel() {
   const appearanceContrastSliderStyle = {
     "--settings-slider-progress": `${appearanceContrastRatio * 100}%`,
     "--settings-slider-fill-offset": `${0.5 - appearanceContrastRatio}rem`,
-  } as CSSProperties;
-  const panelAnimationDurationRatio =
-    (settings.panelAnimationDurationMs - MIN_PANEL_ANIMATION_DURATION_MS) /
-    (MAX_PANEL_ANIMATION_DURATION_MS - MIN_PANEL_ANIMATION_DURATION_MS);
-  const panelAnimationDurationSliderStyle = {
-    "--settings-slider-progress": `${panelAnimationDurationRatio * 100}%`,
-    "--settings-slider-fill-offset": `${0.5 - panelAnimationDurationRatio}rem`,
   } as CSSProperties;
 
   return (
@@ -413,6 +403,7 @@ export function AppearanceSettingsPanel() {
         <AdvancedSettings
           targetIds={[
             searchableSetting("panel-animations").id,
+            searchableSetting("pointer-cursor").id,
             searchableSetting("environment-identification").id,
             // Environment identification's search result lands on this section.
             "appearance-interface",
@@ -421,50 +412,46 @@ export function AppearanceSettingsPanel() {
         >
           <SettingsRow
             {...searchableSetting("panel-animations")}
-            description={gt("Set how fast panels open and close.")}
+            description={gt("Animate panels as they open and close.")}
             control={
-              <div className="grid w-full grid-cols-[5rem_minmax(0,1fr)] items-center gap-3 sm:w-auto sm:grid-cols-[7rem_13rem] sm:gap-4">
-                <PanelAnimationsPreview durationMs={settings.panelAnimationDurationMs} />
-                <div className="flex w-full items-center gap-3">
-                  <output
-                    className="min-w-16 rounded-md bg-muted px-2 py-1 text-center font-mono text-xs font-medium tabular-nums text-foreground"
-                    htmlFor="panel-animation-duration"
-                  >
-                    {settings.panelAnimationDurationMs} ms
-                  </output>
-                  <input
-                    aria-label={gt("Panel animation duration")}
-                    className="settings-slider min-w-0 flex-1"
-                    id="panel-animation-duration"
-                    max={MAX_PANEL_ANIMATION_DURATION_MS}
-                    min={MIN_PANEL_ANIMATION_DURATION_MS}
-                    onChange={(event) => {
-                      const panelAnimationDurationMs = Number(event.currentTarget.value);
-                      if (
-                        Number.isInteger(panelAnimationDurationMs) &&
-                        panelAnimationDurationMs >= MIN_PANEL_ANIMATION_DURATION_MS &&
-                        panelAnimationDurationMs <= MAX_PANEL_ANIMATION_DURATION_MS
-                      ) {
-                        updateSettings({ panelAnimationDurationMs });
-                      }
-                    }}
-                    step={25}
-                    style={panelAnimationDurationSliderStyle}
-                    type="range"
-                    value={settings.panelAnimationDurationMs}
-                  />
-                </div>
-              </div>
+              <Switch
+                checked={settings.panelAnimationsEnabled}
+                onCheckedChange={(checked) =>
+                  updateSettings({ panelAnimationsEnabled: Boolean(checked) })
+                }
+                aria-label={gt("Panel animations")}
+              />
             }
             resetAction={
-              settings.panelAnimationDurationMs !==
-              DEFAULT_UNIFIED_SETTINGS.panelAnimationDurationMs ? (
+              settings.panelAnimationsEnabled !==
+              DEFAULT_UNIFIED_SETTINGS.panelAnimationsEnabled ? (
                 <SettingResetButton
                   ariaLabel={gt("Reset panel animations to default")}
                   onClick={() =>
                     updateSettings({
-                      panelAnimationDurationMs: DEFAULT_UNIFIED_SETTINGS.panelAnimationDurationMs,
+                      panelAnimationsEnabled: DEFAULT_UNIFIED_SETTINGS.panelAnimationsEnabled,
                     })
+                  }
+                />
+              ) : null
+            }
+          />
+          <SettingsRow
+            {...searchableSetting("pointer-cursor")}
+            description={gt("Show the hand cursor over buttons and links.")}
+            control={
+              <Switch
+                checked={settings.pointerCursor}
+                onCheckedChange={(checked) => updateSettings({ pointerCursor: Boolean(checked) })}
+                aria-label={gt("Pointer cursor")}
+              />
+            }
+            resetAction={
+              settings.pointerCursor !== DEFAULT_UNIFIED_SETTINGS.pointerCursor ? (
+                <SettingResetButton
+                  ariaLabel={gt("Reset pointer cursor to default")}
+                  onClick={() =>
+                    updateSettings({ pointerCursor: DEFAULT_UNIFIED_SETTINGS.pointerCursor })
                   }
                 />
               ) : null

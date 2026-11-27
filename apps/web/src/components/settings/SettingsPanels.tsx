@@ -521,8 +521,11 @@ export function useSettingsRestore(onRestored?: () => void) {
     ...(settings.mathRenderingEnabled !== DEFAULT_UNIFIED_SETTINGS.mathRenderingEnabled
       ? [gt("Render math")]
       : []),
-    ...(settings.panelAnimationDurationMs !== DEFAULT_UNIFIED_SETTINGS.panelAnimationDurationMs
+    ...(settings.panelAnimationsEnabled !== DEFAULT_UNIFIED_SETTINGS.panelAnimationsEnabled
       ? [gt("Panel animations")]
+      : []),
+    ...(settings.pointerCursor !== DEFAULT_UNIFIED_SETTINGS.pointerCursor
+      ? [gt("Pointer cursor")]
       : []),
     ...(settings.environmentIdentificationMode !==
     DEFAULT_UNIFIED_SETTINGS.environmentIdentificationMode
@@ -735,7 +738,8 @@ export function useSettingsRestore(onRestored?: () => void) {
       screenReaderWindowTitle: DEFAULT_UNIFIED_SETTINGS.screenReaderWindowTitle,
       environmentIdentificationMode: DEFAULT_UNIFIED_SETTINGS.environmentIdentificationMode,
       glassOpacity: DEFAULT_UNIFIED_SETTINGS.glassOpacity,
-      panelAnimationDurationMs: DEFAULT_UNIFIED_SETTINGS.panelAnimationDurationMs,
+      panelAnimationsEnabled: DEFAULT_UNIFIED_SETTINGS.panelAnimationsEnabled,
+      pointerCursor: DEFAULT_UNIFIED_SETTINGS.pointerCursor,
       sidebarProjectGroupingMode: DEFAULT_UNIFIED_SETTINGS.sidebarProjectGroupingMode,
       sidebarProjectSortOrder: DEFAULT_UNIFIED_SETTINGS.sidebarProjectSortOrder,
       sidebarWorkingShelfEnabled: DEFAULT_UNIFIED_SETTINGS.sidebarWorkingShelfEnabled,

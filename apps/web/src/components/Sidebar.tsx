@@ -227,6 +227,8 @@ import {
 } from "./Sidebar.drag";
 import { SidebarPointerSensor } from "./Sidebar.pointer";
 import { createSidebarListMotion } from "./Sidebar.motion";
+import { resetSidebarPanelStagger, staggerSidebarPanel } from "./Sidebar.panelStagger";
+import { usePanelAnimationSettings } from "../panelAnimations";
 import { createSidebarShiftGuard } from "./Sidebar.shiftGuard";
 import {
   pickSnoozePreset,
@@ -1081,6 +1083,16 @@ export default function Sidebar({ routeReveal }: { routeReveal: SidebarRouteReve
   const threadListRef = useRef<HTMLUListElement | null>(null);
   const searchResultsListRef = useRef<HTMLUListElement | null>(null);
   const sidebarContentRef = useRef<HTMLDivElement | null>(null);
+  const { active: panelMotionActive } = usePanelAnimationSettings();
+  const staggeredOpenRef = useRef(sidebarOpen);
+  // oxlint-disable-next-line t3code/no-unreasoned-state-sync -- plays the panel's row cascade when its open state commits; the rows are DOM the motion library drives
+  useLayoutEffect(() => {
+    const root = sidebarContentRef.current;
+    if (root === null || staggeredOpenRef.current === sidebarOpen) return;
+    staggeredOpenRef.current = sidebarOpen;
+    if (panelMotionActive && !isMobile) staggerSidebarPanel(root, sidebarOpen ? "in" : "out");
+    else resetSidebarPanelStagger(root);
+  }, [isMobile, panelMotionActive, sidebarOpen]);
   const dragLabelOffsetRef = useRef(0);
   const listMotionRef = useRef<ReturnType<typeof createSidebarListMotion> | null>(null);
   const shiftGuardRef = useRef<ReturnType<typeof createSidebarShiftGuard> | null>(null);
@@ -2086,10 +2098,10 @@ export default function Sidebar({ routeReveal }: { routeReveal: SidebarRouteReve
   // oxlint-disable-next-line t3code/no-unreasoned-state-sync -- records moved rows and updates list motion after each layout-affecting commit
   useLayoutEffect(() => {
     shiftGuardRef.current?.update();
-    // Shelf rows would travel over stationary headers below the bottom-anchored shelf.
+    // A section toggle cascades its rows in place instead of dropping them across the header.
     const shelvesUnchanged = previousShelfExpansionKeyRef.current === shelfExpansionKey;
     previousShelfExpansionKeyRef.current = shelfExpansionKey;
-    listMotionRef.current?.update(listMotionPass.animate && shelvesUnchanged);
+    listMotionRef.current?.update(listMotionPass.animate, { section: !shelvesUnchanged });
   }, [listMotionPass, shelfExpansionKey]);
   const handleThreadDragOver = (event: DragOverEvent) => {
     const target = event.over
@@ -3379,7 +3391,7 @@ export default function Sidebar({ routeReveal }: { routeReveal: SidebarRouteReve
         fixedHeader={
           showThreadSearchField || showProjectFilter ? (
             <SidebarGroup className="z-[1]">
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1" data-sidebar-stagger="">
                 {showThreadSearchField ? (
                   <SidebarThreadSearchField
                     searchInputRef={threadSearchInputRef}
@@ -3449,6 +3461,7 @@ export default function Sidebar({ routeReveal }: { routeReveal: SidebarRouteReve
                 <ul
                   ref={searchResultsListRef}
                   id="sidebar-thread-search-results"
+                  data-sidebar-stagger=""
                   role="listbox"
                   aria-label={gt("Thread search results")}
                   className="flex flex-col gap-px"
@@ -3579,6 +3592,7 @@ export default function Sidebar({ routeReveal }: { routeReveal: SidebarRouteReve
               <SortableContext items={sortableIds} strategy={sidebarSortingStrategy}>
                 <ul
                   ref={attachTreeRef}
+                  data-sidebar-stagger=""
                   // Presentation flattens VoiceOver's list interaction boundary while preserving descendant
                   // controls.
                   role="presentation"

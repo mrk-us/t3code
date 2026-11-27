@@ -302,11 +302,9 @@ function Sidebar({
   const { isMobile, state, openMobile, setOpenMobile, setMobileSheetMounted } = useSidebar();
   const gt = useGT();
   // Not usePanelAnimationSettings: its navigation suppression would snap the sheet shut mid-exit when an item navigates.
-  const panelAnimationDurationMs = useClientSettings(
-    (settings) => settings.panelAnimationDurationMs,
-  );
+  const panelAnimationsEnabled = useClientSettings((settings) => settings.panelAnimationsEnabled);
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
-  const panelAnimationsActive = panelAnimationDurationMs > 0 && !prefersReducedMotion;
+  const panelAnimationsActive = panelAnimationsEnabled && !prefersReducedMotion;
   const offcanvasCollapsed = !isMobile && collapsible === "offcanvas" && state === "collapsed";
 
   const resolvedResizable = resolveSidebarResizable({ collapsible, isMobile, resizable });
@@ -409,7 +407,7 @@ function Sidebar({
           className={cn(
             "fixed z-10 hidden w-(--sidebar-width) md:flex",
             variant !== "panel" && "inset-y-0 h-svh",
-            "[[data-panel-animations=true]_&]:transition-[left,right,width] [[data-panel-animations=true]_&]:[transition-duration:var(--panel-animation-duration)] [[data-panel-animations=true]_&]:ease-out",
+            "[[data-panel-animations=true]_&]:transition-[left,right,width] [[data-panel-animations=true]_&]:[transition-duration:var(--panel-animation-duration)] [[data-panel-animations=true]_&]:ease-drawer",
             side === "left"
               ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
               : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",

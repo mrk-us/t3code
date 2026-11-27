@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { type PanelAnimationDurationMs } from "@t3tools/contracts/settings";
 
 import { useMediaQuery } from "./hooks/useMediaQuery";
 import { useClientSettings } from "./hooks/useSettings";
@@ -28,14 +27,17 @@ export function usePanelNavigationSuppression(navigationKey: string): boolean {
   return suppressed;
 }
 
-export function usePanelAnimationSettings(): {
-  active: boolean;
-  durationMs: PanelAnimationDurationMs;
-} {
-  const durationMs = useClientSettings((settings) => settings.panelAnimationDurationMs);
+// Panels animate at one speed; the setting only turns animation on or off.
+const PANEL_ANIMATION_DURATION_MS = 150;
+
+export function usePanelAnimationSettings(): { active: boolean; durationMs: number } {
+  const enabled = useClientSettings((settings) => settings.panelAnimationsEnabled);
   const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const suppressed = useContext(PanelAnimationSuppressionContext);
-  return { active: durationMs > 0 && !prefersReducedMotion && !suppressed, durationMs };
+  return {
+    active: enabled && !prefersReducedMotion && !suppressed,
+    durationMs: PANEL_ANIMATION_DURATION_MS,
+  };
 }
 
 export function usePanelPresence<T>(
@@ -43,7 +45,7 @@ export function usePanelPresence<T>(
   value: T | null,
   animated: boolean,
   scopeKey: string | null,
-  durationMs: PanelAnimationDurationMs,
+  durationMs: number,
 ): { present: boolean; value: T | null } {
   const [present, setPresent] = useState(open);
   const [retained, setRetained] = useState<{ scopeKey: string | null; value: T | null } | null>(

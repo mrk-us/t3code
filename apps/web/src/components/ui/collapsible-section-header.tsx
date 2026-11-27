@@ -1,6 +1,8 @@
 import type { ComponentProps, ReactNode } from "react";
 import { ChevronDownIcon } from "lucide-react";
+import { motion } from "motion/react";
 import { cn } from "../../lib/utils";
+import { SPRING_SNAPPY } from "../../lib/motionTokens";
 
 const tones = {
   muted: { label: "text-sidebar-muted-foreground", line: "bg-sidebar-border/50" },
@@ -39,10 +41,15 @@ export function CollapsibleSectionHeader({
         className={cn("h-px min-w-2 flex-1", tones[tone].line, accessory && "invisible")}
       />
       {accessory}
-      <ChevronDownIcon
+      <motion.span
         aria-hidden
-        className={cn("size-3 shrink-0 transition-transform", !expanded && "-rotate-90")}
-      />
+        className="flex shrink-0"
+        initial={false}
+        animate={{ rotate: expanded ? 0 : -90 }}
+        transition={SPRING_SNAPPY}
+      >
+        <ChevronDownIcon className="size-3" />
+      </motion.span>
     </button>
   );
 }
