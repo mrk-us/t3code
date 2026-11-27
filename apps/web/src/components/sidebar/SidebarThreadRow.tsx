@@ -23,10 +23,7 @@ import {
   resolveThreadActivityTimestamp,
 } from "@t3tools/client-runtime/state/thread-sort";
 import { type EnvironmentThreadSearchMatch } from "@t3tools/client-runtime/state/thread-search";
-import {
-  formatWorkingDurationLabel,
-  resolveThreadProviderStack,
-} from "@t3tools/client-runtime/state/models";
+import { formatWorkingDurationLabel } from "@t3tools/client-runtime/state/models";
 import { scopeThreadRef, scopedThreadKey } from "@t3tools/client-runtime/environment";
 import { toServerClock } from "@t3tools/client-runtime/clock";
 import {
@@ -226,54 +223,6 @@ function terminalProcessLabel(count: number, resolve: MessageResolver): string {
       "{count, plural, one {{count} terminal process running} other {{count} terminal processes running}}",
       { count },
     ),
-  );
-}
-
-function SidebarProviderStack(props: {
-  thread: SidebarThreadSummary;
-  providerEntryByInstanceId: ReadonlyMap<string, SidebarProviderEntry>;
-}) {
-  const stack = resolveThreadProviderStack(props.thread);
-  const currentInstanceId = stack[stack.length - 1]!;
-  const currentEntry = props.providerEntryByInstanceId.get(currentInstanceId) ?? null;
-  if (currentEntry === null) return null;
-  const showInstanceBadge = shouldShowInstanceBadge(
-    currentEntry,
-    props.providerEntryByInstanceId.values(),
-  );
-  const current = (
-    <ProviderInstanceIcon
-      driverKind={currentEntry.driverKind}
-      displayName={currentEntry.displayName}
-      accentColor={currentEntry.accentColor}
-      acpRegistryAgentId={currentEntry.acpRegistryAgentId}
-      acpRegistryIconUrl={currentEntry.acpRegistryIconUrl}
-      showBadge={showInstanceBadge}
-      size="compact"
-      iconClassName="opacity-60"
-    />
-  );
-  if (stack.length === 1) {
-    return <span className="inline-flex shrink-0 items-center">{current}</span>;
-  }
-  return (
-    <span className="inline-flex shrink-0 items-center gap-1.5">
-      {stack.slice(0, -1).map((instanceId) => {
-        const entry = props.providerEntryByInstanceId.get(instanceId);
-        if (entry === undefined) return null;
-        return (
-          <ProviderInstanceIcon
-            key={instanceId}
-            driverKind={entry.driverKind}
-            displayName={entry.displayName}
-            acpRegistryAgentId={entry.acpRegistryAgentId}
-            acpRegistryIconUrl={entry.acpRegistryIconUrl}
-            iconClassName="size-3 opacity-35 grayscale"
-          />
-        );
-      })}
-      <span className="relative z-10 inline-flex items-center">{current}</span>
-    </span>
   );
 }
 
@@ -1057,6 +1006,10 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
           : shouldRecede
             ? "text-sidebar-muted-foreground/75 hover:glass-fill hover:text-sidebar-foreground"
             : "bg-transparent text-sidebar-foreground hover:glass-fill",
+    !props.isActive &&
+      !isSelected &&
+      props.sweepAction === null &&
+      "opacity-80 transition-opacity hover:opacity-100 focus-within:opacity-100 motion-reduce:transition-none",
     shouldRecede &&
       (status === "preparing" || status === "working") &&
       "opacity-70 transition-opacity hover:opacity-100 focus-within:opacity-100 motion-reduce:transition-none",
@@ -1314,25 +1267,8 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
           <span className="text-diff-deletion-foreground">−{formatDiffCount(diff.deletions)}</span>
         </span>
       ) : null}
-      <span
-        aria-hidden
-        className="pointer-events-none ml-auto inline-flex shrink-0 items-center gap-1"
-      >
-        <SidebarProviderStack
-          thread={thread}
-          providerEntryByInstanceId={props.providerEntryByInstanceId}
-        />
-      </span>
     </div>
   );
-  const titleLineIcons = metaLineEmpty ? (
-    <span aria-hidden className="inline-flex shrink-0 items-center gap-1">
-      <SidebarProviderStack
-        thread={thread}
-        providerEntryByInstanceId={props.providerEntryByInstanceId}
-      />
-    </span>
-  ) : null;
 
   if (variant !== "card") {
     const multiline = variant === "folder-multiline";
@@ -1397,7 +1333,6 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
             )}
             {draftIndicator}
             {title}
-            {multiline ? titleLineIcons : null}
             {pinIndicator}
             {multiline ? null : terminalStatusIcon}
             {multiline ? null : issueBadge}
@@ -1760,7 +1695,6 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                 <T>Regenerating title</T>
               </span>
             ) : null}
-            {titleLineIcons}
           </div>
           {metaLine}
         </div>
@@ -1939,7 +1873,7 @@ export const SidebarSearchResultRow = memo(function SidebarSearchResultRow(props
                 ? "glass-fill glass-edge text-sidebar-foreground"
                 : props.isHighlighted
                   ? "glass-fill text-sidebar-foreground"
-                  : "text-sidebar-muted-foreground/75 hover:glass-fill hover:text-sidebar-foreground",
+                  : "text-sidebar-muted-foreground/75 opacity-80 transition-opacity hover:glass-fill hover:text-sidebar-foreground hover:opacity-100 motion-reduce:transition-none",
               isFileDragOver && "ring-1 ring-inset ring-primary/70",
               isFileDragOver && !props.isRouteActive && "glass-fill",
             )}

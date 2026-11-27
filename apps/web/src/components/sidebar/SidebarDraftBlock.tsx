@@ -158,7 +158,12 @@ const SidebarDraftRow = memo(function SidebarDraftRow(props: {
         data-testid="sidebar-draft-row"
         className={cn(
           "group/sidebar-row relative w-full cursor-pointer overflow-hidden rounded-2xl text-left text-sidebar-foreground outline-none select-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
-          props.isActive ? "glass-fill glass-edge" : draftSurfaceClassName,
+          props.isActive
+            ? "glass-fill glass-edge"
+            : cn(
+                draftSurfaceClassName,
+                "opacity-80 transition-opacity hover:opacity-100 focus-within:opacity-100 motion-reduce:transition-none",
+              ),
         )}
         onClick={handleActivate}
         onContextMenu={handleContextMenu}
