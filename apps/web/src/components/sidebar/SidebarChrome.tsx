@@ -23,7 +23,7 @@ import { primaryServerKeybindingsAtom } from "../../state/server";
 import { cn } from "../../lib/utils";
 import { useIssuesSupported, usePullRequestsSupported } from "../../state/environments";
 import { Button } from "../ui/button";
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "../ui/sidebar";
+import { SidebarMenu } from "../ui/sidebar";
 import { readPullRequestListPreferences } from "../pullRequest/pullRequestListPreferences";
 import { readIssueListPreferences } from "../issue/issueListPreferences";
 import {
@@ -81,12 +81,8 @@ export function HistoryNavigationButton({ direction }: { direction: HistoryDirec
   );
 }
 
-/** Settings, the undo notice and update pills, floating at the bottom left. */
+/** The update control, undo notice and update warnings, floating at the bottom left. */
 export function SidebarFloatingFooter({ ref }: { ref?: (node: HTMLDivElement | null) => void }) {
-  const gt = useGT();
-  const navigate = useNavigate();
-  const { isMobile, setOpenMobile } = useSidebar();
-  const settingsLabel = gt("Settings");
   return (
     <div
       ref={ref}
@@ -96,35 +92,19 @@ export function SidebarFloatingFooter({ ref }: { ref?: (node: HTMLDivElement | n
     >
       <SidebarProviderUpdatePill />
       <SidebarUpdateArchitectureWarning />
-      <SidebarMenu className="flex-row items-center">
-        <SidebarMenuItem className="shrink-0">
-          <SharedTooltipTrigger
-            render={
-              <SidebarMenuButton
-                aria-label={settingsLabel}
-                onClick={() => {
-                  if (isMobile) setOpenMobile(false);
-                  void navigate({ to: "/settings" });
-                }}
-                size="icon"
-              >
-                <Settings02Icon />
-              </SidebarMenuButton>
-            }
-            label={settingsLabel}
-          />
-        </SidebarMenuItem>
-        <SidebarThreadUndoNotice />
+      <SidebarMenu className="flex-row items-center empty:hidden">
         <SidebarUpdatePill />
+        <SidebarThreadUndoNotice />
       </SidebarMenu>
     </div>
   );
 }
 
-type AppNavigationDestination = "threads" | "pull-requests" | "issues" | "usage";
+type AppNavigationDestination = "threads" | "pull-requests" | "issues" | "usage" | "settings";
 
 function resolveAppNavigationDestination(pathname: string): AppNavigationDestination | null {
   if (pathname === "/usage") return "usage";
+  if (pathname === "/settings" || pathname.startsWith("/settings/")) return "settings";
   if (pathname === "/pull-requests") return "pull-requests";
   if (pathname === "/issues") return "issues";
   if (isAppModalPage(pathname) || isSidebarUtilityPage(pathname)) return null;
@@ -166,7 +146,7 @@ function AppNavigationItem({
   );
 }
 
-/** Threads, Pull requests, Issues and Usage, floating centered at the bottom. */
+/** Threads, Pull requests, Issues, Usage and Settings, floating centered at the bottom. */
 export function AppNavigationToolbar() {
   const gt = useGT();
   const navigate = useNavigate();
@@ -216,6 +196,12 @@ export function AppNavigationToolbar() {
         icon={<Activity01Icon />}
         label={gt("Usage")}
         onClick={() => void navigate({ to: "/usage" })}
+      />
+      <AppNavigationItem
+        active={destination === "settings"}
+        icon={<Settings02Icon />}
+        label={gt("Settings")}
+        onClick={() => void navigate({ to: "/settings" })}
       />
     </nav>
   );
