@@ -1,5 +1,5 @@
 import { useGT } from "gt-react";
-import { SearchIcon, XIcon } from "lucide-react";
+import { SearchIcon, XIcon } from "~/lib/icons";
 import {
   type ComponentProps,
   type KeyboardEvent as ReactKeyboardEvent,

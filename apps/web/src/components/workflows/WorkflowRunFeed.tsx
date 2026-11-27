@@ -22,11 +22,11 @@ import {
   ChevronRightIcon,
   BotIcon,
   CheckIcon,
-  CircleAlertIcon,
+  AlertCircleIcon,
   HourglassIcon,
   MoonIcon,
   SquareIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { secondTick } from "@t3tools/client-runtime/clock";
 import {
   createContext,
@@ -1797,7 +1797,7 @@ function WorkflowAgentCard({
       />
       {beat.status === "failed" && beat.detail ? (
         <p className="mt-3 flex gap-1.5 text-sm text-destructive">
-          <CircleAlertIcon className="mt-0.5 size-3.5 shrink-0" />
+          <AlertCircleIcon className="mt-0.5 size-3.5 shrink-0" />
           <span className="break-words whitespace-pre-wrap">{beat.detail}</span>
         </p>
       ) : null}
@@ -1860,7 +1860,7 @@ function WorkflowPauseCard({
   return (
     <FeedCard tone="failed" label={gt("Why it paused")} reveal>
       <CardHead
-        mark={<CircleAlertIcon className="size-3.5 text-destructive" />}
+        mark={<AlertCircleIcon className="size-3.5 text-destructive" />}
         name={
           name === null
             ? gt("Paused", { $context: "a workflow run is paused" })

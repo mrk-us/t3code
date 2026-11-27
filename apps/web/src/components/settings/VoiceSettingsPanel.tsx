@@ -39,7 +39,7 @@ import {
   type SpeechRecommendationRole,
 } from "@t3tools/shared/speech";
 import {
-  ArrowDownUpIcon,
+  ArrowUpDownIcon,
   AudioLinesIcon,
   CheckIcon,
   DownloadIcon,
@@ -53,10 +53,10 @@ import {
   RefreshCwIcon,
   SearchIcon,
   StarIcon,
-  Trash2Icon,
+  Delete02Icon,
   UnlinkIcon,
   XIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { msg, T, useGT, useLocale, useMessages, Var } from "gt-react";
 
@@ -372,7 +372,7 @@ function ModelCard(props: ModelCardProps) {
               }
               onClick={props.onDelete}
             >
-              {model.linkedFrom ? <UnlinkIcon /> : <Trash2Icon />}
+              {model.linkedFrom ? <UnlinkIcon /> : <Delete02Icon />}
             </Button>
           ) : null}
         </div>
@@ -1087,7 +1087,7 @@ function SpeechModelBrowser(props: {
                 : gt("Sort and filter models: {sort}", { sort: sortLabels[sort] })
             }
           >
-            <ArrowDownUpIcon />
+            <ArrowUpDownIcon />
             <span className="hidden @min-[34rem]/voice-models:inline">{sortLabels[sort]}</span>
           </MenuTrigger>
           <MenuPopup align="end">

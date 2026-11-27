@@ -1,6 +1,6 @@
 import { type EnvironmentId, type WorkflowRunSubject } from "@t3tools/contracts";
 import { msg, T, useGT, useMessages } from "gt-react";
-import { WorkflowIcon } from "lucide-react";
+import { WorkflowIcon } from "~/lib/icons";
 import * as Schema from "effect/Schema";
 import { useState, type ReactNode } from "react";
 

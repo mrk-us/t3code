@@ -22,7 +22,7 @@ function stop(root: HTMLElement) {
   running.delete(root);
 }
 
-const ENTER_STEP_SECONDS = 0.02;
+const ENTER_STEP_SECONDS = 0.025;
 const EXIT_STEP_SECONDS = 0.02;
 const EXIT_SLIDE_SECONDS = 0.18;
 // Keep in sync with the panel container's delay-380 in ui/sidebar.tsx: it leaves after this exit.

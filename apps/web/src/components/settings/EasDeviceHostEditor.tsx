@@ -12,7 +12,7 @@ import {
   type EnvironmentId,
   type SettingsSecretValue,
 } from "@t3tools/contracts";
-import { XIcon } from "lucide-react";
+import { XIcon } from "~/lib/icons";
 
 import { deviceEasAccountCheck, deviceEnvironment } from "../../state/device";
 import { useAtomCommand } from "../../state/use-atom-command";

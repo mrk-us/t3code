@@ -4,7 +4,7 @@ import {
 } from "@t3tools/client-runtime/state/thread-execution";
 import { isOrchestrationV2WorkActive } from "@t3tools/contracts";
 import { T, useGT, useMessages } from "gt-react";
-import { ArrowUpLeftIcon } from "lucide-react";
+import { ArrowUpLeftIcon } from "~/lib/icons";
 import type { ReactNode } from "react";
 
 import { tickTextContent } from "~/lib/tickTextContent";

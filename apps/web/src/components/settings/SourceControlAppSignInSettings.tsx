@@ -9,7 +9,7 @@ import {
 import { useAtomValue } from "@effect/atom-react";
 import * as Cause from "effect/Cause";
 import { msg, T, useGT, Var } from "gt-react";
-import { CheckIcon, ExternalLinkIcon, CopyIcon } from "lucide-react";
+import { CheckIcon, ExternalLinkIcon, CopyIcon } from "~/lib/icons";
 import { useState, type ReactNode } from "react";
 
 import { T3AppIcon } from "~/components/T3AppIcon";

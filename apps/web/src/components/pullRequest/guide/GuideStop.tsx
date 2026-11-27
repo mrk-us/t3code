@@ -10,9 +10,9 @@ import {
   ChevronUpIcon,
   EyeIcon,
   FileIcon,
-  MessageCircleQuestionIcon,
+  MessageCircleQuestionMarkIcon,
   MessageSquareIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import type { ReactNode } from "react";
 
@@ -261,7 +261,7 @@ export function GuideStop({
                     onClick={() => onAsk(question)}
                     className="flex min-w-0 items-start gap-2 rounded-lg border border-border/60 px-3 py-1.5 text-left text-sm text-foreground outline-none hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
                   >
-                    <MessageCircleQuestionIcon
+                    <MessageCircleQuestionMarkIcon
                       aria-hidden
                       className="size-3.5 h-lh shrink-0 text-muted-foreground"
                     />
@@ -274,7 +274,7 @@ export function GuideStop({
               )}
               {onAsk !== null ? (
                 <Button size="sm" variant="ghost-muted" onClick={() => onAsk("")}>
-                  <MessageCircleQuestionIcon aria-hidden />
+                  <MessageCircleQuestionMarkIcon aria-hidden />
                   <T>Ask about this stop</T>
                 </Button>
               ) : null}

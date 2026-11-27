@@ -4,11 +4,11 @@ import {
   ChevronRightIcon,
   EllipsisIcon,
   ExternalLinkIcon,
-  PanelRightIcon,
+  LayoutAlignRightIcon,
   TagIcon,
   UserPlusIcon,
   UsersIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import type { ReactNode } from "react";
 import {
@@ -217,7 +217,7 @@ export function PullRequestDetailGhost({
               )}
               onClick={onClose}
             >
-              <PanelRightIcon aria-hidden className="size-3.5" />
+              <LayoutAlignRightIcon aria-hidden className="size-3.5" />
             </Button>
           ) : null}
         </div>

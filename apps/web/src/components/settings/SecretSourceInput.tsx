@@ -12,7 +12,7 @@ import { useAtomValue } from "@effect/atom-react";
 import * as Option from "effect/Option";
 import * as Schema from "effect/Schema";
 import { useGT, useMessages } from "gt-react";
-import { AlertTriangleIcon, CheckIcon, KeyRoundIcon, RefreshCwIcon, TypeIcon } from "lucide-react";
+import { TriangleAlertIcon, CheckIcon, KeyRoundIcon, RefreshCwIcon, TypeIcon } from "~/lib/icons";
 import { useState, type ComponentProps, type ComponentType, type ReactNode } from "react";
 
 import { useEnvironmentSettings } from "../../hooks/useSettings";
@@ -196,7 +196,7 @@ function SecretCheckButton(props: {
             ) : state?.status === "resolved" ? (
               <CheckIcon className="text-success-foreground" />
             ) : state?.status === "failed" ? (
-              <AlertTriangleIcon className="text-destructive" />
+              <TriangleAlertIcon className="text-destructive" />
             ) : (
               <RefreshCwIcon />
             )}

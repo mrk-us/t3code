@@ -3,7 +3,7 @@ import {
   DesktopAppActivationPlatform,
 } from "@t3tools/contracts";
 import * as Schema from "effect/Schema";
-import { FolderPlusIcon } from "lucide-react";
+import { FolderPlusIcon } from "~/lib/icons";
 import { useGT } from "gt-react";
 import { useState, type DragEvent, type ReactNode } from "react";
 

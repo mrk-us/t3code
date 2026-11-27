@@ -20,12 +20,12 @@ import {
   CopyIcon,
   HammerIcon,
   LinkIcon,
-  MessageCircleQuestionIcon,
+  MessageCircleQuestionMarkIcon,
   MoreHorizontalIcon,
   RotateCcwIcon,
   ScrollTextIcon,
-  Trash2Icon,
-} from "lucide-react";
+  Delete02Icon,
+} from "~/lib/icons";
 import { Branch, msg, T, useGT, useMessages } from "gt-react";
 import { useId, useState } from "react";
 
@@ -267,7 +267,7 @@ export function PullRequestActionsMenu({
           <T context="verb, menu item">Refresh</T>
         </MenuItem>
         <MenuItem disabled={handoff !== null} onClick={askAboutPullRequest}>
-          <MessageCircleQuestionIcon className="mt-1 size-3.5 shrink-0 self-start" />
+          <MessageCircleQuestionMarkIcon className="mt-1 size-3.5 shrink-0 self-start" />
           <span className="flex min-w-0 flex-col">
             <span>{handoff === "ask" ? gt("Opening...") : gt("Ask a question")}</span>
             <span className="text-xs text-muted-foreground">
@@ -552,7 +552,7 @@ export function PullRequestActionsMenu({
               disabled={actionPending || !environmentConnected}
               onClick={() => void confirmDeleteBranch()}
             >
-              <Trash2Icon className="mt-1 size-3.5 shrink-0 self-start" />
+              <Delete02Icon className="mt-1 size-3.5 shrink-0 self-start" />
               <span className="flex min-w-0 flex-col">
                 <span>
                   {pendingAction === "delete-branch"

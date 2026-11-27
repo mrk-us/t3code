@@ -1,7 +1,7 @@
 /* oxlint-disable react/no-unstable-nested-components -- These callbacks return overlays, and are invoked as render functions. */
 import { msg, T, useGT } from "gt-react";
 import { useEffect, useRef, useState } from "react";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "~/lib/icons";
 import {
   FileSurfaceAction,
   FileSurfaceLoading,

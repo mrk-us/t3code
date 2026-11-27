@@ -1,5 +1,5 @@
 import { useGT } from "gt-react";
-import { CheckIcon } from "lucide-react";
+import { CheckIcon } from "~/lib/icons";
 import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "../../lib/utils";

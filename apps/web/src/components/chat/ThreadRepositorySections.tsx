@@ -27,7 +27,7 @@ import {
   FolderGitIcon,
   PinOffIcon,
   PlusIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT } from "gt-react";
 import { memo, useState } from "react";
 

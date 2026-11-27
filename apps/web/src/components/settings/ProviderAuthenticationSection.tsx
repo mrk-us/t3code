@@ -14,7 +14,7 @@ import type {
 } from "@t3tools/contracts";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { lazy, Suspense, useRef, useState } from "react";
-import { CopyIcon } from "lucide-react";
+import { CopyIcon } from "~/lib/icons";
 
 import { writeTextToClipboard } from "../../hooks/useCopyToClipboard";
 import { isWebUrl } from "../../browser/webUrl";

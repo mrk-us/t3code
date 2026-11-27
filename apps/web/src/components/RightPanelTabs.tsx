@@ -41,21 +41,21 @@ import { restrictToFirstScrollableAncestor, restrictToHorizontalAxis } from "@dn
 import { horizontalListSortingStrategy, SortableContext, useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import {
-  Bot,
+  BotIcon as Bot,
   CircleDotIcon,
-  Smartphone,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  FileDiff,
-  Files,
-  Globe2,
-  MessagesSquare,
-  Plus,
-  TerminalSquare,
-  Volume2Icon,
+  SmartphoneIcon as Smartphone,
+  ChevronDownIcon as ChevronDown,
+  ChevronLeftIcon as ChevronLeft,
+  ChevronRightIcon as ChevronRight,
+  FileDiffIcon as FileDiff,
+  FilesIcon as Files,
+  Globe02Icon as Globe2,
+  MessagesSquareIcon as MessagesSquare,
+  PlusIcon as Plus,
+  SquareTerminalIcon as TerminalSquare,
+  VolumeHighIcon,
   VolumeOffIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import {
   type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent as ReactMouseEvent,
@@ -1023,7 +1023,7 @@ function RightPanelTab(
               {audio === "muted" ? (
                 <VolumeOffIcon className="size-3" />
               ) : (
-                <Volume2Icon className="size-3" />
+                <VolumeHighIcon className="size-3" />
               )}
             </button>
           }

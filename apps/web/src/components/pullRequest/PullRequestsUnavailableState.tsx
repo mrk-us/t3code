@@ -2,7 +2,7 @@ import type { ScopedThreadRef } from "@t3tools/contracts";
 import { useOpenLink } from "~/browser/useOpenLink";
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 import { T, useGT } from "gt-react";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon } from "~/lib/icons";
 
 import { Button } from "../ui/button";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "../ui/empty";

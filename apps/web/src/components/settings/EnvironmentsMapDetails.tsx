@@ -8,7 +8,7 @@ import {
 } from "@t3tools/contracts";
 import * as DateTime from "effect/DateTime";
 import { T, useGT, useMessages } from "gt-react";
-import { ArrowRightIcon, ClockAlertIcon, PlusIcon, TriangleAlertIcon, XIcon } from "lucide-react";
+import { ArrowRightIcon, ClockAlertIcon, PlusIcon, TriangleAlertIcon, XIcon } from "~/lib/icons";
 import { LegendList } from "@legendapp/list/react";
 import { type ReactNode, useRef, useState } from "react";
 

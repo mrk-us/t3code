@@ -12,7 +12,7 @@ import {
 import { TextLayer, type PDFDocumentProxy } from "pdfjs-dist";
 import { msg, useGT } from "gt-react";
 import { m } from "~/i18n/messages";
-import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, ScanIcon } from "lucide-react";
+import { ChevronDownIcon, ChevronUpIcon, MinusIcon, PlusIcon, ScanIcon } from "~/lib/icons";
 import { Input } from "~/components/ui/input";
 import { observeResize } from "~/lib/observeResize";
 import { FileSurfaceAction, FileSurfaceFailure, FileSurfaceLoading } from "./fileSurfaceChrome";

@@ -3,7 +3,7 @@ import type { PromptUltrathink } from "./TraitsPicker";
 import type { ProviderInstanceEntry } from "../../providerInstances";
 import { type AppModelOption } from "../../modelSelection";
 import { useGT, useMessages } from "gt-react";
-import { CircleAlertIcon } from "lucide-react";
+import { AlertCircleIcon } from "~/lib/icons";
 import { CompactComposerControlsMenu } from "./CompactComposerControlsMenu";
 import { ComposerControl } from "./ComposerControl";
 import {
@@ -260,7 +260,7 @@ export function ComposerControlsBar(props: {
       data-chat-provider-unavailable="true"
       className="shrink-0"
     >
-      <CircleAlertIcon className="size-4" />
+      <AlertCircleIcon className="size-4" />
       {providerSetupInstanceId ? gt("Open provider settings") : gt("No provider available")}
     </ComposerControl>
   ) : (

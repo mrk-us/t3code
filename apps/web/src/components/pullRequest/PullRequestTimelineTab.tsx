@@ -18,11 +18,11 @@ import {
   ChevronDownIcon,
   CircleCheckIcon,
   ExternalLinkIcon,
-  FileCode2Icon,
+  FileCodeIcon,
   GitCommitHorizontalIcon,
   MessageSquareIcon,
   MessageSquarePlusIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 
 import { m } from "~/i18n/messages";
@@ -327,7 +327,7 @@ function ConversationCard({
               </span>
               {showPath && event.path ? (
                 <span className="inline-flex min-w-0 items-center gap-1">
-                  <FileCode2Icon aria-hidden className="size-3 shrink-0" />
+                  <FileCodeIcon aria-hidden className="size-3 shrink-0" />
                   <span className="truncate">{event.path}</span>
                 </span>
               ) : null}
@@ -533,7 +533,7 @@ function ReviewThreadEvent({
           </span>
         ) : (
           <>
-            <FileCode2Icon aria-hidden className="size-3 shrink-0" />
+            <FileCodeIcon aria-hidden className="size-3 shrink-0" />
             <span className="min-w-0 truncate font-mono">
               {thread.line === null ? thread.path : `${thread.path}:${thread.line}`}
             </span>
@@ -787,7 +787,7 @@ function ReviewVerdictEvent({
               </span>
               {event.path ? (
                 <span className="inline-flex min-w-0 items-center gap-1">
-                  <FileCode2Icon aria-hidden className="size-3 shrink-0" />
+                  <FileCodeIcon aria-hidden className="size-3 shrink-0" />
                   <span className="truncate">{event.path}</span>
                 </span>
               ) : null}

@@ -1,6 +1,6 @@
 import type { IssueListEntry } from "@t3tools/contracts";
 import { T, useGT, useMessages, Var } from "gt-react";
-import { ExternalLinkIcon } from "lucide-react";
+import { ExternalLinkIcon } from "~/lib/icons";
 
 import { cn } from "~/lib/utils";
 import { formatRelativeTimeLabel } from "~/timestampFormat";

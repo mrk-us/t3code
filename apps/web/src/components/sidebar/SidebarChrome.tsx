@@ -1,10 +1,12 @@
 import {
+  Activity01Icon,
   ArrowLeftIcon,
   ArrowRightIcon,
-  ChartNoAxesColumnIcon,
-  MessagesSquareIcon,
-  SettingsIcon,
-} from "lucide-react";
+  ChatFeedback01Icon,
+  CircleDotDashedIcon,
+  GitPullRequestIcon,
+  Settings02Icon,
+} from "~/lib/icons";
 import { createContext, use, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useGT } from "gt-react";
@@ -24,7 +26,6 @@ import { Button } from "../ui/button";
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "../ui/sidebar";
 import { readPullRequestListPreferences } from "../pullRequest/pullRequestListPreferences";
 import { readIssueListPreferences } from "../issue/issueListPreferences";
-import { IssueGlyph } from "../issue/issuePresentation";
 import {
   isAppModalPage,
   isSidebarUtilityPage,
@@ -34,7 +35,6 @@ import {
 import { SidebarThreadUndoNotice } from "./SidebarThreadUndoNotice";
 import { SidebarProviderUpdatePill } from "./SidebarProviderUpdatePill";
 import { SidebarUpdateArchitectureWarning, SidebarUpdatePill } from "./SidebarUpdatePill";
-import { PullRequestGlyph } from "~/components/pullRequest/pullRequestIcons";
 import { SharedTooltipTrigger } from "../ui/shared-tooltip";
 
 /** The floating top-left group's slot for the thread sidebar's own actions. */
@@ -108,7 +108,7 @@ export function SidebarFloatingFooter({ ref }: { ref?: (node: HTMLDivElement | n
                 }}
                 size="icon"
               >
-                <SettingsIcon />
+                <Settings02Icon />
               </SidebarMenuButton>
             }
             label={settingsLabel}
@@ -143,21 +143,26 @@ function AppNavigationItem({
   onClick: () => void;
 }) {
   return (
-    <button
-      type="button"
-      aria-current={active ? "page" : undefined}
-      aria-label={label}
-      onClick={onClick}
-      className={cn(
-        "inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset sm:px-3 [&>svg]:size-4 [&>svg]:shrink-0",
-        active
-          ? "bg-accent text-accent-foreground"
-          : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
-      )}
+    <SharedTooltipTrigger
+      render={
+        <button
+          type="button"
+          aria-current={active ? "page" : undefined}
+          aria-label={label}
+          onClick={onClick}
+          className={cn(
+            "inline-flex size-8 cursor-pointer items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset [&>svg]:size-4 [&>svg]:shrink-0",
+            active
+              ? "bg-accent text-accent-foreground"
+              : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
+          )}
+        />
+      }
+      label={label}
+      side="top"
     >
       {icon}
-      <span className="max-sm:sr-only">{label}</span>
-    </button>
+    </SharedTooltipTrigger>
   );
 }
 
@@ -181,7 +186,7 @@ export function AppNavigationToolbar() {
     >
       <AppNavigationItem
         active={destination === "threads"}
-        icon={<MessagesSquareIcon />}
+        icon={<ChatFeedback01Icon />}
         label={gt("Threads")}
         onClick={() => {
           if (isAppModalPage(pathname)) void closeAppModal();
@@ -191,7 +196,7 @@ export function AppNavigationToolbar() {
       {pullRequestsSupported ? (
         <AppNavigationItem
           active={destination === "pull-requests"}
-          icon={<PullRequestGlyph.pullRequest />}
+          icon={<GitPullRequestIcon />}
           label={gt("Pull requests")}
           onClick={() =>
             void navigate({ to: "/pull-requests", search: readPullRequestListPreferences() })
@@ -201,14 +206,14 @@ export function AppNavigationToolbar() {
       {issuesSupported ? (
         <AppNavigationItem
           active={destination === "issues"}
-          icon={<IssueGlyph.issue />}
+          icon={<CircleDotDashedIcon />}
           label={gt("Issues", { $context: "sidebar link to the list of issues" })}
           onClick={() => void navigate({ to: "/issues", search: readIssueListPreferences() })}
         />
       ) : null}
       <AppNavigationItem
         active={destination === "usage"}
-        icon={<ChartNoAxesColumnIcon />}
+        icon={<Activity01Icon />}
         label={gt("Usage")}
         onClick={() => void navigate({ to: "/usage" })}
       />

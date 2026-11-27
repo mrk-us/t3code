@@ -1,6 +1,6 @@
 import type { EnvironmentMachineKind } from "@t3tools/contracts";
 import { msg } from "gt-react";
-import { CloudIcon, LaptopIcon, MonitorIcon, ServerIcon, type LucideProps } from "lucide-react";
+import { CloudIcon, LaptopIcon, MonitorIcon, ServerIcon, type IconProps } from "~/lib/icons";
 import type { FunctionComponent, SVGProps } from "react";
 import { LinuxIcon } from "./Icons";
 
@@ -39,7 +39,7 @@ function MacStudioIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-const ICON_BY_KIND: Record<EnvironmentMachineKind, FunctionComponent<LucideProps>> = {
+const ICON_BY_KIND: Record<EnvironmentMachineKind, FunctionComponent<IconProps>> = {
   server: ServerIcon,
   cloud: CloudIcon,
   linux: LinuxIcon,
@@ -59,16 +59,14 @@ export const ENVIRONMENT_MACHINE_KIND_LABELS: Record<EnvironmentMachineKind, str
   "mac-studio": msg("Workstation"),
 };
 
-export function environmentMachineIcon(
-  kind: EnvironmentMachineKind,
-): FunctionComponent<LucideProps> {
+export function environmentMachineIcon(kind: EnvironmentMachineKind): FunctionComponent<IconProps> {
   return ICON_BY_KIND[kind];
 }
 
 export function EnvironmentMachineIcon({
   kind,
   ...props
-}: LucideProps & { readonly kind: EnvironmentMachineKind }) {
+}: IconProps & { readonly kind: EnvironmentMachineKind }) {
   const Icon = ICON_BY_KIND[kind];
   return <Icon {...props} />;
 }

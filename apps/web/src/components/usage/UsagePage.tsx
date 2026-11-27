@@ -10,7 +10,7 @@ import {
   type UsageProviderKind,
   type UsageSummaryInput,
 } from "@t3tools/contracts";
-import { CircleAlertIcon, ChevronDownIcon, InfoIcon, SlidersHorizontalIcon } from "lucide-react";
+import { AlertCircleIcon, ChevronDownIcon, InfoIcon, SlidersHorizontalIcon } from "~/lib/icons";
 import { T, useGT, useLocale, useMessages, Var } from "gt-react";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { settlePromise } from "@t3tools/client-runtime/state/runtime";
@@ -1229,7 +1229,7 @@ function UsageEnvironmentFilter({
         <WorkspaceBreadcrumbText>{label}</WorkspaceBreadcrumbText>
         <span className="flex size-3.5 shrink-0 items-center justify-center text-muted-foreground">
           {showUsageStatus && hasIssue ? (
-            <CircleAlertIcon
+            <AlertCircleIcon
               className="size-3.5 text-warning-foreground"
               aria-label={gt("Some environments could not report usage")}
             />

@@ -50,7 +50,7 @@ import {
 } from "@t3tools/client-runtime/state/runtime";
 import { useUiStateStore } from "../../uiStateStore";
 import { type ChatMessage, DEFAULT_INTERACTION_MODE } from "../../types";
-import { AlarmClockIcon, CheckCircle2Icon } from "lucide-react";
+import { AlarmClockIcon, CircleCheckIcon } from "~/lib/icons";
 import { stackedThreadToast, toastManager } from "../ui/toast";
 import { titleRegenerationToast } from "../threadTitleRegenerationToast";
 import { newMessageId } from "~/lib/utils";
@@ -675,7 +675,7 @@ export function useThreadLifecycle(input: ThreadLifecycleInput) {
     )
   ) : activeThreadSettled ? (
     <ThreadStatusLine
-      icon={<CheckCircle2Icon />}
+      icon={<CircleCheckIcon />}
       label={
         settledAt
           ? gt("Settled {time}", { time: formatRelativeTimeLabel(settledAt, undefined, messages) })

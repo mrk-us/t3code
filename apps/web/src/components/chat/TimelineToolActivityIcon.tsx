@@ -8,7 +8,7 @@ import {
   BotIcon,
   BrainIcon,
   CheckIcon,
-  CircleAlertIcon,
+  AlertCircleIcon,
   EyeIcon,
   GlobeIcon,
   ListTodoIcon,
@@ -19,10 +19,10 @@ import {
   TerminalIcon,
   HammerIcon,
   WrenchIcon,
-  Code2Icon,
+  CodeXmlIcon,
   XIcon,
   ZapIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useAssetUrlState } from "../../assets/assetUrls";
 import { cn } from "~/lib/utils";
 import { TimelineRowCtx } from "./timelineRowContext";
@@ -241,7 +241,7 @@ function WorkEntryIcon({ name, className }: { name: WorkEntryIconName; className
     case "computer":
       return <BrowserAppIcon className={className} />;
     case "code":
-      return <Code2Icon className={className} aria-hidden />;
+      return <CodeXmlIcon className={className} aria-hidden />;
     case "device":
       return <SmartphoneIcon className={className} aria-hidden />;
     case "t3-code":
@@ -251,7 +251,7 @@ function WorkEntryIcon({ name, className }: { name: WorkEntryIconName; className
     case "list-todo":
       return <ListTodoIcon className={className} aria-hidden />;
     case "circle-alert":
-      return <CircleAlertIcon className={className} aria-hidden />;
+      return <AlertCircleIcon className={className} aria-hidden />;
     case "eye":
       return <EyeIcon className={className} aria-hidden />;
     case "globe":

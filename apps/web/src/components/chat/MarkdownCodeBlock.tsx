@@ -1,5 +1,5 @@
 import { useGT } from "gt-react";
-import { PlayIcon, WrapTextIcon, CheckIcon, CopyIcon } from "lucide-react";
+import { PlayIcon, TextWrapIcon, CheckIcon, CopyIcon } from "~/lib/icons";
 import { toHtml } from "hast-util-to-html";
 import React, { use, useEffect, useState, type ReactNode } from "react";
 
@@ -240,7 +240,7 @@ export function MarkdownCodeBlock({
                 />
               }
             >
-              <WrapTextIcon className="size-3" />
+              <TextWrapIcon className="size-3" />
             </SharedTooltipTrigger>
           ) : null}
           {canRun ? (

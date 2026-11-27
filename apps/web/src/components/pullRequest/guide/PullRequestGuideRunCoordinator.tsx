@@ -1,7 +1,7 @@
 import { msg } from "gt-react";
 import type { AnyRouter } from "@tanstack/react-router";
 import type { PullRequestReviewGuideResult } from "@t3tools/contracts";
-import { CircleAlertIcon, CircleCheckIcon } from "lucide-react";
+import { AlertCircleIcon, CircleCheckIcon } from "~/lib/icons";
 import { AsyncResult, type AtomRegistry } from "effect/reactivity";
 
 import { getClientSettings } from "~/hooks/useSettings";
@@ -127,7 +127,7 @@ function watchGuideRun(
             failure === null ? (
               <CircleCheckIcon aria-hidden className="size-4 text-success-foreground" />
             ) : (
-              <CircleAlertIcon aria-hidden className="size-4 text-destructive-foreground" />
+              <AlertCircleIcon aria-hidden className="size-4 text-destructive-foreground" />
             ),
         },
         actionProps: {

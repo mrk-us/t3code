@@ -4,7 +4,7 @@ import {
 } from "@t3tools/client-runtime/operations/projects";
 import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
 import type { SourceControlProviderKind } from "@t3tools/contracts";
-import { FolderGit2Icon, LinkIcon } from "lucide-react";
+import { FolderGit2Icon, LinkIcon } from "~/lib/icons";
 import { type ReactNode, useState } from "react";
 import { T, useGT } from "gt-react";
 

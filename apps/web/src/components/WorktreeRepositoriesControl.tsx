@@ -3,7 +3,7 @@ import {
   type WorktreeRepositoryChoice,
 } from "@t3tools/client-runtime/state/thread-repositories";
 import type { EnvironmentProject } from "@t3tools/client-runtime/state/shell";
-import { FolderGitIcon } from "lucide-react";
+import { FolderGitIcon } from "~/lib/icons";
 import { T, useGT, useMessages } from "gt-react";
 import { memo, useState } from "react";
 

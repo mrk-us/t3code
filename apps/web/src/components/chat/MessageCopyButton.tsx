@@ -1,6 +1,6 @@
 import { useGT } from "gt-react";
 import { memo, useRef } from "react";
-import { CheckIcon, CopyIcon, type LucideIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, type IconComponent } from "~/lib/icons";
 import { Button } from "../ui/button";
 import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";
 import {
@@ -20,7 +20,7 @@ export const MessageCopyButton = memo(function MessageCopyButton({
 }: {
   text: string;
   label?: string;
-  icon?: LucideIcon;
+  icon?: IconComponent;
   extraFlavors?: Readonly<Record<string, string>>;
   size?: "xs" | "icon-xs";
   variant?: "outline" | "ghost";

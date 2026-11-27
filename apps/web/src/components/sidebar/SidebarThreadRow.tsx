@@ -38,25 +38,25 @@ import type { TimestampFormat } from "@t3tools/contracts/settings";
 import {
   AlarmClockIcon,
   AlarmClockOffIcon,
-  ArrowRightLeftIcon,
+  ArrowLeftRightIcon,
   CheckIcon,
-  CircleAlertIcon,
+  AlertCircleIcon,
   CircleCheckIcon,
   CircleDashedIcon,
   CircleDotDashedIcon,
   ClockIcon,
   FolderGit2Icon,
   GitBranchIcon,
-  MessageCircleQuestionIcon,
+  MessageCircleQuestionMarkIcon,
   PinIcon,
   PinOffIcon,
-  ShieldQuestionIcon,
+  ShieldQuestionMarkIcon,
   SquarePenIcon,
   TerminalIcon,
-  Undo2Icon,
+  Undo02Icon,
   UserRoundIcon,
   XIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { animate } from "motion";
 import {
   memo,
@@ -309,7 +309,7 @@ function SidebarThreadTooltip({
         ) : null}
         {branchMismatch ? (
           <div className="flex min-w-0 items-start gap-2 text-warning">
-            <CircleAlertIcon aria-hidden className="mt-0.5 size-3 shrink-0 stroke-current" />
+            <AlertCircleIcon aria-hidden className="mt-0.5 size-3 shrink-0 stroke-current" />
             <div className="min-w-0 flex-1 wrap-break-word">
               <T>You're currently checked out on another branch.</T>
             </div>
@@ -339,7 +339,7 @@ function SidebarThreadTooltip({
         ) : null}
         {previousProviderNames.length > 0 ? (
           <div className="flex min-w-0 items-center gap-2">
-            <ArrowRightLeftIcon className="size-3 shrink-0 stroke-muted-foreground" />
+            <ArrowLeftRightIcon className="size-3 shrink-0 stroke-muted-foreground" />
             <div className="min-w-0 truncate text-foreground/75">
               <T>
                 Handed off from <Var>{previousProviderNames.join(", ")}</Var>
@@ -365,7 +365,7 @@ function SidebarThreadTooltip({
               thread.runtime.lastErrorClass === "usage_limit" ? "text-warning" : "text-error",
             )}
           >
-            <CircleAlertIcon className="size-3 shrink-0 stroke-current" />
+            <AlertCircleIcon className="size-3 shrink-0 stroke-current" />
             <div className="min-w-0 truncate">
               {thread.runtime.lastErrorClass === "usage_limit"
                 ? gt("Usage limit reached")
@@ -527,7 +527,7 @@ const dropVerbBadge: Record<SidebarDropVerb, ReactNode> = {
   ),
   unsettle: (
     <>
-      <Undo2Icon aria-hidden className="size-3" />
+      <Undo02Icon aria-hidden className="size-3" />
       <T>Un-settle</T>
     </>
   ),
@@ -542,10 +542,10 @@ const dropVerbBadge: Record<SidebarDropVerb, ReactNode> = {
 const TOP_STATUS_ICONS = {
   working: CircleDashedIcon,
   waiting: CircleDotDashedIcon,
-  input: MessageCircleQuestionIcon,
+  input: MessageCircleQuestionMarkIcon,
   request: UserRoundIcon,
-  approval: ShieldQuestionIcon,
-  failed: CircleAlertIcon,
+  approval: ShieldQuestionMarkIcon,
+  failed: AlertCircleIcon,
   done: CircleCheckIcon,
   woke: AlarmClockIcon,
 } as const;
@@ -1464,7 +1464,7 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
                       </>
                     }
                   >
-                    <Undo2Icon className="mb-px size-3.5" />
+                    <Undo02Icon className="mb-px size-3.5" />
                   </SharedTooltipTrigger>
                 ) : (
                   <SharedTooltipTrigger

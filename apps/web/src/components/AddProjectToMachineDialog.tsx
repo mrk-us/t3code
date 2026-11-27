@@ -20,7 +20,7 @@ import {
   cloneUrlProtocol,
   withoutRemoteUrlCredentials,
 } from "@t3tools/shared/cloneUrl";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "~/lib/icons";
 import { useId, useState } from "react";
 import { T, useGT, Var } from "gt-react";
 import { create } from "zustand";

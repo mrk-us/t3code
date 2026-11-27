@@ -9,7 +9,7 @@ import type {
   ScopedThreadRef,
   ThreadId,
 } from "@t3tools/contracts";
-import { Link2Icon, Link2OffIcon, MessageSquareIcon } from "lucide-react";
+import { Link02Icon, LinkOffIcon, MessageSquareIcon } from "~/lib/icons";
 import { msg, T, useGT } from "gt-react";
 import { useState } from "react";
 
@@ -177,9 +177,9 @@ export function IssueThreadLinks({
           }
         >
           {linkedHere ? (
-            <Link2OffIcon aria-hidden className="size-3.5" />
+            <LinkOffIcon aria-hidden className="size-3.5" />
           ) : (
-            <Link2Icon aria-hidden className="size-3.5" />
+            <Link02Icon aria-hidden className="size-3.5" />
           )}
         </SharedTooltipTrigger>
       ) : null}

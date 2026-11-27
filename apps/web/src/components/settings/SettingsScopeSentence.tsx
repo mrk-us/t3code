@@ -1,6 +1,6 @@
 import { resolveEnvironmentMachineKind } from "@t3tools/contracts";
 import { fileDisplayName } from "@t3tools/shared/path";
-import { CheckIcon, ChevronDownIcon, FolderIcon, LayersIcon } from "lucide-react";
+import { CheckIcon, ChevronDownIcon, FolderIcon, LayersIcon } from "~/lib/icons";
 import { Fragment, useState, type ReactNode } from "react";
 import { T, useGT, useMessages, Var } from "gt-react";
 

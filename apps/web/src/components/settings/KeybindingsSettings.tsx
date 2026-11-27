@@ -6,13 +6,13 @@ import {
   ChevronDownIcon,
   CircleXIcon,
   EllipsisIcon,
-  FileJsonIcon,
+  FileBracesIcon,
   MinusIcon,
   PlusIcon,
   SearchIcon,
   TriangleAlertIcon,
   XIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useLocation } from "@tanstack/react-router";
 import {
   type KeyboardEvent,
@@ -1709,7 +1709,7 @@ export function KeybindingsSettingsPanel() {
                 onClick={openKeybindingsFile}
                 aria-label={gt("Open keybindings.json")}
               >
-                <FileJsonIcon aria-hidden className="size-4" />
+                <FileBracesIcon aria-hidden className="size-4" />
               </Button>
             }
             label={

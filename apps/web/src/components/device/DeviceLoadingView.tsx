@@ -1,6 +1,6 @@
 import { useGT } from "gt-react";
 import type { ReactNode } from "react";
-import { Smartphone } from "lucide-react";
+import { SmartphoneIcon as Smartphone } from "~/lib/icons";
 
 import { Spinner } from "~/components/ui/spinner";
 

@@ -1,5 +1,5 @@
 import type { EditorId } from "@t3tools/contracts";
-import { FolderClosedIcon } from "lucide-react";
+import { FolderClosedIcon } from "~/lib/icons";
 
 import { isMacPlatform, isWindowsPlatform } from "~/lib/utils";
 import {

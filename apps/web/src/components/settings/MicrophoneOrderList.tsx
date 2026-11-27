@@ -10,7 +10,7 @@ import { restrictToParentElement, restrictToVerticalAxis } from "@dnd-kit/modifi
 import { SortableContext, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { T, useGT } from "gt-react";
-import { ArrowDownIcon, ArrowUpIcon, GripVerticalIcon, XIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon, GripVerticalIcon, XIcon } from "~/lib/icons";
 
 import { cn } from "~/lib/utils";
 import { type BrowserMicrophone, updateMicrophoneOrder } from "../../speech/browserMicrophones";

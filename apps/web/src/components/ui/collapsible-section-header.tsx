@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon } from "~/lib/icons";
 import { motion } from "motion/react";
 import { cn } from "../../lib/utils";
 import { SPRING_SNAPPY } from "../../lib/motionTokens";

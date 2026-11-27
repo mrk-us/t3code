@@ -1,6 +1,6 @@
 import type { ProjectScript, ResolvedKeybindingsConfig } from "@t3tools/contracts";
 import { T, useGT } from "gt-react";
-import { SettingsIcon } from "lucide-react";
+import { Settings02Icon } from "~/lib/icons";
 import { shortcutLabelForCommand } from "../../keybindings";
 import { commandForProjectScript } from "../../projectScripts";
 import { ScriptIcon } from "../projectScriptEditor";
@@ -66,7 +66,7 @@ export function ProjectActionsList({
                 disabled={disabled}
                 onClick={() => onEdit(script)}
               >
-                <SettingsIcon className="size-3.5" />
+                <Settings02Icon className="size-3.5" />
               </Button>
             </span>
           </>

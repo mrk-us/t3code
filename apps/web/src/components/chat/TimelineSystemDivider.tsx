@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { LucideIcon } from "lucide-react";
+import { type IconComponent } from "~/lib/icons";
 
 import { cn } from "~/lib/utils";
 import { SharedTooltipTrigger } from "~/components/ui/shared-tooltip";
@@ -8,7 +8,7 @@ export function TimelineSystemDivider(props: {
   readonly label: string;
   readonly detail?: ReactNode | null;
   readonly tone?: "neutral" | "danger";
-  readonly icon?: LucideIcon;
+  readonly icon?: IconComponent;
   readonly showDetailSeparator?: boolean;
   readonly wrapDetail?: boolean;
   readonly actionLabel?: string;

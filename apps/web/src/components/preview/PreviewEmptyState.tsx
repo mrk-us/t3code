@@ -1,7 +1,11 @@
 import { T } from "gt-react";
 import type { EnvironmentId, ScopedThreadRef } from "@t3tools/contracts";
 import { parseUrl } from "@t3tools/shared/url";
-import { Globe, History, RadioTower } from "lucide-react";
+import {
+  GlobeIcon as Globe,
+  HistoryIcon as History,
+  RadioTowerIcon as RadioTower,
+} from "~/lib/icons";
 
 import type { BrowserHistoryEntry } from "~/browserHistoryStore";
 import { Empty, EmptyDescription, EmptyMedia, EmptyTitle } from "~/components/ui/empty";

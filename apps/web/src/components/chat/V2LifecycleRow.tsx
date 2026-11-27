@@ -44,13 +44,13 @@ import type { TimestampFormat } from "@t3tools/contracts/settings";
 import {
   BotIcon,
   ChevronRightIcon,
-  CircleStopIcon,
-  ArrowRightLeftIcon,
+  StopCircleIcon,
+  ArrowLeftRightIcon,
   ArrowRightIcon,
   EraserIcon,
   GitForkIcon,
   MessageSquareIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 
 import { Tooltip, TooltipTrigger } from "../ui/tooltip";
 import { SharedTooltipTrigger } from "../ui/shared-tooltip";
@@ -91,7 +91,7 @@ export function V2LifecycleRow(props: {
       <TimelineSystemDivider
         label={gt("Run interrupted")}
         detail={item.message}
-        icon={CircleStopIcon}
+        icon={StopCircleIcon}
         wrapDetail
       />
     );
@@ -687,7 +687,7 @@ export function HandoffRow(props: {
   return (
     <TimelineSystemDivider
       label={props.pending ? gt("Context handoff pending") : gt("Context handoff")}
-      icon={ArrowRightLeftIcon}
+      icon={ArrowLeftRightIcon}
       showDetailSeparator={false}
       tone={props.failed ? "danger" : "neutral"}
       detail={

@@ -2,7 +2,7 @@ import { type EnvironmentId, SourceControlProviderKind } from "@t3tools/contract
 import { runAtomCommand } from "@t3tools/client-runtime/state/runtime";
 import * as Schema from "effect/Schema";
 import { msg } from "gt-react";
-import { StarIcon } from "lucide-react";
+import { StarIcon } from "~/lib/icons";
 
 import { m } from "../i18n/messages";
 import { getLocalStorageItem, setLocalStorageItem } from "../hooks/useLocalStorage";

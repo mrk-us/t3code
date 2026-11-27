@@ -12,7 +12,7 @@ import {
   MousePointerClickIcon,
   QuoteIcon,
   TerminalIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import type { ReactElement } from "react";
 
 import { splitPromptIntoComposerSegments } from "~/composer-editor-mentions";

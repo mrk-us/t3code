@@ -1,6 +1,6 @@
 import type { DevicePlatformAvailability } from "@t3tools/contracts";
 import { useGT } from "gt-react";
-import { Check, Minus } from "lucide-react";
+import { CheckIcon as Check, MinusIcon as Minus } from "~/lib/icons";
 import { SharedTooltipTrigger } from "../ui/shared-tooltip";
 
 export function DeviceHostAvailability({

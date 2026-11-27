@@ -1,6 +1,6 @@
 import { useAtomValue } from "@effect/atom-react";
 import { msg, useMessages } from "gt-react";
-import { Undo2Icon } from "lucide-react";
+import { Undo02Icon } from "~/lib/icons";
 import { useState } from "react";
 
 import {
@@ -57,7 +57,7 @@ export function SidebarThreadUndoNotice() {
           {/* The icon's negative margin cancels its width, so beside the label it sits in
               clipped space; once the label is too wide it wraps away and the icon shows. */}
           <span className="flex h-6 min-w-0 flex-wrap justify-end overflow-hidden">
-            <Undo2Icon className="-ml-4 h-6 w-4 @max-[1rem]:invisible" />
+            <Undo02Icon className="-ml-4 h-6 w-4 @max-[1rem]:invisible" />
             <span>{threadUndoLabel(keybindings, m)}</span>
           </span>
         </InlineButton>

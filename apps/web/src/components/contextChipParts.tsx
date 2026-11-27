@@ -1,6 +1,6 @@
 import type { EnvironmentId, PullRequestContextMetadata } from "@t3tools/contracts";
 import { useGT } from "gt-react";
-import { CircleDashedIcon, FilmIcon, ImageIcon } from "lucide-react";
+import { CircleDashedIcon, FilmIcon, ImageIcon } from "~/lib/icons";
 import {
   useEffect,
   useState,

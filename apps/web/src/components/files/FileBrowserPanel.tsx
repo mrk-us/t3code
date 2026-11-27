@@ -13,7 +13,7 @@ import { serializeComposerFileLink } from "@t3tools/shared/composerTrigger";
 import * as AsyncResult from "effect/reactivity/AsyncResult";
 import * as Cause from "effect/Cause";
 import { T, useGT, useMessages } from "gt-react";
-import { ChevronsDownUpIcon, ChevronsUpDownIcon } from "lucide-react";
+import { ChevronsDownUpIcon, UnfoldMoreIcon } from "~/lib/icons";
 import { type Ref, useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { Button } from "~/components/ui/button";
@@ -679,7 +679,7 @@ export default function FileBrowserPanel({
             {allDirectoriesExpanded ? (
               <ChevronsDownUpIcon className="size-3.5" />
             ) : (
-              <ChevronsUpDownIcon className="size-3.5" />
+              <UnfoldMoreIcon className="size-3.5" />
             )}
           </SharedTooltipTrigger>
         ) : null}

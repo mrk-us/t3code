@@ -11,7 +11,7 @@ import {
   type ThreadGuestShare,
 } from "@t3tools/contracts";
 import { msg, T, useGT } from "gt-react";
-import { CheckIcon, CopyIcon, UserIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, UserIcon } from "~/lib/icons";
 import { useState } from "react";
 
 import { useCopyToClipboard } from "~/hooks/useCopyToClipboard";

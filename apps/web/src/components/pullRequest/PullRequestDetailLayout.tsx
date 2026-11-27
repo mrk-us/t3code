@@ -1,5 +1,5 @@
 import { useGT } from "gt-react";
-import { ArrowLeftIcon, FileDiffIcon, LockIcon } from "lucide-react";
+import { ArrowLeftIcon, FileDiffIcon, LockIcon } from "~/lib/icons";
 import { useEffect, useRef, type ComponentProps, type ReactNode } from "react";
 
 import { cn } from "~/lib/utils";

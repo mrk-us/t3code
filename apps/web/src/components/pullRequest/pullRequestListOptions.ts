@@ -6,11 +6,11 @@ import {
   EyeIcon,
   LayersIcon,
   ListChecksIcon,
-  Maximize2Icon,
-  Minimize2Icon,
+  Maximize02Icon,
+  Minimize02Icon,
   PenLineIcon,
   UserLockIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg } from "gt-react";
 
 import type { MessageResolver } from "~/i18n/messages";
@@ -58,8 +58,8 @@ export const SORT_OPTIONS = [
   { value: "updated", label: msg("Recently updated"), Icon: ClockIcon },
   { value: "newest", label: msg("Newest shown"), Icon: CalendarArrowDownIcon },
   { value: "oldest", label: msg("Oldest shown"), Icon: CalendarArrowUpIcon },
-  { value: "largest", label: msg("Largest shown"), Icon: Maximize2Icon },
-  { value: "smallest", label: msg("Smallest shown"), Icon: Minimize2Icon },
+  { value: "largest", label: msg("Largest shown"), Icon: Maximize02Icon },
+  { value: "smallest", label: msg("Smallest shown"), Icon: Minimize02Icon },
 ] as const satisfies ReadonlyArray<PullRequestFilterOption<PullRequestListSort>>;
 
 /** Static option tables hold `msg()` labels; components resolve them with `useMessages()`. */

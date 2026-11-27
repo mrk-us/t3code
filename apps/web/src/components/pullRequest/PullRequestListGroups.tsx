@@ -1,5 +1,5 @@
 import type { EnvironmentId, PullRequestAction } from "@t3tools/contracts";
-import { EyeIcon, LayersIcon, PenLineIcon, UsersIcon, type LucideIcon } from "lucide-react";
+import { EyeIcon, LayersIcon, PenLineIcon, UsersIcon, type IconComponent } from "~/lib/icons";
 import { useMessages } from "gt-react";
 import { useDeferredValue, type RefCallback } from "react";
 
@@ -17,7 +17,7 @@ import {
   type PullRequestSpeedActionResult,
 } from "./PullRequestSpeedActions";
 
-const GROUP_ICONS: Record<string, LucideIcon> = {
+const GROUP_ICONS: Record<string, IconComponent> = {
   authored: PenLineIcon,
   reviewRequested: EyeIcon,
   others: UsersIcon,

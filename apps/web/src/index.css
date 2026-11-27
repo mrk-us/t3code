@@ -1744,14 +1744,6 @@ body {
   font-variant-ligatures: none;
 }
 
-/* Lighter default icon stroke. In the base layer so stroke-* utilities still win; any
-   CSS beats lucide's stroke-width="2" attribute. */
-@layer base {
-  :where(svg.lucide[stroke-width="2"]) {
-    stroke-width: 1.75;
-  }
-}
-
 html,
 body {
   min-height: calc(100svh + env(safe-area-inset-top));
@@ -2773,7 +2765,7 @@ code {
 /* The timeline's turn markers sit beside the open floating thread sidebar, not under it. */
 [data-timeline-minimap] {
   left: var(--sidebar-panel-clearance, 0px);
-  transition: left 200ms var(--ease-out-strong);
+  transition: left 200ms var(--ease-out-strong) 150ms;
 }
 
 /* Zen mode drops the space the hidden chrome held: titles move to the corner and the

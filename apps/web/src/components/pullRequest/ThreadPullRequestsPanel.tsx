@@ -17,7 +17,7 @@ import {
   LinkIcon,
   MoreHorizontalIcon,
   PlusIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { LegendList } from "@legendapp/list/react";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { memo, useState } from "react";

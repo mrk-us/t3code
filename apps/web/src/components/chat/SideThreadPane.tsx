@@ -9,7 +9,7 @@ import {
 import { AuthOrchestrationOperateScope, type ScopedThreadRef } from "@t3tools/contracts";
 import { threadContextRecord } from "@t3tools/shared/composerContextReferences";
 import { T, useGT } from "gt-react";
-import { Trash2Icon, XIcon } from "lucide-react";
+import { Delete02Icon, XIcon } from "~/lib/icons";
 import { useEffect, useState } from "react";
 
 import { useComposerDraftStore } from "../../composerDraftStore";
@@ -185,7 +185,7 @@ export default function SideThreadPane(props: {
             disabled={!canOperate || shell === null || deleting}
             onClick={() => void deleteSideChat()}
           >
-            <Trash2Icon />
+            <Delete02Icon />
           </Button>
           <Button
             variant="ghost"

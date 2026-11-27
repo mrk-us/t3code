@@ -5,7 +5,7 @@ import { assistantCitationsToPlainText } from "@t3tools/shared/assistantCitation
 import { replaceComposerContextReferences } from "@t3tools/shared/composerContextReferences";
 import { composerFileLinksToPlainText } from "@t3tools/shared/composerInlineTokens";
 import { T, useGT, useMessages } from "gt-react";
-import { SquarePenIcon, XIcon } from "lucide-react";
+import { SquarePenIcon, XIcon } from "~/lib/icons";
 import {
   memo,
   useState,

@@ -10,7 +10,7 @@ import {
 import { managedRuntimeModeCeilingMessage } from "@t3tools/client-runtime/contract-labels";
 import { Radio as RadioPrimitive } from "@base-ui/react/radio";
 import { isLoopbackHost } from "@t3tools/shared/preview";
-import { EyeIcon, type LucideIcon } from "lucide-react";
+import { EyeIcon, type IconComponent } from "~/lib/icons";
 import type * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Schema from "effect/Schema";
@@ -37,7 +37,7 @@ import { StandalonePage, StandalonePageHeader } from "../ui/standalone-page";
 
 export const accessConfig: Record<
   AuthMcpClientAccess,
-  { readonly label: string; readonly description: string; readonly icon: LucideIcon }
+  { readonly label: string; readonly description: string; readonly icon: IconComponent }
 > = {
   "read-only": {
     label: msg("Read only"),

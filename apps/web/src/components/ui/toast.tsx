@@ -12,7 +12,7 @@ import {
 } from "react";
 import { type ScopedThreadRef, type ThreadId } from "@t3tools/contracts";
 import {
-  CircleAlertIcon,
+  AlertCircleIcon,
   CircleCheckIcon,
   InfoIcon,
   TriangleAlertIcon,
@@ -21,7 +21,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   CopyIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 
 import { cn } from "~/lib/utils";
 import { Button, buttonVariants } from "~/components/ui/button";
@@ -109,7 +109,7 @@ type ToastId = ReturnType<typeof toastManager.add>;
 const threadToastVisibleTimeoutRemainingMs = new Map<ToastId, number>();
 
 const TOAST_ICONS = {
-  error: CircleAlertIcon,
+  error: AlertCircleIcon,
   info: InfoIcon,
   loading: Spinner,
   success: CircleCheckIcon,

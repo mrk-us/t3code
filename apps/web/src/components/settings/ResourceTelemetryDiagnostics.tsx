@@ -4,7 +4,7 @@ import { AuthEnvironmentMaintainScope } from "@t3tools/contracts";
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 import {
   ActivityIcon,
-  AlertTriangleIcon,
+  TriangleAlertIcon,
   BatteryIcon,
   CpuIcon,
   DatabaseIcon,
@@ -13,7 +13,7 @@ import {
   MemoryStickIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import type {
   BackgroundBooleanState,
   EnvironmentId,
@@ -1199,7 +1199,7 @@ function ResourceTelemetryDiagnosticsBody({
           </div>
           {telemetry.error ? (
             <div className="flex items-start gap-2 border-t border-destructive/20 bg-destructive/5 px-4 py-3 text-xs text-destructive sm:px-5">
-              <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+              <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
               <span>{telemetry.error}</span>
             </div>
           ) : null}
@@ -1395,7 +1395,7 @@ function ResourceTelemetryDiagnosticsBody({
         <div className="overflow-hidden rounded-[inherit]">
           {history.error ? (
             <div className="flex items-start gap-2 border-b border-destructive/20 bg-destructive/5 px-4 py-3 text-xs text-destructive sm:px-5">
-              <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+              <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
               <span>{history.error}</span>
             </div>
           ) : null}

@@ -4,10 +4,10 @@ import {
   GitPullRequestClosedIcon,
   GitPullRequestDraftIcon,
   LayersIcon,
-  Link2Icon,
-  Unlink2Icon,
+  Link02Icon,
+  Unlink02Icon,
   TriangleAlertIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import type { PullRequestState } from "@t3tools/contracts";
 import { msg } from "gt-react";
 
@@ -19,8 +19,8 @@ export const PullRequestGlyph = {
   merged: GitMergeIcon,
   conflicting: TriangleAlertIcon,
   stack: LayersIcon,
-  link: Link2Icon,
-  unlink: Unlink2Icon,
+  link: Link02Icon,
+  unlink: Unlink02Icon,
 } as const;
 
 export type PullRequestGlyphIcon = (typeof PullRequestGlyph)[keyof typeof PullRequestGlyph];

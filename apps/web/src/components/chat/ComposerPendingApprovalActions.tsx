@@ -5,7 +5,7 @@ import {
 } from "@t3tools/contracts";
 import { msg, useGT, useMessages } from "gt-react";
 import { memo } from "react";
-import { EllipsisIcon, TriangleAlertIcon } from "lucide-react";
+import { EllipsisIcon, TriangleAlertIcon } from "~/lib/icons";
 import { Button, InlineButton } from "../ui/button";
 import { Menu, MenuItem, MenuPopup, MenuTrigger } from "../ui/menu";
 import { composerFloatingLayerProps } from "./composerEventScope";

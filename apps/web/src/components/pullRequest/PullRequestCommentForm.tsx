@@ -1,7 +1,7 @@
 import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
 import { useAtomCommand } from "~/state/use-atom-command";
 import type { EnvironmentId, PullRequestDetailView, PullRequestRef } from "@t3tools/contracts";
-import { SendIcon } from "lucide-react";
+import { SendIcon } from "~/lib/icons";
 import { msg, T, useGT } from "gt-react";
 import { useEffect, useState, type RefObject } from "react";
 

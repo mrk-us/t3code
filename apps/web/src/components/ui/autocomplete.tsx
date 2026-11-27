@@ -1,5 +1,5 @@
 import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomplete";
-import { ChevronsUpDownIcon, XIcon } from "lucide-react";
+import { UnfoldMoreIcon, XIcon } from "~/lib/icons";
 
 import { cn } from "~/lib/utils";
 import { Input } from "~/components/ui/input";
@@ -55,7 +55,7 @@ function AutocompleteInput({
           )}
         >
           <AutocompletePrimitive.Icon data-slot="autocomplete-icon">
-            <ChevronsUpDownIcon />
+            <UnfoldMoreIcon />
           </AutocompletePrimitive.Icon>
         </AutocompleteTrigger>
       )}

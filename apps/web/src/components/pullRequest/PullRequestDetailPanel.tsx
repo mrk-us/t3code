@@ -29,15 +29,15 @@ import {
   type ScopedThreadRef,
 } from "@t3tools/contracts";
 import {
-  ArrowDownUpIcon,
+  ArrowUpDownIcon,
   ArrowLeftIcon,
   CircleDotIcon,
   FileDiffIcon,
   GitCommitHorizontalIcon,
   MessageSquareIcon,
-  PanelRightIcon,
+  LayoutAlignRightIcon,
   TriangleAlertIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import {
   lazy,
   Suspense,
@@ -1721,7 +1721,7 @@ export function PullRequestDetailPanel({
               )}
               onClick={onClose}
             >
-              <PanelRightIcon className="size-3.5" />
+              <LayoutAlignRightIcon className="size-3.5" />
             </Button>
           ) : null}
         </div>
@@ -2080,7 +2080,7 @@ export function PullRequestDetailPanel({
                     setTimelineOrder((value) => (value === "newest" ? "oldest" : "newest"))
                   }
                 >
-                  <ArrowDownUpIcon aria-hidden className="size-3" />
+                  <ArrowUpDownIcon aria-hidden className="size-3" />
                   {timelineOrder === "newest" ? gt("Newest first") : gt("Oldest first")}
                 </Button>
               </div>

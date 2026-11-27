@@ -1,7 +1,7 @@
 import { resolveTimelineMinimapPreview, type TimelineMinimapItem } from "./timelineMinimapItems";
 import { useRef, useState, type MouseEvent } from "react";
 import { T, useGT } from "gt-react";
-import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { ChevronDownIcon, ChevronUpIcon } from "~/lib/icons";
 import { Button } from "../ui/button";
 import {
   resolveTimelineMinimapHeightStyle,

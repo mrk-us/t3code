@@ -1,10 +1,10 @@
 import {
-  PanelBottomIcon,
-  PanelRightIcon,
-  SquareMenuIcon,
-  Maximize2Icon,
-  Minimize2Icon,
-} from "lucide-react";
+  SquareTerminalIcon,
+  LayoutAlignRightIcon,
+  MenuSquareIcon,
+  Maximize02Icon,
+  Minimize02Icon,
+} from "~/lib/icons";
 import { useGT } from "gt-react";
 import { memo, type ReactNode, useLayoutEffect, useRef } from "react";
 
@@ -68,7 +68,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
       variant="ghost"
       size="sm"
     >
-      <SquareMenuIcon className="size-4" />
+      <MenuSquareIcon className="size-4" />
     </Toggle>
   );
   const threadPanelControl = (
@@ -116,7 +116,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
             size="sm"
             disabled={!terminalAvailable}
           >
-            <PanelBottomIcon className="size-4" />
+            <SquareTerminalIcon className="size-4" />
           </Toggle>
         </SharedTooltipTrigger>
       ) : null}
@@ -142,7 +142,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
             size="sm"
             disabled={!rightPanelAvailable}
           >
-            <PanelRightIcon className="size-4" />
+            <LayoutAlignRightIcon className="size-4" />
           </Toggle>
         </SharedTooltipTrigger>
       ) : null}
@@ -170,7 +170,11 @@ export const RightPanelMaximizeControl = memo(function RightPanelMaximizeControl
           variant="ghost"
           size="sm"
         >
-          {maximized ? <Minimize2Icon className="size-4" /> : <Maximize2Icon className="size-4" />}
+          {maximized ? (
+            <Minimize02Icon className="size-4" />
+          ) : (
+            <Maximize02Icon className="size-4" />
+          )}
         </Toggle>
       }
       label={label}

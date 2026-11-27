@@ -1,5 +1,5 @@
 import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
-import { DownloadIcon, CopyIcon, CheckIcon, Code2Icon, EyeIcon, Table2Icon } from "lucide-react";
+import { DownloadIcon, CopyIcon, CheckIcon, CodeXmlIcon, EyeIcon, Table02Icon } from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { m, type MessageResolver } from "~/i18n/messages";
 import { namedClipboardTarget, useCopyToClipboard } from "~/hooks/useCopyToClipboard";
@@ -47,7 +47,7 @@ import {
   squashAtomCommandFailure,
 } from "@t3tools/client-runtime/state/runtime";
 import { mediaFileReference } from "@t3tools/client-runtime/media-reference";
-import { FolderTree, Globe2, WrapTextIcon } from "lucide-react";
+import { FolderTreeIcon as FolderTree, Globe02Icon as Globe2, TextWrapIcon } from "~/lib/icons";
 import * as Schema from "effect/Schema";
 import {
   lazy,
@@ -1660,9 +1660,9 @@ export default function FilePreviewPanel({
               }}
             >
               {rendered ? (
-                <Code2Icon className="size-3.5" />
+                <CodeXmlIcon className="size-3.5" />
               ) : renderedMode === "table" ? (
-                <Table2Icon className="size-3.5" />
+                <Table02Icon className="size-3.5" />
               ) : (
                 <EyeIcon className="size-3.5" />
               )}
@@ -1674,7 +1674,7 @@ export default function FilePreviewPanel({
               pressed={wordWrap}
               onPress={() => setWordWrapOverride(!wordWrap)}
             >
-              <WrapTextIcon className="size-3.5" />
+              <TextWrapIcon className="size-3.5" />
             </FileSurfaceAction>
           ) : null}
           {copyableContents !== null ? (

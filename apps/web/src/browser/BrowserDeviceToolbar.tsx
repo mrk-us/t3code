@@ -5,7 +5,7 @@ import {
   type PreviewViewportSetting,
 } from "@t3tools/contracts";
 import { PREVIEW_VIEWPORT_PRESETS, resolvePreviewViewport } from "@t3tools/shared/previewViewport";
-import { Link2, Unlink2, X } from "lucide-react";
+import { Link02Icon as Link2, Unlink02Icon as Unlink2, XIcon as X } from "~/lib/icons";
 import { useState } from "react";
 import { msg, T, useGT, useMessages } from "gt-react";
 

@@ -1,5 +1,5 @@
 import { useGT } from "gt-react";
-import { InfoIcon } from "lucide-react";
+import { InfoIcon } from "~/lib/icons";
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
 import { Button } from "../ui/button";

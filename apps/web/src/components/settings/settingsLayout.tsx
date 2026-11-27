@@ -3,7 +3,7 @@ import { AuthSettingsWriteScope } from "@t3tools/contracts";
 import { usePrimaryEnvironmentId, usePrimaryEnvironment } from "../../state/environments";
 import { useEnvironmentScope, useEnvironmentsWithScope } from "../../state/session";
 import { useServerConfigs } from "../../state/entities";
-import { InfoIcon, Undo2Icon } from "lucide-react";
+import { InfoIcon, Undo02Icon } from "~/lib/icons";
 import {
   DEFAULT_SERVER_SETTINGS,
   isManagedSettingPath,
@@ -612,7 +612,7 @@ export function SettingResetButton({
               onClick();
             }}
           >
-            <Undo2Icon className="size-3" />
+            <Undo02Icon className="size-3" />
           </Button>
         }
       />

@@ -19,7 +19,7 @@ import type {
   EnvironmentId,
   OrchestrationV2ProjectedTurnItem,
 } from "@t3tools/contracts";
-import { CheckIcon, ChevronDownIcon, LockIcon, MessageSquareIcon, MinusIcon } from "lucide-react";
+import { CheckIcon, ChevronDownIcon, LockIcon, MessageSquareIcon, MinusIcon } from "~/lib/icons";
 import { useAtomValue } from "@effect/atom-react";
 import { useRef, useState } from "react";
 

@@ -1,6 +1,6 @@
 import type { PullRequestInvolvement, PullRequestListState } from "@t3tools/contracts";
 import { T, useGT, useMessages } from "gt-react";
-import { Plug2Icon, SearchIcon } from "lucide-react";
+import { Plug02Icon, SearchIcon } from "~/lib/icons";
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 
 import { isElectron } from "~/env";
@@ -260,7 +260,7 @@ export function PullRequestsColumn({
                 label={gt("Filter by provider")}
                 outlined
                 iconOnly={host !== undefined}
-                triggerIcon={<Plug2Icon aria-hidden className="size-4" />}
+                triggerIcon={<Plug02Icon aria-hidden className="size-4" />}
                 triggerLabel={gt("All", { $context: "all providers" })}
                 value={host ?? ""}
                 options={hostMenuOptions}

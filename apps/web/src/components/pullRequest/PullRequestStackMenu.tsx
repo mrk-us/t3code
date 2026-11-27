@@ -5,7 +5,7 @@ import type {
   PullRequestMergeMethod,
 } from "@t3tools/contracts";
 import { squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
-import { ClockIcon, RefreshCwIcon, TriangleAlertIcon, XIcon } from "lucide-react";
+import { ClockIcon, RefreshCwIcon, TriangleAlertIcon, XIcon } from "~/lib/icons";
 import { msg, T, useGT, Var } from "gt-react";
 import { useState } from "react";
 

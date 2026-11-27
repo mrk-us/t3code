@@ -15,7 +15,7 @@ import {
 } from "@t3tools/contracts";
 import { T, useGT, useMessages } from "gt-react";
 import { useRef, useState } from "react";
-import { Trash2Icon } from "lucide-react";
+import { Delete02Icon } from "~/lib/icons";
 
 import { ensureLocalApi } from "../../localApi";
 import { useEnvironmentQuery } from "../../state/query";
@@ -324,7 +324,7 @@ function ProviderSetupActions({
                     </>
                   }
                 >
-                  <Trash2Icon className="size-3.5" />
+                  <Delete02Icon className="size-3.5" />
                 </SharedTooltipTrigger>
               ) : null}
             </div>

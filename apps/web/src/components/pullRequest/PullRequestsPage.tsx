@@ -26,7 +26,7 @@ import type {
 } from "@t3tools/contracts";
 import { useAtomValue } from "@effect/atom-react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
-import { ArrowDownUpIcon, LayersIcon, Plug2Icon } from "lucide-react";
+import { ArrowUpDownIcon, LayersIcon, Plug02Icon } from "~/lib/icons";
 import { msg, T, useGT, useMessages } from "gt-react";
 
 import { m } from "~/i18n/messages";
@@ -1346,7 +1346,7 @@ export function PullRequestsPage() {
   );
   const hostEntries = hosts.length > 0 ? hosts : expectedHosts;
   const hostMenuOptions: ReadonlyArray<PullRequestFilterOption<string>> = [
-    { value: "", label: gt("All", { $context: "all hosts" }), Icon: Plug2Icon },
+    { value: "", label: gt("All", { $context: "all hosts" }), Icon: Plug02Icon },
     ...hostEntries.map((entry) => {
       const summary = hosts.find((host) => host.host === entry.host);
       return {
@@ -1370,7 +1370,7 @@ export function PullRequestsPage() {
   const sortMenu = (
     <PullRequestCompactFilterMenu
       label={gt("Sort pull requests")}
-      triggerIcon={<ArrowDownUpIcon aria-hidden className="size-4" />}
+      triggerIcon={<ArrowUpDownIcon aria-hidden className="size-4" />}
       triggerLabel={gt("Sort", { $context: "verb, sort a list" })}
       outlined
       value={sort}

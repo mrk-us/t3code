@@ -1,7 +1,7 @@
 import type { EnvironmentId, ScopedThreadRef } from "@t3tools/contracts";
 import { useNavigate } from "@tanstack/react-router";
 import { useGT, useMessages } from "gt-react";
-import { MessagesSquareIcon } from "lucide-react";
+import { MessagesSquareIcon } from "~/lib/icons";
 import {
   formatHostedThreadLink,
   guessThreadLinkRef,

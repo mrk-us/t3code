@@ -1,5 +1,5 @@
 import type { DesktopPreviewPointerEvent } from "@t3tools/contracts";
-import { MousePointer2 } from "lucide-react";
+import { MousePointerIcon as MousePointer2 } from "~/lib/icons";
 import { useEffect, useState } from "react";
 
 import { useBrowserPointerStore } from "~/browser/browserPointerStore";

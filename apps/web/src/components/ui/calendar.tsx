@@ -1,5 +1,5 @@
 import { DayPicker } from "@daypicker/react";
-import { ChevronLeftIcon, ChevronRightIcon, ChevronsUpDownIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon, UnfoldMoreIcon } from "~/lib/icons";
 import type * as React from "react";
 import { useFormattingLocale } from "~/i18n/I18nProvider";
 import { cn } from "~/lib/utils";
@@ -36,7 +36,7 @@ const defaultComponents = {
       );
     }
 
-    return <ChevronsUpDownIcon className={className} {...props} aria-hidden="true" />;
+    return <UnfoldMoreIcon className={className} {...props} aria-hidden="true" />;
   },
 };
 

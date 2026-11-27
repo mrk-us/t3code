@@ -17,7 +17,7 @@ import {
   type SimlockDeviceHostConfig,
   type SshDeviceHostConfig,
 } from "@t3tools/contracts";
-import { ChevronDownIcon, MoreVertical, PlusIcon } from "lucide-react";
+import { ChevronDownIcon, MoreVerticalIcon as MoreVertical, PlusIcon } from "~/lib/icons";
 
 import { cn, randomUUID } from "../../lib/utils";
 import { deviceEnvironment } from "../../state/device";

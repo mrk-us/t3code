@@ -76,10 +76,9 @@ import {
   ListFilterIcon,
   PlusIcon,
   SearchIcon,
-  SettingsIcon,
-  SquarePenIcon,
+  Settings02Icon,
   XIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import {
   useEffect,
   useLayoutEffect,
@@ -3209,7 +3208,7 @@ export default function Sidebar({ routeReveal }: { routeReveal: SidebarRouteReve
               />
             }
           >
-            <SquarePenIcon className="size-4" />
+            <PlusIcon className="size-4" />
           </ComboboxTrigger>
           {/* Refocusing the trigger after a pointer close shows its focus ring and opens its tooltip. */}
           <ComboboxPopup
@@ -3274,7 +3273,7 @@ export default function Sidebar({ routeReveal }: { routeReveal: SidebarRouteReve
                       ? FolderPlusIcon
                       : item.value === "all"
                         ? ListFilterIcon
-                        : SquarePenIcon;
+                        : PlusIcon;
                   return (
                     <ComboboxItem key={item.value} hideIndicator value={item}>
                       <Icon className="size-4 shrink-0" />
@@ -3363,7 +3362,7 @@ export default function Sidebar({ routeReveal }: { routeReveal: SidebarRouteReve
                                 void handleProjectSettings(event, project);
                               }}
                             >
-                              <SettingsIcon className="size-3.5" />
+                              <Settings02Icon className="size-3.5" />
                             </Button>
                           </>
                         }

@@ -15,7 +15,7 @@ import {
 import type { EnvironmentId, ThreadId } from "@t3tools/contracts";
 import { useAtomValue } from "@effect/atom-react";
 import { useNavigate } from "@tanstack/react-router";
-import { MessageSquareIcon } from "lucide-react";
+import { MessageSquareIcon } from "~/lib/icons";
 import { createContext, use, useState } from "react";
 import { useGT, useMessages } from "gt-react";
 

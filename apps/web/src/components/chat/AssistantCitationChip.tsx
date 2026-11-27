@@ -6,7 +6,7 @@ import {
 } from "@t3tools/shared/assistantCitations";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useGT } from "gt-react";
-import { PencilIcon, QuoteIcon } from "lucide-react";
+import { PencilIcon, QuoteIcon } from "~/lib/icons";
 import {
   useEffect,
   useEffectEvent,

@@ -2,7 +2,7 @@ import { scopeThreadRef } from "@t3tools/client-runtime/environment";
 import { workflowReferenceLabel } from "@t3tools/client-runtime/workflows";
 import { EnvironmentId, ThreadId, type WorkflowRunReference } from "@t3tools/contracts";
 import { useGT } from "gt-react";
-import { BotIcon, Maximize2Icon, XIcon } from "lucide-react";
+import { BotIcon, Maximize02Icon, XIcon } from "~/lib/icons";
 
 import { cn } from "../../lib/utils";
 import { useEnvironmentQuery } from "../../state/query";
@@ -141,7 +141,7 @@ export default function WorkflowPane({
             }
             onClick={openFull}
           >
-            <Maximize2Icon />
+            <Maximize02Icon />
           </Button>
         )}
         <Button
