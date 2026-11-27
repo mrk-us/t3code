@@ -1,6 +1,7 @@
 import { animate as motionAnimate } from "motion";
 
 import { fadeTransition, SPRING_FAST } from "~/lib/motionTokens";
+import { observeResize } from "~/lib/observeResize";
 
 // Reorders read eased WAAPI progress mid-flight to retarget, so they stay on WAAPI.
 const motionTiming = { duration: 200, easing: "cubic-bezier(0.23, 1, 0.32, 1)" };
@@ -35,6 +36,26 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
     scrollTop = scroller?.scrollTop ?? 0;
   };
   scroller?.addEventListener("scroll", trackScroll, { passive: true });
+  const measure = () =>
+    new Map(
+      Array.from(parent.children)
+        .filter((node): node is HTMLElement => node instanceof HTMLElement && !exiting.has(node))
+        .map((node) => [
+          node,
+          {
+            top: node.offsetTop,
+            left: node.offsetLeft,
+            width: node.offsetWidth,
+            height: node.offsetHeight,
+          },
+        ]),
+    );
+  // Rows resize between updates (a web font swap, streamed row content). Re-measuring keeps the
+  // next update from sliding rows that never moved by the stale difference.
+  const remeasure = () => {
+    if (positions !== null && parent.getClientRects().length > 0) positions = measure();
+  };
+  let stopObservingResizes = () => {};
 
   const remainingOffset = (node: HTMLElement) => {
     const current = running.get(node);
@@ -161,19 +182,7 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
         suspend();
         return;
       }
-      const next = new Map(
-        Array.from(parent.children)
-          .filter((node): node is HTMLElement => node instanceof HTMLElement && !exiting.has(node))
-          .map((node) => [
-            node,
-            {
-              top: node.offsetTop,
-              left: node.offsetLeft,
-              width: node.offsetWidth,
-              height: node.offsetHeight,
-            },
-          ]),
-      );
+      const next = measure();
       let fadeCount = 0;
       if (positions !== null) {
         for (const [node, position] of positions) {
@@ -305,6 +314,8 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
         released = null;
       }
       positions = next;
+      stopObservingResizes();
+      stopObservingResizes = observeResize([...next.keys()], remeasure);
       if (scroller !== null) scrollTop = scroller.scrollTop;
     },
     release() {
@@ -320,6 +331,7 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
     dispose() {
       suspend();
       scroller?.removeEventListener("scroll", trackScroll);
+      stopObservingResizes();
       disposed = true;
     },
   };
