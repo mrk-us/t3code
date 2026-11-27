@@ -1,7 +1,7 @@
 import {
   SquareTerminalIcon,
   LayoutAlignRightIcon,
-  MenuSquareIcon,
+  EqualSignSquareIcon,
   Maximize02Icon,
   Minimize02Icon,
 } from "~/lib/icons";
@@ -68,7 +68,7 @@ export const PanelLayoutControls = memo(function PanelLayoutControls({
       variant="ghost"
       size="sm"
     >
-      <MenuSquareIcon className="size-4" />
+      <EqualSignSquareIcon className="size-4" />
     </Toggle>
   );
   const threadPanelControl = (
