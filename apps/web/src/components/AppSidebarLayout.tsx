@@ -52,9 +52,7 @@ import { isAppModalPage } from "./sidebar/mainAppLocation";
 import type { SidebarRouteReveal } from "./sidebar/routeReveal";
 import {
   resolveEnvironmentIdentificationPillLabel,
-  SidebarStageBackdrop,
   useEnvironmentStageLabel,
-  useSidebarStageBackdropVariant,
 } from "./SidebarStageBackdrop";
 import { Badge } from "./ui/badge";
 import { observeResize } from "../lib/observeResize";
@@ -73,7 +71,6 @@ import {
   SidebarTrigger,
   useMobileSidebarSheetMounted,
   useSidebar,
-  useSidebarVisibility,
 } from "./ui/sidebar";
 import { appAtomRegistry } from "../rpc/atomRegistry";
 import { registerCommands, registerMenuAction } from "../shortcuts/dispatcher";
@@ -343,15 +340,12 @@ function SidebarControl({
   const keybindings = useAtomValue(primaryServerKeybindingsAtom);
   const { toggleSidebar } = useSidebar();
   const mobileSidebarSheetMounted = useMobileSidebarSheetMounted();
-  const isSidebarVisible = useSidebarVisibility();
   const environmentIdentificationMode = useEnvironmentIdentificationMode();
-  const stageBackdropVariant = useSidebarStageBackdropVariant(environmentIdentificationMode);
   const stageLabel = useEnvironmentStageLabel();
   const pillLabel =
     environmentIdentificationMode === "pill"
       ? resolveEnvironmentIdentificationPillLabel(stageLabel)
       : null;
-  const onBackdrop = isSidebarVisible && stageBackdropVariant !== null;
   const shortcutLabel = shortcutLabelForCommand(keybindings, "sidebar.toggle", {
     context: { usagePageOpen },
   });
@@ -438,11 +432,7 @@ function SidebarControl({
           <SharedTooltipTrigger
             render={
               <SidebarTrigger
-                variant={onBackdrop ? "media-navigation" : "ghost"}
-                className={cn(
-                  "pointer-events-auto",
-                  onBackdrop && "relative top-auto translate-y-0",
-                )}
+                className="pointer-events-auto"
                 aria-label={gt("Toggle main sidebar")}
               />
             }
@@ -456,14 +446,13 @@ function SidebarControl({
           <div
             ref={onActionsSlotChange}
             className="pointer-events-auto flex items-center gap-1 empty:hidden"
-            data-on-backdrop={onBackdrop ? "true" : undefined}
           />
         </>
       ) : null}
       {isElectron ? (
         <div className="hidden items-center md:flex">
-          <HistoryNavigationButton direction="back" onBackdrop={onBackdrop} />
-          <HistoryNavigationButton direction="forward" onBackdrop={onBackdrop} />
+          <HistoryNavigationButton direction="back" />
+          <HistoryNavigationButton direction="forward" />
         </div>
       ) : null}
       {pillLabel ? (
@@ -471,19 +460,6 @@ function SidebarControl({
           {pillLabel}
         </Badge>
       ) : null}
-    </div>
-  );
-}
-
-function SidebarStageBanner() {
-  const isSidebarVisible = useSidebarVisibility();
-  const isMobileSheetMounted = useMobileSidebarSheetMounted();
-  const variant = useSidebarStageBackdropVariant(useEnvironmentIdentificationMode());
-  if (!variant || !isSidebarVisible || isMobileSheetMounted) return null;
-  return (
-    // Sized to the floating controls so it never covers titlebar content.
-    <div className="pointer-events-none fixed top-0 left-0 z-40 hidden h-(--workspace-topbar-height) w-[calc(var(--workspace-titlebar-content-left)-0.375rem)] overflow-hidden rounded-br-2xl md:block">
-      <SidebarStageBackdrop variant={variant} />
     </div>
   );
 }
@@ -558,7 +534,6 @@ export function AppSidebarLayout({
       >
         {showSidebar ? (
           <SidebarActionsSlotContext value={actionsSlot}>
-            <SidebarStageBanner />
             <Sidebar
               side="left"
               variant="panel"

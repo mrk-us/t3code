@@ -46,13 +46,7 @@ export function SidebarActionsPortal({ children }: { children: ReactNode }) {
   return slot ? createPortal(children, slot) : null;
 }
 
-export function HistoryNavigationButton({
-  direction,
-  onBackdrop,
-}: {
-  direction: HistoryDirection;
-  onBackdrop: boolean;
-}) {
+export function HistoryNavigationButton({ direction }: { direction: HistoryDirection }) {
   const keybindings = useAtomValue(primaryServerKeybindingsAtom);
   const enabled = useCanNavigateHistory(direction);
   const gt = useGT();
@@ -67,14 +61,11 @@ export function HistoryNavigationButton({
       render={
         <Button
           aria-label={label}
-          className={cn(
-            "pointer-events-auto [-webkit-app-region:no-drag]",
-            onBackdrop && "relative top-auto translate-y-0",
-          )}
+          className="pointer-events-auto [-webkit-app-region:no-drag]"
           disabled={!enabled}
           onClick={() => navigateHistory(direction)}
           size="icon-sm"
-          variant={onBackdrop ? "media-navigation" : "ghost"}
+          variant="ghost"
         />
       }
       label={

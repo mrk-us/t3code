@@ -7,11 +7,8 @@ import {
   type RefObject,
 } from "react";
 
-import { useEnvironmentIdentificationMode } from "~/hooks/useSettings";
-import { cn } from "~/lib/utils";
-import { useSidebarStageBackdropVariant } from "../SidebarStageBackdrop";
 import { Button } from "../ui/button";
-import { SidebarInput, useSidebarVisibility } from "../ui/sidebar";
+import { SidebarInput } from "../ui/sidebar";
 import { SharedTooltipTrigger } from "../ui/shared-tooltip";
 
 export interface SidebarThreadSearchFieldProps {
@@ -98,22 +95,16 @@ export function SidebarFloatingIconButton({
   tooltip?: ReactNode;
   children?: ReactNode;
 } & Omit<ComponentProps<typeof Button>, "children" | "className" | "aria-label">) {
-  const sidebarVisible = useSidebarVisibility();
-  const stageBackdropVariant = useSidebarStageBackdropVariant(useEnvironmentIdentificationMode());
-  const onBackdrop = sidebarVisible && stageBackdropVariant !== null;
   return (
     <SharedTooltipTrigger
       render={
         <Button
           size="icon"
           type="button"
-          variant={onBackdrop ? "media-navigation" : "ghost"}
+          variant="ghost"
           aria-label={label}
           {...rest}
-          className={cn(
-            "size-[var(--workspace-titlebar-control-size)]! [-webkit-app-region:no-drag]",
-            onBackdrop && "relative top-auto translate-y-0",
-          )}
+          className="size-[var(--workspace-titlebar-control-size)]! [-webkit-app-region:no-drag]"
         />
       }
       label={tooltip}
