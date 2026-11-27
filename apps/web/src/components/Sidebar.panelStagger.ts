@@ -22,38 +22,46 @@ function stop(root: HTMLElement) {
   running.delete(root);
 }
 
+// Keep in sync with the panel container's delay-300 in ui/sidebar.tsx: it leaves after this exit.
+const EXIT_SECONDS = 0.3;
+
 /**
- * Cascades the panel's rows top to bottom as it opens or closes. Rows animate
- * `translate`, never `transform`: dnd-kit and the list motion engine own that.
+ * Rows fade together and slide in or out top to bottom as the panel opens or
+ * closes. Rows animate `translate`, never `transform`: dnd-kit and the list
+ * motion engine own that.
  */
 export function staggerSidebarPanel(root: HTMLElement, direction: "in" | "out") {
   stop(root);
   const targets = visibleTargets(root);
   if (targets.length === 0) return;
-  const step = direction === "in" ? 0.03 : 0.01;
-  const delay = (index: number) => Math.min(index, MAX_STAGGER_STEPS) * step;
   const moving = !prefersReducedMotion();
+  // Rows travel the whole way from off the window's left edge.
+  const offscreen = `${-Math.ceil(root.getBoundingClientRect().right + 8)}px 0px`;
   if (direction === "in") {
     // Rows that never faded out (the panel started closed) start from hidden.
     for (const element of targets) {
       if (element.style.opacity !== "") continue;
       element.style.opacity = "0";
-      if (moving) element.style.translate = "-12px 0px";
+      if (moving) element.style.translate = offscreen;
     }
   }
   const controls = [
     animate(
       targets,
       { opacity: direction === "in" ? 1 : 0 },
-      { ...fadeTransition(direction === "in" ? 0.2 : 0.1), delay },
+      direction === "in" ? fadeTransition(0.25) : { duration: EXIT_SECONDS, ease: "easeInOut" },
     ),
   ];
   if (moving) {
+    const step = direction === "in" ? 0.03 : 0.012;
+    const delay = (index: number) => Math.min(index, MAX_STAGGER_STEPS) * step;
     controls.push(
       animate(
         targets,
-        { translate: direction === "in" ? "0px 0px" : "-8px 0px" },
-        direction === "in" ? { ...SPRING_SNAPPY, delay } : { ...fadeTransition(0.1), delay },
+        { translate: direction === "in" ? "0px 0px" : offscreen },
+        direction === "in"
+          ? { ...SPRING_SNAPPY, delay }
+          : { ...fadeTransition(EXIT_SECONDS - MAX_STAGGER_STEPS * step), delay },
       ),
     );
   }

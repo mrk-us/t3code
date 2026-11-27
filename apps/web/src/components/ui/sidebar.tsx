@@ -407,7 +407,10 @@ function Sidebar({
           className={cn(
             "fixed z-10 hidden w-(--sidebar-width) md:flex",
             variant !== "panel" && "inset-y-0 h-svh",
-            "[[data-panel-animations=true]_&]:transition-[left,right,width] [[data-panel-animations=true]_&]:[transition-duration:var(--panel-animation-duration)] [[data-panel-animations=true]_&]:ease-drawer",
+            variant === "panel"
+              ? // The panel's rows animate themselves; it steps away once their 300ms exit ends.
+                "[[data-panel-animations=true]_&]:transition-[left] [[data-panel-animations=true]_&]:duration-0 [[data-panel-animations=true]_&]:group-data-[collapsible=offcanvas]:delay-300"
+              : "[[data-panel-animations=true]_&]:transition-[left,right,width] [[data-panel-animations=true]_&]:[transition-duration:var(--panel-animation-duration)] [[data-panel-animations=true]_&]:ease-drawer",
             side === "left"
               ? "left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]"
               : "right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]",

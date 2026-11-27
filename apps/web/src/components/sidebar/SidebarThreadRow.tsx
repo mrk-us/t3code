@@ -126,7 +126,7 @@ import { ProjectFavicon, type ProjectFaviconProject } from "../ProjectFavicon";
 import { ThreadSearchMatchExcerpt } from "../ThreadSearchMatch";
 import { makeWorkspaceFileDropHandlers } from "../chat/workspaceFileDrop";
 import { ProviderInstanceIcon } from "../chat/ProviderInstanceIcon";
-import { fadeTransition, prefersReducedMotion, SPRING_SNAPPY } from "~/lib/motionTokens";
+import { fadeTransition, prefersReducedMotion } from "~/lib/motionTokens";
 import { getTriggerDisplayModelName } from "../chat/providerIconUtils";
 import { shouldShowInstanceBadge, type ProviderInstanceEntry } from "../../providerInstances";
 import { useThreadRunningTerminalIds } from "../../state/terminalSessions";
@@ -877,9 +877,9 @@ const SidebarThreadRow = memo(function SidebarThreadRow(props: SidebarThreadRowP
     intentPrefetch.onPointerEnter(event);
     const items = rowActionsRef.current ? Array.from(rowActionsRef.current.children) : [];
     if (event.pointerType !== "mouse" || items.length === 0) return;
-    const delay = (index: number) => index * 0.03;
-    animate(items, { opacity: [0, 1] }, { ...fadeTransition(0.15), delay });
-    if (!prefersReducedMotion()) animate(items, { x: [4, 0] }, { ...SPRING_SNAPPY, delay });
+    const delay = (index: number) => index * 0.02;
+    animate(items, { opacity: [0, 1] }, { ...fadeTransition(0.1), delay });
+    if (!prefersReducedMotion()) animate(items, { x: [4, 0] }, { ...fadeTransition(0.12), delay });
   };
   const handleClick = (event: ReactMouseEvent) => {
     onThreadClick(event, threadRef);

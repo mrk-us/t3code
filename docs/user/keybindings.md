@@ -32,6 +32,10 @@ In the model picker, use `Left`/`Shift+Tab` to move to the provider list, `Right
 
 Remap under **Copy Link or Thread** and **Copy Number** in **Settings → Keybindings**.
 
+## Hide all panels
+
+`panels.toggleAll` (default `mod+.`, web and desktop) hides the sidebar, thread details, right panel, and terminal drawer. Press it again to bring back the ones that were open.
+
 ## Find
 
 - **Current thread** (`chat.find`, default `mod+f` outside terminals/previews): Searches all messages and plans in the thread (requires an up-to-date server). Use `Enter` / `Shift+Enter` to step through matches and `Esc` to close.
