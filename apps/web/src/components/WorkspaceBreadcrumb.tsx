@@ -10,7 +10,7 @@ interface WorkspaceBreadcrumbProps {
 
 export function WorkspaceBreadcrumb({ ariaLabel, children, className }: WorkspaceBreadcrumbProps) {
   return (
-    <nav aria-label={ariaLabel} className={cn("min-w-0", className)}>
+    <nav aria-label={ariaLabel} className={cn("min-w-0", className)} data-zen-flip="">
       <ol className="m-0 flex min-w-0 list-none items-center gap-2 p-0 text-sm sm:gap-3">
         {children}
       </ol>

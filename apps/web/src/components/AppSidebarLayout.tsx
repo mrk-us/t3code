@@ -324,7 +324,7 @@ function registerAppShellCommands(router: AnyRouter, shellElement: Element): () 
   };
 }
 
-const TITLEBAR_CONTENT_GAP_PX = 12;
+const TITLEBAR_CONTENT_GAP_PX = 20;
 // Panel rows clear the floating footer by this much.
 const SIDEBAR_PANEL_FOOTER_GAP_PX = 8;
 

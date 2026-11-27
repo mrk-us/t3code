@@ -1877,9 +1877,14 @@ code {
   background: transparent;
 }
 
+/* Scrollbar thumbs show only while the pointer is over their scroll area. */
 :where(:not(iframe))::-webkit-scrollbar-thumb {
-  background: var(--app-scrollbar-thumb);
+  background: transparent;
   border-radius: 3px;
+}
+
+:where(:not(iframe)):hover::-webkit-scrollbar-thumb {
+  background: var(--app-scrollbar-thumb);
 }
 
 :where(:not(iframe))::-webkit-scrollbar-thumb:hover {
@@ -2763,6 +2768,19 @@ code {
 
 .messages-timeline-scroll:focus-visible {
   outline: none;
+}
+
+/* The timeline's turn markers sit beside the open floating thread sidebar, not under it. */
+[data-timeline-minimap] {
+  left: var(--sidebar-panel-clearance, 0px);
+  transition: left 200ms var(--ease-out-strong);
+}
+
+/* Zen mode drops the space the hidden chrome held: titles move to the corner and the
+   composer to the bottom. zenMode.ts animates that shift. */
+:root[data-zen-mode] [data-slot="sidebar-wrapper"] {
+  --workspace-titlebar-content-left: calc(var(--workspace-controls-left) + 0.25rem) !important;
+  --app-toolbar-clearance: 0px !important;
 }
 
 /* Zen mode hides the app chrome, including chrome that mounts while it is on. */

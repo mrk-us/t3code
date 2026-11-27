@@ -23,9 +23,9 @@ function stop(root: HTMLElement) {
 }
 
 const ENTER_STEP_SECONDS = 0.02;
-const EXIT_STEP_SECONDS = 0.03;
+const EXIT_STEP_SECONDS = 0.02;
 const EXIT_SLIDE_SECONDS = 0.18;
-// Keep in sync with the panel container's delay-480 in ui/sidebar.tsx: it leaves after this exit.
+// Keep in sync with the panel container's delay-380 in ui/sidebar.tsx: it leaves after this exit.
 const EXIT_SECONDS = MAX_STAGGER_STEPS * EXIT_STEP_SECONDS + EXIT_SLIDE_SECONDS;
 
 /**
@@ -38,8 +38,9 @@ export function staggerSidebarPanel(root: HTMLElement, direction: "in" | "out") 
   const targets = visibleTargets(root);
   if (targets.length === 0) return;
   const moving = !prefersReducedMotion();
-  // Rows travel the whole way from off the window's left edge.
-  const offscreen = `${-Math.ceil(root.getBoundingClientRect().right + 8)}px 0px`;
+  // Rows travel the whole way from off the window's left edge. Single-value translates match
+  // what the browser reports back, so motion can interpolate from a row it never animated.
+  const offscreen = `${-Math.ceil(root.getBoundingClientRect().right + 8)}px`;
   if (direction === "in") {
     // Rows that never faded out (the panel started closed) start from hidden.
     for (const element of targets) {
@@ -61,7 +62,7 @@ export function staggerSidebarPanel(root: HTMLElement, direction: "in" | "out") 
     controls.push(
       animate(
         targets,
-        { translate: direction === "in" ? "0px 0px" : offscreen },
+        { translate: direction === "in" ? "0px" : offscreen },
         direction === "in"
           ? { ...SPRING_FAST, delay }
           : { ...fadeTransition(EXIT_SLIDE_SECONDS), delay },

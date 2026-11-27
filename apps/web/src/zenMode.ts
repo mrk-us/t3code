@@ -1,7 +1,12 @@
 import type { ScopedThreadRef } from "@t3tools/contracts";
 import { animate } from "motion";
 
-import { fadeTransition, prefersReducedMotion, SPRING_FAST } from "./lib/motionTokens";
+import {
+  fadeTransition,
+  prefersReducedMotion,
+  SPRING_FAST,
+  SPRING_SNAPPY,
+} from "./lib/motionTokens";
 import {
   selectThreadPanelOpen,
   selectThreadRightPanelState,
@@ -22,6 +27,8 @@ let zenPanels: OpenPanels | null = null;
 // Chrome that zen mode hides marks itself with data-zen-chrome="top" | "bottom" | "left".
 const ZEN_CHROME = "[data-zen-chrome]";
 const ZEN_OFFSET_PX = 12;
+// The breadcrumb and composer that zen mode moves into the freed space.
+const ZEN_FLIP = "[data-zen-flip]";
 
 function readOpenPanels(sidebarOpen: boolean, threadRef: ScopedThreadRef | null): OpenPanels {
   const rightPanels = useRightPanelStore.getState();
@@ -60,10 +67,23 @@ function chromeOffset(element: HTMLElement): { x: number; y: number } {
 
 function animateChrome(hidden: boolean, animated: boolean) {
   const root = document.documentElement;
+  const moving = animated && !prefersReducedMotion();
+  const flips = moving
+    ? Array.from(document.querySelectorAll<HTMLElement>(ZEN_FLIP), (element) => ({
+        element,
+        from: element.getBoundingClientRect(),
+      }))
+    : [];
   // The attribute also hides chrome that mounts while zen mode is on.
   if (hidden) root.dataset.zenMode = "";
   else delete root.dataset.zenMode;
-  const moving = animated && !prefersReducedMotion();
+  // Play the layout shift from where each element was, so it glides into the freed space.
+  for (const { element, from } of flips) {
+    const to = element.getBoundingClientRect();
+    const x = from.left - to.left;
+    const y = from.top - to.top;
+    if (x !== 0 || y !== 0) animate(element, { x: [x, 0], y: [y, 0] }, SPRING_SNAPPY);
+  }
   for (const element of document.querySelectorAll<HTMLElement>(ZEN_CHROME)) {
     element.inert = hidden;
     const offset = chromeOffset(element);
