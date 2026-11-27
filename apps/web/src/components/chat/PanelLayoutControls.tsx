@@ -189,6 +189,7 @@ export function ThreadPanelHeaderControl(props: PanelLayoutControlsProps) {
         mobileSidebarSheetMounted && "hidden",
       )}
       data-workspace-titlebar-controls
+      data-zen-chrome="top"
     >
       <PanelLayoutControls {...props} showTerminalControl={false} showRightPanelControl={false} />
     </div>
@@ -235,6 +236,7 @@ export function WorkspaceTitlebarControls(props: {
         mobileSidebarSheetMounted && "hidden",
       )}
       data-workspace-titlebar-controls
+      data-zen-chrome="top"
     >
       {props.showMaximizeControl ? (
         <span

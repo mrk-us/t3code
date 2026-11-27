@@ -1237,6 +1237,7 @@ export function PullRequestsPage() {
         mobileSidebarSheetMounted && "hidden",
       )}
       data-workspace-titlebar-controls
+      data-zen-chrome="top"
     >
       {rightPanelState.isOpen ? (
         <RightPanelMaximizeControl

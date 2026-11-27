@@ -681,6 +681,7 @@ export function IssuesPage() {
             <div
               className="flex items-center gap-1 [-webkit-app-region:no-drag]"
               data-workspace-titlebar-controls
+              data-zen-chrome="top"
             >
               <PanelLayoutControls
                 showTerminalControl={false}

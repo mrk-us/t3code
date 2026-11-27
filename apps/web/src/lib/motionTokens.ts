@@ -3,6 +3,8 @@ const EASE_OUT_STRONG = [0.23, 1, 0.32, 1] as const;
 
 // visualDuration is when the motion looks finished; the tail settles quietly after it.
 export const SPRING_SNAPPY = { type: "spring", visualDuration: 0.3, bounce: 0.15 } as const;
+// For entrances that should land quickly, like rows cascading in.
+export const SPRING_FAST = { type: "spring", visualDuration: 0.22, bounce: 0.1 } as const;
 
 export function fadeTransition(durationSeconds: number) {
   return { duration: durationSeconds, ease: EASE_OUT_STRONG } as const;

@@ -2765,6 +2765,14 @@ code {
   outline: none;
 }
 
+/* Zen mode hides the app chrome, including chrome that mounts while it is on. */
+:root[data-zen-mode] [data-zen-chrome] {
+  opacity: 0;
+}
+:root[data-zen-mode] :is([data-zen-chrome], [data-zen-chrome] *) {
+  pointer-events: none !important;
+}
+
 /* Interactive elements keep the arrow cursor unless the user opts into the hand.
    Unlayered so it outranks utilities and the cursor rules above. */
 :root[data-pointer-cursor="off"]

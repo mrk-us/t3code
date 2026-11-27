@@ -1,6 +1,6 @@
 import { animate } from "motion";
 
-import { fadeTransition, prefersReducedMotion, SPRING_SNAPPY } from "~/lib/motionTokens";
+import { fadeTransition, prefersReducedMotion, SPRING_FAST } from "~/lib/motionTokens";
 
 type Controls = ReturnType<typeof animate>;
 
@@ -22,8 +22,11 @@ function stop(root: HTMLElement) {
   running.delete(root);
 }
 
-// Keep in sync with the panel container's delay-300 in ui/sidebar.tsx: it leaves after this exit.
-const EXIT_SECONDS = 0.3;
+const ENTER_STEP_SECONDS = 0.02;
+const EXIT_STEP_SECONDS = 0.03;
+const EXIT_SLIDE_SECONDS = 0.18;
+// Keep in sync with the panel container's delay-480 in ui/sidebar.tsx: it leaves after this exit.
+const EXIT_SECONDS = MAX_STAGGER_STEPS * EXIT_STEP_SECONDS + EXIT_SLIDE_SECONDS;
 
 /**
  * Rows fade together and slide in or out top to bottom as the panel opens or
@@ -49,19 +52,19 @@ export function staggerSidebarPanel(root: HTMLElement, direction: "in" | "out") 
     animate(
       targets,
       { opacity: direction === "in" ? 1 : 0 },
-      direction === "in" ? fadeTransition(0.25) : { duration: EXIT_SECONDS, ease: "easeInOut" },
+      direction === "in" ? fadeTransition(0.18) : { duration: EXIT_SECONDS, ease: "easeInOut" },
     ),
   ];
   if (moving) {
-    const step = direction === "in" ? 0.03 : 0.012;
+    const step = direction === "in" ? ENTER_STEP_SECONDS : EXIT_STEP_SECONDS;
     const delay = (index: number) => Math.min(index, MAX_STAGGER_STEPS) * step;
     controls.push(
       animate(
         targets,
         { translate: direction === "in" ? "0px 0px" : offscreen },
         direction === "in"
-          ? { ...SPRING_SNAPPY, delay }
-          : { ...fadeTransition(EXIT_SECONDS - MAX_STAGGER_STEPS * step), delay },
+          ? { ...SPRING_FAST, delay }
+          : { ...fadeTransition(EXIT_SLIDE_SECONDS), delay },
       ),
     );
   }

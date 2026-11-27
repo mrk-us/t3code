@@ -75,7 +75,7 @@ import {
 import { appAtomRegistry } from "../rpc/atomRegistry";
 import { registerCommands, registerMenuAction } from "../shortcuts/dispatcher";
 import { resolveThreadRouteRef } from "../threadRoutes";
-import { toggleAllPanels } from "../panelsVisibility";
+import { toggleZenMode } from "../zenMode";
 import { SharedTooltipTrigger } from "./ui/shared-tooltip";
 
 const MACOS_TRAFFIC_LIGHTS_LEFT_INSET = "var(--desktop-window-controls-inset, 90px)";
@@ -340,6 +340,7 @@ function SidebarControl({
   const usagePageOpen = useLocation({ select: (location) => location.pathname === "/usage" });
   const keybindings = useAtomValue(primaryServerKeybindingsAtom);
   const { open: sidebarOpen, setOpen: setSidebarOpen, toggleSidebar } = useSidebar();
+  const { active: panelMotionActive } = usePanelAnimationSettings();
   const mobileSidebarSheetMounted = useMobileSidebarSheetMounted();
   const environmentIdentificationMode = useEnvironmentIdentificationMode();
   const stageLabel = useEnvironmentStageLabel();
@@ -399,24 +400,25 @@ function SidebarControl({
     };
   }, [keybindings, router, showSidebar, toggleSidebar, usagePageOpen]);
 
-  // oxlint-disable-next-line t3code/no-unreasoned-state-sync -- registers the hide-all-panels shortcut with the window key dispatcher; it reads the current sidebar state
+  // oxlint-disable-next-line t3code/no-unreasoned-state-sync -- registers the zen mode shortcut with the window key dispatcher; it reads the current sidebar state
   useEffect(
     () =>
       registerCommands(
         {
-          "panels.toggleAll": (event) => {
+          "zenMode.toggle": (event) => {
             event.preventDefault();
             event.stopPropagation();
-            toggleAllPanels({
+            toggleZenMode({
               sidebarOpen,
               setSidebarOpen,
               threadRef: resolveThreadRouteRef(router.state.matches.at(-1)?.params ?? {}),
+              animated: panelMotionActive,
             });
           },
         },
         { when: (event) => !isKeybindingCaptureTarget(event) },
       ),
-    [router, setSidebarOpen, sidebarOpen],
+    [panelMotionActive, router, setSidebarOpen, sidebarOpen],
   );
 
   // The control lives as long as the shell, so it carries the shell's commands. Created
@@ -447,6 +449,7 @@ function SidebarControl({
         mobileSidebarSheetMounted && "hidden",
       )}
       data-sidebar-control=""
+      data-zen-chrome="top"
     >
       {showSidebar ? (
         <>

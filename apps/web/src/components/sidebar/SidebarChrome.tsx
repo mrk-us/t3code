@@ -92,6 +92,7 @@ export function SidebarFloatingFooter({ ref }: { ref?: (node: HTMLDivElement | n
       ref={ref}
       className="pointer-events-none fixed bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] left-[calc(env(safe-area-inset-left)+0.5rem)] z-40 flex w-[calc(var(--sidebar-width)-1rem)] max-w-[calc(100vw-1rem)] flex-col gap-2 *:pointer-events-auto"
       data-sidebar-floating-footer=""
+      data-zen-chrome="bottom"
     >
       <SidebarProviderUpdatePill />
       <SidebarUpdateArchitectureWarning />
@@ -176,6 +177,7 @@ export function AppNavigationToolbar() {
       aria-label={gt("App navigation")}
       className="dropdown-glass fixed bottom-[calc(env(safe-area-inset-bottom)+0.75rem)] left-1/2 z-40 flex -translate-x-1/2 items-center gap-0.5 rounded-full p-1"
       data-app-navigation-toolbar=""
+      data-zen-chrome="bottom"
     >
       <AppNavigationItem
         active={destination === "threads"}

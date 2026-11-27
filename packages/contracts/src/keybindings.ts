@@ -59,7 +59,7 @@ export const STATIC_KEYBINDING_COMMANDS = [
   "workspace.focusNext",
   "workspace.focusPrevious",
   "sidebar.toggle",
-  "panels.toggleAll",
+  "zenMode.toggle",
   "navigation.back",
   "navigation.forward",
   "terminal.toggle",

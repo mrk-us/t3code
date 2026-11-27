@@ -32,9 +32,9 @@ In the model picker, use `Left`/`Shift+Tab` to move to the provider list, `Right
 
 Remap under **Copy Link or Thread** and **Copy Number** in **Settings → Keybindings**.
 
-## Hide all panels
+## Zen mode
 
-`panels.toggleAll` (default `mod+.`, web and desktop) hides the sidebar, thread details, right panel, and terminal drawer. Press it again to bring back the ones that were open.
+`zenMode.toggle` (default `mod+.`, web and desktop) turns on zen mode: everything except the thread breadcrumb and the message box hides, including the sidebar, thread details, right panel, terminal drawer, and toolbars. Press it again to bring back the panels that were open.
 
 ## Find
 

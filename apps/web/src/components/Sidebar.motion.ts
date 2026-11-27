@@ -1,6 +1,6 @@
 import { animate as motionAnimate } from "motion";
 
-import { fadeTransition, SPRING_SNAPPY } from "~/lib/motionTokens";
+import { fadeTransition, SPRING_FAST } from "~/lib/motionTokens";
 
 // Reorders read eased WAAPI progress mid-flight to retarget, so they stay on WAAPI.
 const motionTiming = { duration: 200, easing: "cubic-bezier(0.23, 1, 0.32, 1)" };
@@ -287,12 +287,12 @@ export function createSidebarListMotion(parent: HTMLUListElement) {
         motionAnimate(
           sectionEntering,
           { opacity: [0, 1] },
-          { ...fadeTransition(0.2), delay: (index) => sectionDelay(index, 0.025) },
+          { ...fadeTransition(0.15), delay: (index) => sectionDelay(index, 0.015) },
         );
         motionAnimate(
           sectionEntering,
           { translate: ["0px -6px", "0px 0px"] },
-          { ...SPRING_SNAPPY, delay: (index) => sectionDelay(index, 0.025) },
+          { ...SPRING_FAST, delay: (index) => sectionDelay(index, 0.015) },
         );
       }
       if (released !== null) {
