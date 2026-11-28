@@ -7,7 +7,7 @@ import {
   GitPullRequestIcon,
   Settings02Icon,
 } from "~/lib/icons";
-import { createContext, use, type ReactNode } from "react";
+import { createContext, use, type ComponentProps, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useGT } from "gt-react";
 import { useLocation, useNavigate } from "@tanstack/react-router";
@@ -36,6 +36,7 @@ import { SidebarThreadUndoNotice } from "./SidebarThreadUndoNotice";
 import { SidebarProviderUpdatePill } from "./SidebarProviderUpdatePill";
 import { SidebarUpdateArchitectureWarning, SidebarUpdatePill } from "./SidebarUpdatePill";
 import { SharedTooltipTrigger } from "../ui/shared-tooltip";
+import { UsageLimitsHoverCard } from "../usage/UsageLimitsHoverCard";
 
 /** The floating top-left group's slot for the thread sidebar's own actions. */
 export const SidebarActionsSlotContext = createContext<HTMLElement | null>(null);
@@ -111,6 +112,27 @@ function resolveAppNavigationDestination(pathname: string): AppNavigationDestina
   return "threads";
 }
 
+function AppNavigationButton({
+  active,
+  className,
+  ...props
+}: ComponentProps<"button"> & { active: boolean }) {
+  return (
+    <button
+      type="button"
+      aria-current={active ? "page" : undefined}
+      className={cn(
+        "inline-flex size-8 cursor-pointer items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset [&>svg]:size-4 [&>svg]:shrink-0",
+        active
+          ? "bg-accent text-accent-foreground"
+          : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
 function AppNavigationItem({
   active,
   icon,
@@ -124,20 +146,7 @@ function AppNavigationItem({
 }) {
   return (
     <SharedTooltipTrigger
-      render={
-        <button
-          type="button"
-          aria-current={active ? "page" : undefined}
-          aria-label={label}
-          onClick={onClick}
-          className={cn(
-            "inline-flex size-8 cursor-pointer items-center justify-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset [&>svg]:size-4 [&>svg]:shrink-0",
-            active
-              ? "bg-accent text-accent-foreground"
-              : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
-          )}
-        />
-      }
+      render={<AppNavigationButton active={active} aria-label={label} onClick={onClick} />}
       label={label}
       side="top"
     >
@@ -191,11 +200,16 @@ export function AppNavigationToolbar() {
           onClick={() => void navigate({ to: "/issues", search: readIssueListPreferences() })}
         />
       ) : null}
-      <AppNavigationItem
-        active={destination === "usage"}
-        icon={<Activity01Icon />}
-        label={gt("Usage")}
-        onClick={() => void navigate({ to: "/usage" })}
+      <UsageLimitsHoverCard
+        trigger={
+          <AppNavigationButton
+            active={destination === "usage"}
+            aria-label={gt("Usage")}
+            onClick={() => void navigate({ to: "/usage" })}
+          >
+            <Activity01Icon />
+          </AppNavigationButton>
+        }
       />
       <AppNavigationItem
         active={destination === "settings"}

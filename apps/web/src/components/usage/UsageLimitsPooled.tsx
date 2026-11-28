@@ -103,7 +103,7 @@ function AccountAvatar({
   return account.email ? <AccountChip email={account.email} /> : null;
 }
 
-function AccountName({
+export function AccountName({
   account,
   className,
 }: {
