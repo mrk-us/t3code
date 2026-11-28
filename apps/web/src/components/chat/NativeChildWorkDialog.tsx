@@ -6,7 +6,7 @@ import type {
   ThreadId,
 } from "@t3tools/contracts";
 import { T, useGT } from "gt-react";
-import { ListTreeIcon } from "lucide-react";
+import { ListTreeIcon } from "~/lib/icons";
 import { useState } from "react";
 
 import { orchestrationEnvironment } from "../../state/orchestration";

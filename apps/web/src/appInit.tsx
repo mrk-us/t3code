@@ -94,6 +94,9 @@ function startClientAppearance(): void {
     if (previous?.htmlPreviewWidth !== settings.htmlPreviewWidth) {
       root.dataset.htmlPreviewWidth = settings.htmlPreviewWidth;
     }
+    if (previous?.pointerCursor !== settings.pointerCursor) {
+      root.dataset.pointerCursor = settings.pointerCursor ? "on" : "off";
+    }
     if (previous?.appearanceContrast !== settings.appearanceContrast) {
       applyAppearanceContrast(root, settings.appearanceContrast);
     }

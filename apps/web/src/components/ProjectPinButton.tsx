@@ -1,6 +1,6 @@
 import type { ResolvedKeybindingsConfig } from "@t3tools/contracts";
 import { useGT } from "gt-react";
-import { PinIcon, PinOffIcon } from "lucide-react";
+import { PinIcon, PinOffIcon } from "~/lib/icons";
 import type { KeyboardEvent } from "react";
 
 import { resolveShortcutCommand } from "../keybindings";

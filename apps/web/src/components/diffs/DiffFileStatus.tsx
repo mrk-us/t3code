@@ -1,5 +1,5 @@
 import { useGT } from "gt-react";
-import { InfoIcon, RotateCwIcon } from "lucide-react";
+import { InfoIcon, RotateCwIcon } from "~/lib/icons";
 import { Button } from "../ui/button";
 import { SharedTooltipTrigger } from "../ui/shared-tooltip";
 

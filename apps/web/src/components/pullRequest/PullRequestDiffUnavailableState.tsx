@@ -1,6 +1,6 @@
 import type { ScopedThreadRef, SourceControlProviderKind } from "@t3tools/contracts";
 import { T, useMessages, Var } from "gt-react";
-import { ExternalLinkIcon, TriangleAlertIcon } from "lucide-react";
+import { ExternalLinkIcon, TriangleAlertIcon } from "~/lib/icons";
 
 import { useOpenLink } from "~/browser/useOpenLink";
 import { getSourceControlPresentationForKind } from "~/sourceControlPresentation";

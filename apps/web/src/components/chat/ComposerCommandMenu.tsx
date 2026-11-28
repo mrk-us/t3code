@@ -20,10 +20,10 @@ import {
   FolderIcon,
   MessagesSquareIcon,
   PackageIcon,
-  SettingsIcon,
+  Settings02Icon,
   UserRoundIcon,
-  type LucideIcon,
-} from "lucide-react";
+  type IconComponent,
+} from "~/lib/icons";
 import { msg, useGT, useMessages } from "gt-react";
 import { memo, useLayoutEffect, useRef, useState } from "react";
 
@@ -338,12 +338,12 @@ const LISTBOX_LABEL_BY_TRIGGER: Record<ComposerTriggerKind, string> = {
   skill: msg("Skills"),
 };
 
-const SKILL_SOURCE_ICON_BY_KIND: Record<ProviderSkillSourceKind, LucideIcon> = {
+const SKILL_SOURCE_ICON_BY_KIND: Record<ProviderSkillSourceKind, IconComponent> = {
   app: BlocksIcon,
   repo: FolderIcon,
   project: FolderIcon,
   personal: UserRoundIcon,
-  system: SettingsIcon,
+  system: Settings02Icon,
   other: PackageIcon,
 };
 

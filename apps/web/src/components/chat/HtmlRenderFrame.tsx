@@ -6,7 +6,7 @@ import {
   type HtmlRenderReference,
 } from "@t3tools/shared/htmlRender";
 import { T, useGT, Var } from "gt-react";
-import { Maximize2Icon } from "lucide-react";
+import { Maximize02Icon } from "~/lib/icons";
 import { useEffect, useState } from "react";
 
 import { useAssetUrlRefresh } from "~/assets/assetUrls";
@@ -128,7 +128,7 @@ export function HtmlRenderFrame(props: {
               }
               side="left"
             >
-              <Maximize2Icon className="size-3.5" />
+              <Maximize02Icon className="size-3.5" />
             </SharedTooltipTrigger>
           </div>
           {expandedSrc !== null ? (

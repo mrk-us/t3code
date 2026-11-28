@@ -2,7 +2,7 @@ import type { PullRequestAction } from "@t3tools/contracts";
 import { contextMenuSourceOf } from "../../contextMenuSource";
 import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
 import { T } from "gt-react";
-import { SearchIcon } from "lucide-react";
+import { SearchIcon } from "~/lib/icons";
 import { PullRequestChangeBreakdownStat } from "./PullRequestChangeBreakdownStat";
 import { PullRequestStackPopover } from "./PullRequestStackPopover";
 import {

@@ -36,19 +36,19 @@ import { SOURCE_CONTROL_MEDIA_ASSET } from "@t3tools/contracts";
 import {
   ChevronDownIcon,
   ChevronRightIcon,
-  Columns2Icon,
+  LayoutTwoColumnIcon,
   FlaskConicalOffIcon,
   FolderTreeIcon,
   InfoIcon,
   MessageSquareOffIcon,
   PilcrowIcon,
   Rows3Icon,
-  Settings2Icon,
+  SlidersHorizontalIcon,
   TextWrapIcon,
   TriangleAlertIcon,
   ChevronsDownUpIcon,
-  ChevronsUpDownIcon,
-} from "lucide-react";
+  UnfoldMoreIcon,
+} from "~/lib/icons";
 import { RegistryContext, useAtomRefresh, useAtomValue } from "@effect/atom-react";
 import { AsyncResult, Atom } from "effect/reactivity";
 import * as Schema from "effect/Schema";
@@ -1674,7 +1674,7 @@ function PullRequestCodeTab({
               </>
             }
           >
-            <Settings2Icon className="size-3.5" />
+            <SlidersHorizontalIcon className="size-3.5" />
           </SharedTooltipTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuCheckboxItem
@@ -1740,7 +1740,7 @@ function PullRequestCodeTab({
               <Rows3Icon className="size-3.5" />
             </Toggle>
             <Toggle aria-label={gt("Split diff view")} value="split">
-              <Columns2Icon className="size-3.5" />
+              <LayoutTwoColumnIcon className="size-3.5" />
             </Toggle>
           </ToggleGroup>
           <SharedTooltipTrigger
@@ -1776,7 +1776,7 @@ function PullRequestCodeTab({
             label={allFilesCollapsed ? gt("Expand all files") : gt("Collapse all files")}
           >
             {allFilesCollapsed ? (
-              <ChevronsUpDownIcon className="size-3.5" />
+              <UnfoldMoreIcon className="size-3.5" />
             ) : (
               <ChevronsDownUpIcon className="size-3.5" />
             )}

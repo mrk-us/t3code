@@ -35,7 +35,7 @@ import {
   LockIcon,
   MinusIcon,
   ShieldCheckIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useId, useRef, useState, type FormEvent } from "react";
 import { flushSync } from "react-dom";
 

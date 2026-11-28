@@ -5,7 +5,7 @@ import {
   PUSH_HOOKS_APPROVAL_QUESTION,
 } from "@t3tools/client-runtime/state/thread-requests";
 import { msg, T, useMessages } from "gt-react";
-import { ShieldIcon } from "lucide-react";
+import { ShieldIcon } from "~/lib/icons";
 import { memo, use } from "react";
 import { type PendingApproval } from "../../session-logic";
 import { InlineButton } from "../ui/button";

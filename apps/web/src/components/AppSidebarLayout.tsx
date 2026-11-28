@@ -42,10 +42,20 @@ import {
 import { BackgroundThreadAnnouncer } from "./BackgroundThreadAnnouncer";
 import { HistorySwipeNavigation } from "./HistorySwipeNavigation";
 import ThreadSidebar from "./Sidebar";
-import { SidebarBrandWidthProbe } from "./sidebar/SidebarChrome";
+import {
+  AppNavigationToolbar,
+  HistoryNavigationButton,
+  SidebarActionsSlotContext,
+  SidebarFloatingFooter,
+} from "./sidebar/SidebarChrome";
 import { isAppModalPage } from "./sidebar/mainAppLocation";
 import type { SidebarRouteReveal } from "./sidebar/routeReveal";
-import { useSidebarStageBackdropVariant } from "./SidebarStageBackdrop";
+import {
+  resolveEnvironmentIdentificationPillLabel,
+  useEnvironmentStageLabel,
+} from "./SidebarStageBackdrop";
+import { Badge } from "./ui/badge";
+import { observeResize } from "../lib/observeResize";
 import {
   clampThreadSidebarWidth,
   resolveInitialThreadSidebarWidth,
@@ -61,11 +71,11 @@ import {
   SidebarTrigger,
   useMobileSidebarSheetMounted,
   useSidebar,
-  useSidebarVisibility,
 } from "./ui/sidebar";
 import { appAtomRegistry } from "../rpc/atomRegistry";
 import { registerCommands, registerMenuAction } from "../shortcuts/dispatcher";
 import { resolveThreadRouteRef } from "../threadRoutes";
+import { toggleZenMode } from "../zenMode";
 import { SharedTooltipTrigger } from "./ui/shared-tooltip";
 
 const MACOS_TRAFFIC_LIGHTS_LEFT_INSET = "var(--desktop-window-controls-inset, 90px)";
@@ -314,16 +324,30 @@ function registerAppShellCommands(router: AnyRouter, shellElement: Element): () 
   };
 }
 
-function SidebarControl({ showSidebar }: { readonly showSidebar: boolean }) {
+const TITLEBAR_CONTENT_GAP_PX = 20;
+// Panel rows clear the floating footer by this much.
+const SIDEBAR_PANEL_FOOTER_GAP_PX = 8;
+
+function SidebarControl({
+  showSidebar,
+  onActionsSlotChange,
+}: {
+  readonly showSidebar: boolean;
+  readonly onActionsSlotChange: (slot: HTMLDivElement | null) => void;
+}) {
   const gt = useGT();
   const router = useRouter();
   const usagePageOpen = useLocation({ select: (location) => location.pathname === "/usage" });
   const keybindings = useAtomValue(primaryServerKeybindingsAtom);
-  const { toggleSidebar } = useSidebar();
+  const { open: sidebarOpen, setOpen: setSidebarOpen, toggleSidebar } = useSidebar();
+  const { active: panelMotionActive } = usePanelAnimationSettings();
   const mobileSidebarSheetMounted = useMobileSidebarSheetMounted();
-  const isSidebarVisible = useSidebarVisibility();
   const environmentIdentificationMode = useEnvironmentIdentificationMode();
-  const stageBackdropVariant = useSidebarStageBackdropVariant(environmentIdentificationMode);
+  const stageLabel = useEnvironmentStageLabel();
+  const pillLabel =
+    environmentIdentificationMode === "pill"
+      ? resolveEnvironmentIdentificationPillLabel(stageLabel)
+      : null;
   const shortcutLabel = shortcutLabelForCommand(keybindings, "sidebar.toggle", {
     context: { usagePageOpen },
   });
@@ -376,41 +400,89 @@ function SidebarControl({ showSidebar }: { readonly showSidebar: boolean }) {
     };
   }, [keybindings, router, showSidebar, toggleSidebar, usagePageOpen]);
 
-  // The control lives as long as the shell, so it carries the shell's commands. Created
-  // once so re-renders never re-register them.
-  const [appShellCommandsRef] = useState(
-    () => (node: HTMLDivElement | null) =>
-      node === null ? undefined : registerAppShellCommands(router, node),
+  // oxlint-disable-next-line t3code/no-unreasoned-state-sync -- registers the zen mode shortcut with the window key dispatcher; it reads the current sidebar state
+  useEffect(
+    () =>
+      registerCommands(
+        {
+          "zenMode.toggle": (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            toggleZenMode({
+              sidebarOpen,
+              setSidebarOpen,
+              routeParams: router.state.matches.at(-1)?.params ?? {},
+              animated: panelMotionActive,
+            });
+          },
+        },
+        { when: (event) => !isKeybindingCaptureTarget(event) },
+      ),
+    [panelMotionActive, router, setSidebarOpen, sidebarOpen],
   );
+
+  // The control lives as long as the shell, so it carries the shell's commands. Created
+  // once so re-renders never re-register them. Titlebars start past its right edge.
+  const [appShellCommandsRef] = useState(() => (node: HTMLDivElement | null) => {
+    if (node === null) return undefined;
+    const wrapper = node.closest<HTMLElement>('[data-slot="sidebar-wrapper"]');
+    const disposeCommands = registerAppShellCommands(router, node);
+    const disposeResize = observeResize(node, () => {
+      const right = node.getBoundingClientRect().right;
+      if (right > 0)
+        wrapper?.style.setProperty(
+          "--workspace-titlebar-content-left",
+          `${Math.ceil(right) + TITLEBAR_CONTENT_GAP_PX}px`,
+        );
+    });
+    return () => {
+      disposeResize();
+      disposeCommands();
+    };
+  });
 
   return (
     <div
       ref={appShellCommandsRef}
       className={cn(
-        "pointer-events-none fixed left-[var(--workspace-controls-left)] top-[var(--workspace-controls-top)] z-50 ml-px flex h-[var(--workspace-topbar-height)] items-center",
+        "pointer-events-none fixed left-[var(--workspace-controls-left)] top-[var(--workspace-controls-top)] z-50 ml-px flex h-[var(--workspace-topbar-height)] items-center gap-1",
         mobileSidebarSheetMounted && "hidden",
       )}
       data-sidebar-control=""
+      data-zen-chrome="top"
     >
       {showSidebar ? (
-        <SharedTooltipTrigger
-          render={
-            <SidebarTrigger
-              variant={isSidebarVisible && stageBackdropVariant ? "media-navigation" : "ghost"}
-              className={cn(
-                "pointer-events-auto",
-                isSidebarVisible && stageBackdropVariant && "relative top-auto translate-y-0",
-              )}
-              aria-label={gt("Toggle main sidebar")}
-            />
-          }
-          label={
-            shortcutLabel
-              ? gt("Toggle main sidebar ({shortcut})", { shortcut: shortcutLabel })
-              : gt("Toggle main sidebar")
-          }
-          side="bottom"
-        />
+        <>
+          <SharedTooltipTrigger
+            render={
+              <SidebarTrigger
+                className="pointer-events-auto"
+                aria-label={gt("Toggle main sidebar")}
+              />
+            }
+            label={
+              shortcutLabel
+                ? gt("Toggle main sidebar ({shortcut})", { shortcut: shortcutLabel })
+                : gt("Toggle main sidebar")
+            }
+            side="bottom"
+          />
+          <div
+            ref={onActionsSlotChange}
+            className="pointer-events-auto flex items-center gap-1 empty:hidden"
+          />
+        </>
+      ) : null}
+      {isElectron ? (
+        <div className="hidden items-center md:flex">
+          <HistoryNavigationButton direction="back" />
+          <HistoryNavigationButton direction="forward" />
+        </div>
+      ) : null}
+      {pillLabel ? (
+        <Badge data-environment-identification="pill" size="sm" variant="secondary">
+          {pillLabel}
+        </Badge>
       ) : null}
     </div>
   );
@@ -438,8 +510,17 @@ export function AppSidebarLayout({
   const [sidebarWidth, setSidebarWidth] = useState(readInitialThreadSidebarWidth);
   // A clamped drag may not change width, so viewport changes need a separate subscription.
   const viewportWidth = useSyncExternalStore(subscribeToViewportWidth, readViewportWidth);
-  const [brandWidth, setBrandWidth] = useState(0);
-  const sidebarMinimumWidth = resolveThreadSidebarMinimumWidth(brandWidth);
+  const [actionsSlot, setActionsSlot] = useState<HTMLDivElement | null>(null);
+  const [footerHeight, setFooterHeight] = useState(0);
+  const [observeFooterHeight] = useState(
+    () => (node: HTMLDivElement | null) =>
+      node === null
+        ? undefined
+        : observeResize(node, ([entry]) => {
+            if (entry) setFooterHeight(entry.borderBoxSize[0]?.blockSize ?? node.offsetHeight);
+          }),
+  );
+  const sidebarMinimumWidth = resolveThreadSidebarMinimumWidth(0);
   const sidebarMaximumWidth = resolveThreadSidebarMaximumWidth(viewportWidth, sidebarMinimumWidth);
   const resetSidebarWidth = () => {
     try {
@@ -461,6 +542,8 @@ export function AppSidebarLayout({
   const sidebarProviderStyle = {
     "--sidebar-width": `${clampThreadSidebarWidth(sidebarWidth, sidebarMinimumWidth, sidebarMaximumWidth)}px`,
     "--panel-animation-duration": `${panelAnimationDurationMs}ms`,
+    "--sidebar-panel-bottom-inset": `calc(env(safe-area-inset-bottom) + 0.75rem + ${footerHeight + SIDEBAR_PANEL_FOOTER_GAP_PX}px)`,
+    ...(showSidebar ? { "--app-toolbar-clearance": "2.75rem" } : {}),
     ...windowControlsInsetStyle,
   } as CSSProperties;
 
@@ -469,14 +552,15 @@ export function AppSidebarLayout({
       <SidebarProvider
         className="h-dvh! min-h-0!"
         data-panel-animations={routePanelAnimationsActive ? "true" : "false"}
+        data-sidebar-panel={showSidebar ? "" : undefined}
         storageKey="chat_thread_sidebar_open"
         style={sidebarProviderStyle}
       >
         {showSidebar ? (
-          <>
-            <SidebarBrandWidthProbe isElectron={isElectron} onWidthChange={setBrandWidth} />
+          <SidebarActionsSlotContext value={actionsSlot}>
             <Sidebar
               side="left"
+              variant="panel"
               collapsible="offcanvas"
               data-app-sidebar=""
               {...sidebarArea}
@@ -497,11 +581,17 @@ export function AppSidebarLayout({
               <ThreadSidebar routeReveal={sidebarRouteReveal} />
               <SidebarRail onDoubleClick={resetSidebarWidth} />
             </Sidebar>
-          </>
+          </SidebarActionsSlotContext>
         ) : null}
         {children}
+        {showSidebar ? (
+          <>
+            <SidebarFloatingFooter ref={observeFooterHeight} />
+            <AppNavigationToolbar />
+          </>
+        ) : null}
         <BackgroundThreadAnnouncer />
-        <SidebarControl showSidebar={showSidebar} />
+        <SidebarControl showSidebar={showSidebar} onActionsSlotChange={setActionsSlot} />
         {isElectron ? <HistorySwipeNavigation /> : null}
       </SidebarProvider>
     </PanelAnimationSuppressionProvider>

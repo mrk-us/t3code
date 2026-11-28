@@ -26,7 +26,7 @@ import {
 import * as Option from "effect/Option";
 import * as Result from "effect/Result";
 import { T, useGT, useMessages, Var } from "gt-react";
-import { CheckIcon, LinkIcon, MinusIcon, XIcon } from "lucide-react";
+import { CheckIcon, LinkIcon, MinusIcon, XIcon } from "~/lib/icons";
 import { useId, useRef, useState } from "react";
 
 import { useEnvironmentScope, usePreparedConnection } from "../../state/session";

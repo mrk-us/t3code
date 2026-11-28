@@ -1,6 +1,6 @@
 import type { EnvironmentThreadShell } from "@t3tools/client-runtime/state/models";
 import { resolveProviderInstanceDisplayName } from "@t3tools/client-runtime/state/provider-instance-display";
-import { CircleAlertIcon, GitBranchIcon } from "lucide-react";
+import { AlertCircleIcon, GitBranchIcon } from "~/lib/icons";
 import { useGT } from "gt-react";
 
 import { useSupportsMultiplePullRequests } from "~/hooks/useSupportsMultiplePullRequests";
@@ -77,7 +77,7 @@ export function ThreadChipHoverCard(props: {
       ) : null}
       {props.unreadable ? (
         <div className="flex min-w-0 items-start gap-2 text-warning">
-          <CircleAlertIcon aria-hidden className="mt-0.5 size-3 shrink-0 stroke-current" />
+          <AlertCircleIcon aria-hidden className="mt-0.5 size-3 shrink-0 stroke-current" />
           <div className="min-w-0 flex-1 wrap-break-word">
             {gt(
               "On another machine, so this machine's agent can't read it. Remove it or switch back to send.",

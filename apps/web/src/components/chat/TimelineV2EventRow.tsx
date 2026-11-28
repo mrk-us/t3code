@@ -8,7 +8,7 @@ import {
 } from "@t3tools/client-runtime/state/subagent-display";
 import { useGT, useMessages } from "gt-react";
 import { memo, use, useState } from "react";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon } from "~/lib/icons";
 import { cn } from "~/lib/utils";
 import { Collapsible, CollapsibleTrigger, CollapsiblePanel } from "../ui/collapsible";
 import { EnvironmentSubagentAvatar, SubagentElapsed, V2LifecycleRow } from "./V2LifecycleRow";

@@ -15,7 +15,7 @@ import type {
   EnvironmentId,
   ProviderInstanceConfig,
 } from "@t3tools/contracts";
-import { ExternalLinkIcon, SearchIcon } from "lucide-react";
+import { ExternalLinkIcon, SearchIcon } from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { type FormEvent, useState } from "react";
 

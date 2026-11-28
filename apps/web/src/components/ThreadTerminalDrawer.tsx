@@ -17,13 +17,13 @@ import {
   type TerminalSessionState,
 } from "@t3tools/client-runtime/state/terminal";
 import {
-  Plus,
-  Square,
-  SquareSplitHorizontal,
-  SquareSplitVertical,
-  TerminalSquare,
-  Trash2,
-} from "lucide-react";
+  PlusIcon as Plus,
+  SquareIcon as Square,
+  SquareSplitHorizontalIcon as SquareSplitHorizontal,
+  SquareSplitVerticalIcon as SquareSplitVertical,
+  SquareTerminalIcon as TerminalSquare,
+  Delete02Icon as Trash2,
+} from "~/lib/icons";
 import {
   AuthPreviewOperateScope,
   AuthFilesystemReadScope,

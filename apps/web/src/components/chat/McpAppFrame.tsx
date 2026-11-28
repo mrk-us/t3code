@@ -20,7 +20,7 @@ import {
   type McpAppReference,
 } from "@t3tools/shared/mcpApp";
 import { msg, T, useGT, Var } from "gt-react";
-import { Minimize2Icon } from "lucide-react";
+import { Minimize02Icon } from "~/lib/icons";
 import { useEffect, useRef, useState, type FocusEvent, type ToggleEvent } from "react";
 import { flushSync } from "react-dom";
 
@@ -495,7 +495,7 @@ export function McpAppFrame(props: {
               variant="ghost"
               onClick={() => setDisplayMode("inline")}
             >
-              <Minimize2Icon className="size-4" />
+              <Minimize02Icon className="size-4" />
             </Button>
           </div>
         ) : null}

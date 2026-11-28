@@ -4,7 +4,7 @@ import { contextMenuSourceOf } from "../../contextMenuSource";
 import { m as resolveMessage } from "~/i18n/messages";
 import { settingsScopeEnvironmentLabels } from "./settingsScopeAxis";
 import { Spinner } from "~/components/ui/spinner";
-import { ArchiveIcon, ArchiveX, Trash2Icon } from "lucide-react";
+import { ArchiveIcon, ArchiveXIcon as ArchiveX, Delete02Icon } from "~/lib/icons";
 import { scopeThreadRef, scopedThreadKey } from "@t3tools/client-runtime/environment";
 import { presentThreadShell } from "@t3tools/client-runtime/state/shell";
 import {
@@ -42,7 +42,7 @@ const ARCHIVE_ACTIONS = [
     label: msg("Delete", { $context: "verb, deletes a thread" }),
     threadLabel: msg("Delete {title}"),
     failureTitle: msg("Failed to delete thread"),
-    Icon: Trash2Icon,
+    Icon: Delete02Icon,
   },
 ] as const;
 type ArchiveAction = (typeof ARCHIVE_ACTIONS)[number]["action"];

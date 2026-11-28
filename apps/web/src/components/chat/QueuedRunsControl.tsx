@@ -25,11 +25,11 @@ import {
   ArrowUpIcon,
   CalendarClockIcon,
   ChevronDownIcon,
-  Clock3Icon,
+  Clock03Icon,
   MessagesSquareIcon,
   PencilIcon,
   XIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import * as DateTime from "effect/DateTime";
 import { msg, T, useGT, useMessages } from "gt-react";
 import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
@@ -352,7 +352,7 @@ export function QueuedRunsControl({
                 ) : null}
                 {item.pending ? (
                   <span className="flex items-center gap-1 px-1">
-                    <Clock3Icon aria-hidden className="size-3" />
+                    <Clock03Icon aria-hidden className="size-3" />
                     <T>Saving</T>
                   </span>
                 ) : null}

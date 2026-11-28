@@ -5,7 +5,14 @@ import type {
   DeviceSummary,
   ScopedThreadRef,
 } from "@t3tools/contracts";
-import { ArrowUpRight, CircleAlert, Play, Smartphone, Square, X } from "lucide-react";
+import {
+  ArrowUpRightIcon as ArrowUpRight,
+  AlertCircleIcon as CircleAlert,
+  PlayIcon as Play,
+  SmartphoneIcon as Smartphone,
+  SquareIcon as Square,
+  XIcon as X,
+} from "~/lib/icons";
 import { useAtomMount } from "@effect/atom-react";
 import { T, useGT, Var } from "gt-react";
 import { type ReactNode, useState } from "react";

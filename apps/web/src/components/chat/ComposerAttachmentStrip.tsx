@@ -7,7 +7,7 @@ import type {
 } from "@t3tools/contracts";
 import { formatAttachmentSize } from "@t3tools/client-runtime/state/attachments";
 import { T, useGT, useMessages } from "gt-react";
-import { CircleAlertIcon, ImageIcon, PaperclipIcon, PlayIcon, XIcon } from "lucide-react";
+import { AlertCircleIcon, ImageIcon, PaperclipIcon, PlayIcon, XIcon } from "~/lib/icons";
 import { type ComponentProps, type Ref, useLayoutEffect, useRef } from "react";
 
 import {
@@ -278,7 +278,7 @@ export function ComposerAttachmentMediaRow({
                       aria-label={gt("Draft attachment may not persist")}
                       className="absolute left-1 top-1 inline-flex items-center justify-center rounded bg-background/85 p-0.5 text-warning-foreground"
                     >
-                      <CircleAlertIcon className="size-3" />
+                      <AlertCircleIcon className="size-3" />
                     </span>
                   }
                   label={

@@ -13,12 +13,13 @@ import { normalizeProviderAccentColor } from "@t3tools/client-runtime/state/prov
 import { resetCreditFailureText } from "@t3tools/client-runtime/state/usage";
 import {
   type LimitPace,
+  type LimitPresentations,
   paceOf,
   paceRemainingPercent,
   remainingPercent,
   type ResetCreditChoice,
 } from "@t3tools/shared/usageLimits";
-import { GaugeIcon, TrendingDownIcon, TrendingUpIcon } from "lucide-react";
+import { GaugeIcon, TrendingDownIcon, TrendingUpIcon } from "~/lib/icons";
 import { msg, T, useGT, useMessages } from "gt-react";
 import { Fragment, useLayoutEffect, useState } from "react";
 
@@ -383,22 +384,16 @@ export function ResetCredits({
   );
 }
 
-/** Advance now only on explicit refresh to avoid page repaints from ticking. */
-export function UsageLimitsSection({
-  selectedEnvironmentIds,
-  hiddenProviders,
-  now,
-}: {
-  readonly selectedEnvironmentIds: ReadonlySet<EnvironmentId> | null;
-  readonly hiddenProviders: ReadonlySet<UsageProviderKind>;
-  readonly now: number;
-}) {
-  const presentations = useAtomValue(environmentPresentations.presentationsWithProvidersAtom);
+export function visibleLimitPresentations(
+  presentations: LimitPresentations,
+  selectedEnvironmentIds: ReadonlySet<EnvironmentId> | null,
+  hiddenProviders: ReadonlySet<UsageProviderKind>,
+) {
   const hiddenDrivers = new Set<ServerProvider["driver"]>(
     [...hiddenProviders].map((provider) => PROVIDER_PRESENTATION[provider].driverKind),
   );
   const isVisible = (driver: ServerProvider["driver"]) => !hiddenDrivers.has(driver);
-  const selected = new Map(
+  return new Map(
     [...presentations].flatMap(([id, presentation]) => {
       if (selectedEnvironmentIds !== null && !selectedEnvironmentIds.has(id)) return [];
       const config = presentation.serverConfig;
@@ -423,5 +418,27 @@ export function UsageLimitsSection({
       ];
     }),
   );
-  return <UsageLimitsPooled presentations={selected} now={now} />;
+}
+
+/** Advance now only on explicit refresh to avoid page repaints from ticking. */
+export function UsageLimitsSection({
+  selectedEnvironmentIds,
+  hiddenProviders,
+  now,
+}: {
+  readonly selectedEnvironmentIds: ReadonlySet<EnvironmentId> | null;
+  readonly hiddenProviders: ReadonlySet<UsageProviderKind>;
+  readonly now: number;
+}) {
+  const presentations = useAtomValue(environmentPresentations.presentationsWithProvidersAtom);
+  return (
+    <UsageLimitsPooled
+      presentations={visibleLimitPresentations(
+        presentations,
+        selectedEnvironmentIds,
+        hiddenProviders,
+      )}
+      now={now}
+    />
+  );
 }

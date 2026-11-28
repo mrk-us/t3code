@@ -8,13 +8,13 @@ import { readEnvironmentScope, useEnvironmentScope } from "../../state/session";
 import { AuthEnvironmentMaintainScope } from "@t3tools/contracts";
 import { RefreshIcon } from "~/components/ui/refresh-icon";
 import {
-  AlertTriangleIcon,
+  TriangleAlertIcon,
   CopyIcon,
   FolderOpenIcon,
   InfoIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import {
   isAtomCommandInterrupted,
   squashAtomCommandFailure,
@@ -1014,13 +1014,13 @@ function DiagnosticsSettingsBody() {
           <div className="space-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground sm:px-5">
             {processDiagnosticsError ? (
               <div className="flex items-start gap-2 text-destructive">
-                <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+                <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
                 <span>{processDiagnosticsError.message}</span>
               </div>
             ) : null}
             {processError ? (
               <div className="flex items-start gap-2 text-destructive">
-                <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+                <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
                 <span>{processError}</span>
               </div>
             ) : null}
@@ -1090,13 +1090,13 @@ function DiagnosticsSettingsBody() {
           <div className="space-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground sm:px-5">
             {processResourceError ? (
               <div className="flex items-start gap-2 text-destructive">
-                <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+                <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
                 <span>{processResourceError.message}</span>
               </div>
             ) : null}
             {resourceError ? (
               <div className="flex items-start gap-2 text-destructive">
-                <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+                <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
                 <span>{resourceError}</span>
               </div>
             ) : null}
@@ -1177,7 +1177,7 @@ function DiagnosticsSettingsBody() {
           <div className="space-y-2 border-t border-border/60 px-4 py-3 text-xs text-muted-foreground sm:px-5">
             {openLogsDirectoryError ? (
               <div className="flex items-start gap-2 text-destructive">
-                <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+                <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
                 <span>{openLogsDirectoryError}</span>
               </div>
             ) : null}
@@ -1188,7 +1188,7 @@ function DiagnosticsSettingsBody() {
                   traceDiagnosticsPartialFailure ? "text-warning-foreground" : "text-destructive",
                 )}
               >
-                <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+                <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
                 <span>
                   {traceDiagnosticsPartialFailure
                     ? gt(
@@ -1201,7 +1201,7 @@ function DiagnosticsSettingsBody() {
             ) : null}
             {error ? (
               <div className="flex items-start gap-2 text-destructive">
-                <AlertTriangleIcon className="size-3.5 h-lh shrink-0" />
+                <TriangleAlertIcon className="size-3.5 h-lh shrink-0" />
                 <span>{error}</span>
               </div>
             ) : null}

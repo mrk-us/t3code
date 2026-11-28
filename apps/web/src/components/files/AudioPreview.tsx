@@ -1,4 +1,4 @@
-import { LoaderCircleIcon, PauseIcon, PlayIcon, TriangleAlertIcon } from "lucide-react";
+import { LoaderCircleIcon, PauseIcon, PlayIcon, TriangleAlertIcon } from "~/lib/icons";
 import { useGT } from "gt-react";
 import { createContext, useContext, useRef, useState } from "react";
 

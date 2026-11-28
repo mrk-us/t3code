@@ -1,6 +1,6 @@
 import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
 import type { EnvironmentId, PullRequestDetailView, PullRequestRef } from "@t3tools/contracts";
-import { MessageSquareIcon, Trash2Icon, XIcon } from "lucide-react";
+import { MessageSquareIcon, Delete02Icon, XIcon } from "~/lib/icons";
 import { T, useGT } from "gt-react";
 import { useRef, useState } from "react";
 
@@ -165,7 +165,7 @@ export function PullRequestComposer({
                 disabled={reviewPending}
                 onClick={() => clearComments(reviewKey)}
               >
-                <Trash2Icon className="size-3.5" />
+                <Delete02Icon className="size-3.5" />
               </Button>
             ) : null}
             <PopoverClose

@@ -24,7 +24,7 @@ import {
 } from "@t3tools/shared/model";
 import { msg, T, useMessages } from "gt-react";
 import { memo } from "react";
-import { GaugeIcon } from "lucide-react";
+import { GaugeIcon } from "~/lib/icons";
 import {
   Menu,
   MenuGroup,

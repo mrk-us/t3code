@@ -3,7 +3,7 @@ import {
   type CodexFeedbackSubmission,
 } from "@t3tools/client-runtime/state/threads";
 import { msg } from "gt-react";
-import { MessageSquareIcon } from "lucide-react";
+import { MessageSquareIcon } from "~/lib/icons";
 
 import { writeTextToClipboard } from "../../hooks/useCopyToClipboard";
 import { m, type MessageResolver } from "../../i18n/messages";

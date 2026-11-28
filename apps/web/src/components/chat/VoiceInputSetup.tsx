@@ -12,7 +12,7 @@ import type {
   EnvironmentSpeechStatus,
 } from "@t3tools/contracts";
 import { useNavigate } from "@tanstack/react-router";
-import { CircleAlertIcon, MicIcon, RefreshCwIcon } from "lucide-react";
+import { AlertCircleIcon, MicIcon, RefreshCwIcon } from "~/lib/icons";
 import { useEffect, useRef, useState } from "react";
 
 import { useClientSettings } from "../../hooks/useSettings";
@@ -171,7 +171,7 @@ export function VoiceInputSetup(props: {
               ) : null}
               {props.error ? (
                 <p role="alert" className="flex items-start gap-1.5 text-destructive">
-                  <CircleAlertIcon aria-hidden className="mt-0.5 size-3.5 shrink-0" />
+                  <AlertCircleIcon aria-hidden className="mt-0.5 size-3.5 shrink-0" />
                   {props.error}
                 </p>
               ) : null}

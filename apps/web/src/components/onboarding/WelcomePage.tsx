@@ -36,7 +36,7 @@ import {
   PlusIcon,
   SmartphoneIcon,
   TerminalIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useLocale, useMessages, Var } from "gt-react";
 import { useEffect, useEffectEvent, useRef, useState, type ReactNode } from "react";
 

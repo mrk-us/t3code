@@ -42,8 +42,8 @@ import {
   PresentationIcon,
   StarIcon,
   TriangleAlertIcon,
-  type LucideIcon,
-} from "lucide-react";
+  type IconComponent,
+} from "~/lib/icons";
 import {
   AssetWorkspaceAssetNotFoundError,
   AuthPreviewOperateScope,
@@ -296,7 +296,7 @@ const ARTIFACT_TEMPLATE_ICON_BY_KIND = {
   image: ImageIcon,
   email: MailIcon,
   slack: MessageSquareIcon,
-} satisfies Record<CodexArtifactTemplateKind, LucideIcon>;
+} satisfies Record<CodexArtifactTemplateKind, IconComponent>;
 
 function CodexArtifactTemplateCard(props: {
   readonly template: CodexArtifactTemplate;

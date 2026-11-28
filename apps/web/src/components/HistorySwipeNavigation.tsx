@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
+import { ArrowLeftIcon, ArrowRightIcon } from "~/lib/icons";
 import { useEffect, useState } from "react";
 
 import { cn, isMacPlatform } from "../lib/utils";

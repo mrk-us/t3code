@@ -414,6 +414,12 @@ export const SETTINGS_SEARCH_ITEMS = [
     to: "/settings/appearance",
   },
   {
+    id: "pointer-cursor",
+    title: msg("Pointer cursor"),
+    to: "/settings/appearance",
+    searchTerms: [msg("hand cursor mouse links buttons")],
+  },
+  {
     id: "environment-identification",
     title: msg("Environment identification"),
     to: "/settings/appearance",

@@ -1,5 +1,5 @@
 import type { EnvironmentId, ThreadId } from "@t3tools/contracts";
-import { CheckIcon, MessageSquareIcon } from "lucide-react";
+import { CheckIcon, MessageSquareIcon } from "~/lib/icons";
 import { T, useGT } from "gt-react";
 import { useState } from "react";
 

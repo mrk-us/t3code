@@ -3,7 +3,7 @@ import { m as resolveMessage } from "~/i18n/messages";
 import { ProviderInstanceIcon } from "../chat/ProviderInstanceIcon";
 
 import { Radio as RadioPrimitive } from "@base-ui/react/radio";
-import { CheckIcon, ChevronDownIcon } from "lucide-react";
+import { CheckIcon, ChevronDownIcon } from "~/lib/icons";
 import { useState } from "react";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import type { MessageResolver } from "../../i18n/messages";

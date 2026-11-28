@@ -65,8 +65,8 @@ vi.mock("../commandPaletteBus", () => ({
   isCommandPaletteOpen: () => false,
 }));
 vi.mock("./sidebar/SidebarChrome", () => ({
-  SidebarChromeHeader: () => null,
-  SidebarChromeFooter: () => null,
+  // Renders the floating actions in place, as the app shell's slot would.
+  SidebarActionsPortal: (props: { children: unknown }) => props.children,
 }));
 
 function project(id: string): Project {
@@ -83,21 +83,9 @@ function project(id: string): Project {
   };
 }
 
-describe("sidebar header new thread", () => {
-  it.each([
-    { mode: "normal", count: 2, shift: false, picker: true },
-    { mode: "boring", count: 2, shift: false, picker: true },
-    { mode: "boring", count: 2, shift: true, picker: false },
-    { mode: "boring", count: 1, shift: false, picker: false },
-  ] as const)("$mode sidebar, $count projects, shift=$shift: picker=$picker", async (scenario) => {
-    using stack = new DisposableStack();
-    const previousSettings = getClientSettings();
-    stack.defer(() => __setClientSettingsForTests(previousSettings));
-    __setClientSettingsForTests({
-      ...DEFAULT_CLIENT_SETTINGS,
-      boringSidebarEnabled: scenario.mode === "boring",
-    });
-    const projects = [project("active"), project("idle")].slice(0, scenario.count);
+describe("sidebar new thread menu", () => {
+  it("starts a thread in the picked project, or the current one on Shift+click", async () => {
+    const projects = [project("active"), project("idle")];
     const currentProjectRef = {
       environmentId: projects[0]!.environmentId,
       projectId: projects[0]!.id,
@@ -119,18 +107,23 @@ describe("sidebar header new thread", () => {
         <Sidebar routeReveal={{ observedKey: null, pendingKey: null }} />
       </SidebarProvider>,
     );
+    const trigger = screen.getByRole("combobox", { name: "New thread", exact: true });
 
-    await userEvent.click(screen.getByRole("button", { name: "New thread", exact: true }), {
-      modifiers: scenario.shift ? ["Shift"] : [],
+    await userEvent.click(trigger, { modifiers: ["Shift"] });
+    expect(startThread).toHaveBeenCalledExactlyOnceWith(currentProjectRef);
+    await expect.element(screen.getByRole("option", { name: /idle$/ })).not.toBeInTheDocument();
+
+    startThread.mockClear();
+    await userEvent.click(trigger);
+    await expect
+      .element(screen.getByRole("option", { name: "New thread in active" }))
+      .toBeVisible();
+    await userEvent.click(screen.getByRole("option", { name: /idle$/ }));
+    expect(startThread).toHaveBeenCalledExactlyOnceWith({
+      environmentId: projects[1]!.environmentId,
+      projectId: projects[1]!.id,
     });
-
-    if (scenario.picker) {
-      expect(openCommandPalette).toHaveBeenCalledExactlyOnceWith({ open: "new-thread-in" });
-      expect(startThread).not.toHaveBeenCalled();
-    } else {
-      expect(openCommandPalette).not.toHaveBeenCalled();
-      expect(startThread).toHaveBeenCalledExactlyOnceWith(currentProjectRef);
-    }
+    expect(openCommandPalette).not.toHaveBeenCalled();
   });
 });
 

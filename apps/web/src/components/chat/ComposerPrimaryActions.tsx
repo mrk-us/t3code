@@ -10,11 +10,11 @@ import { msg, useGT, useMessages } from "gt-react";
 import {
   CheckIcon,
   ChevronLeftIcon,
-  Minimize2Icon,
+  Minimize02Icon,
   PlayIcon,
   CornerUpRightIcon,
   ListPlusIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useEnvironmentIdentificationMode } from "~/hooks/useSettings";
 import type { MessageResolver } from "~/i18n/messages";
 import { formatContextWindowTokens } from "~/lib/contextWindow";
@@ -536,7 +536,7 @@ export const ComposerPrimaryActions = memo(function ComposerPrimaryActions({
           </>
         }
       >
-        <Minimize2Icon aria-hidden="true" />
+        <Minimize02Icon aria-hidden="true" />
         <span className="@max-[480px]/composer-surface:hidden">
           {keepFullHistory
             ? gt("Keep", { $context: "keep full history instead of compacting" })

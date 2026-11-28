@@ -1,5 +1,5 @@
 import { T } from "gt-react";
-import { ArrowDownIcon, ArrowUpIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowUpIcon } from "~/lib/icons";
 import { type ComponentProps, type ReactNode, type RefObject } from "react";
 
 import { Command, CommandFooter, CommandInput, CommandPanel } from "./ui/command";

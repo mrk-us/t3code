@@ -15,7 +15,7 @@ import {
   FileDiffIcon,
   GitBranchIcon,
   TriangleAlertIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { AsyncResult } from "effect/reactivity";
 import { useState, type MouseEvent as ReactMouseEvent } from "react";
 

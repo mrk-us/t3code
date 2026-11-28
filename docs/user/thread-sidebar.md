@@ -4,7 +4,7 @@ Use a separate thread for each task. Choose **New worktree** when a task needs i
 
 ## Start a thread
 
-- **Web and desktop**: **New thread** opens the project picker when you have multiple open projects (unless the sidebar is filtered to one project). `Shift`-click to start in the current project. To reuse an existing worktree, choose **New thread in this worktree** from the branch toolbar.
+- **Web and desktop**: **New thread** (top left) opens one menu: start in the current project, pick or search for another project, or add a project. `Shift`-click it to start in the current project right away. To reuse an existing worktree, choose **New thread in this worktree** from the branch toolbar.
 - **Mobile**: **New thread** uses the current, filtered, or last-opened project. Disable **Settings → General → Use last project** to pick every time.
 - **Defaults**: New threads inherit your last model and mode unless the project sets its own model default.
 
@@ -24,6 +24,7 @@ Threads don't require a project. Pick **No project** (or press `mod+alt+n` on we
 ## Sidebar layout and organization
 
 - **Resize or hide** (web/desktop): Drag the sidebar's right edge past its minimum width to hide it; hover the left window edge and click or drag the handle to bring it back.
+- **Search and filter** (web/desktop): Click the search icon at the top left to search threads. To list only some projects' threads, click the filter icon on a project in the **New thread** menu (or `Shift`-click the project); clear it from the sidebar's filter row.
 - **Drop files onto a thread** (web/desktop): Drag files from your computer onto any thread row to open it and attach them to its composer.
 - **Pin and reorder**: Pin a thread from its menu or drag threads between **Pinned**, **Active**, and **Settled** (or drag out of **Snoozed** to wake). On mobile, use **Arrange threads** or **Move up / Move down** in the thread menu. Custom order syncs across devices (requires an up-to-date server).
 - **Undo** (web/desktop): Unpinning, settling, snoozing, archiving, or discarding a draft shows a 5-second **Undo** toast (`mod+z`).

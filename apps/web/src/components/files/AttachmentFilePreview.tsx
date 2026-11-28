@@ -14,15 +14,15 @@ import {
 import {
   ChevronRightIcon,
   DownloadIcon,
-  Trash2Icon,
-  WrapTextIcon,
+  Delete02Icon,
+  TextWrapIcon,
   XIcon,
   CheckIcon,
-  Code2Icon,
+  CodeXmlIcon,
   CopyIcon,
   EyeIcon,
-  Table2Icon,
-} from "lucide-react";
+  Table02Icon,
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { m, type MessageResolver } from "~/i18n/messages";
@@ -436,9 +436,9 @@ export function AttachmentFilePreview(props: {
             onPress={() => setRendered((value) => !value)}
           >
             {rendered ? (
-              <Code2Icon className="size-3.5" />
+              <CodeXmlIcon className="size-3.5" />
             ) : renderedMode === "table" ? (
-              <Table2Icon className="size-3.5" />
+              <Table02Icon className="size-3.5" />
             ) : (
               <EyeIcon className="size-3.5" />
             )}
@@ -450,7 +450,7 @@ export function AttachmentFilePreview(props: {
             pressed={wordWrap}
             onPress={() => setWordWrapOverride(!wordWrap)}
           >
-            <WrapTextIcon className="size-3.5" />
+            <TextWrapIcon className="size-3.5" />
           </FileSurfaceAction>
         ) : null}
         {content || streamsText ? (
@@ -501,7 +501,7 @@ export function AttachmentFilePreview(props: {
         ) : null}
         {props.onRemove ? (
           <FileSurfaceAction label={gt("Remove from draft")} onPress={props.onRemove}>
-            <Trash2Icon className="size-3.5" />
+            <Delete02Icon className="size-3.5" />
           </FileSurfaceAction>
         ) : null}
         {props.onClose ? (

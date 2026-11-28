@@ -1,7 +1,7 @@
 import type { RuntimeMode } from "@t3tools/contracts";
 import { useGT } from "gt-react";
 import { memo, useRef } from "react";
-import { EllipsisIcon } from "lucide-react";
+import { EllipsisIcon } from "~/lib/icons";
 import { Menu, MenuPopup, MenuTrigger } from "../ui/menu";
 import { ComposerControl, ComposerControlIcon } from "./ComposerControl";
 import { focusRequestedPermission, useComposerMenuProps } from "./composerEventScope";

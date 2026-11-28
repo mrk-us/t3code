@@ -1,7 +1,7 @@
 import type { GitStatusEntry } from "@pierre/trees";
 import { FileTree, useFileTree } from "@pierre/trees/react";
 import { T, useGT } from "gt-react";
-import { ChevronsDownUpIcon, ChevronsUpDownIcon } from "lucide-react";
+import { ChevronsDownUpIcon, UnfoldMoreIcon } from "~/lib/icons";
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 
 import { useStableCallback } from "~/hooks/useStableCallback";
@@ -221,7 +221,7 @@ export function DiffFileTree({
             {allDirectoriesExpanded ? (
               <ChevronsDownUpIcon className="size-3.5" />
             ) : (
-              <ChevronsUpDownIcon className="size-3.5" />
+              <UnfoldMoreIcon className="size-3.5" />
             )}
           </SharedTooltipTrigger>
         ) : null}

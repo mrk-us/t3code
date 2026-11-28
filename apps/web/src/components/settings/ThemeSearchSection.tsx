@@ -1,7 +1,7 @@
 import { thrownErrorMessage } from "@t3tools/client-runtime/errors";
 import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
 import { RefreshIcon } from "~/components/ui/refresh-icon";
-import { ExternalLinkIcon, PackagePlusIcon, PaletteIcon, SearchIcon } from "lucide-react";
+import { ExternalLinkIcon, PackagePlusIcon, PaletteIcon, SearchIcon } from "~/lib/icons";
 import { type ReactNode, useState } from "react";
 import {
   importOpenVsxThemeExtension,

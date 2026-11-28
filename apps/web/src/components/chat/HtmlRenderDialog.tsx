@@ -5,7 +5,7 @@ import {
   type HtmlRenderReference,
 } from "@t3tools/shared/htmlRender";
 import { useGT } from "gt-react";
-import { MinusIcon, PlusIcon, XIcon } from "lucide-react";
+import { MinusIcon, PlusIcon, XIcon } from "~/lib/icons";
 import { useRef, useState } from "react";
 
 import { observeResize } from "~/lib/observeResize";

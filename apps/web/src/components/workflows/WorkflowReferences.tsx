@@ -6,7 +6,7 @@ import {
 import type { EnvironmentId, WorkflowRunReference, WorkflowRunSubject } from "@t3tools/contracts";
 import { useNavigate } from "@tanstack/react-router";
 import { T } from "gt-react";
-import { CircleCheckIcon, CircleDotIcon, ExternalLinkIcon, LinkIcon } from "lucide-react";
+import { CircleCheckIcon, CircleDotIcon, ExternalLinkIcon, LinkIcon } from "~/lib/icons";
 
 import { isElectron } from "~/env";
 import { isTerminalFocused } from "../../lib/terminalFocus";

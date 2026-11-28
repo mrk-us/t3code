@@ -1,6 +1,6 @@
 import type { PullRequestReviewGuideStop } from "@t3tools/contracts";
 import { T, useGT, useMessages } from "gt-react";
-import { CheckIcon } from "lucide-react";
+import { CheckIcon } from "~/lib/icons";
 
 import { cn } from "~/lib/utils";
 

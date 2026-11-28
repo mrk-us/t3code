@@ -14,7 +14,7 @@ import {
 import * as Equal from "effect/Equal";
 import * as Schema from "effect/Schema";
 import { msg, T, useGT, useLocale, useMessages, Var } from "gt-react";
-import { PlusIcon, XIcon } from "lucide-react";
+import { PlusIcon, XIcon } from "~/lib/icons";
 
 import { useNowMinute } from "../../hooks/useNowMinute";
 import { useFormattingLocale } from "../../i18n/I18nProvider";

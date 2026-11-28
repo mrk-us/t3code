@@ -13,7 +13,7 @@ import {
   CHATGPT_USAGE_LIMIT_CODE,
   CHATGPT_WORKSPACE_USAGE_LIMIT_CODE,
 } from "@t3tools/shared/usageLimits";
-import { GaugeIcon } from "lucide-react";
+import { GaugeIcon } from "~/lib/icons";
 import { useState } from "react";
 import { useDeadlinePassed } from "../../hooks/useDeadline";
 import { OpenAI } from "../Icons";

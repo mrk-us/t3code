@@ -12,10 +12,10 @@ import {
   HammerIcon,
   MessageSquareIcon,
   MessageSquarePlusIcon,
-  Trash2Icon,
+  Delete02Icon,
   CircleCheckIcon,
   CircleIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { T, useGT } from "gt-react";
 import { type ReactNode, useRef, useState } from "react";
 import { settlePromise, squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
@@ -118,7 +118,7 @@ export function PendingReviewCommentCard({
           aria-label={gt("Discard this comment")}
           onClick={onRemove}
         >
-          <Trash2Icon className="size-3.5" />
+          <Delete02Icon className="size-3.5" />
         </Button>
       </div>
       <p className="mt-2 whitespace-pre-wrap leading-relaxed">{comment.body}</p>

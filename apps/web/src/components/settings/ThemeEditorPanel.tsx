@@ -1,13 +1,13 @@
 import { errorDisplayMessage } from "@t3tools/client-runtime/errors";
 import {
-  MousePointer2Icon,
+  MousePointerIcon,
   PaintbrushIcon,
   PlusIcon,
   XIcon,
   ChevronDownIcon,
   ChevronRightIcon,
   ChevronUpIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import {
   applyThemeColorPreview,
@@ -1247,7 +1247,7 @@ export function ThemeEditorPanel({
                   setIsInspecting(true);
                 }}
               >
-                <MousePointer2Icon />
+                <MousePointerIcon />
                 {isInspecting ? gt("Cancel") : gt("Inspect")}
               </Button>
             }

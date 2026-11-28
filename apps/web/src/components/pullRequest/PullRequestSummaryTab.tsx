@@ -14,7 +14,7 @@ import {
   pullRequestConversationThreads,
 } from "@t3tools/contracts";
 import {
-  ArrowDownUpIcon,
+  ArrowUpDownIcon,
   ChevronDownIcon,
   ChevronRightIcon,
   HammerIcon,
@@ -22,7 +22,7 @@ import {
   MessageSquarePlusIcon,
   TagIcon,
   UsersIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import * as Schema from "effect/Schema";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import {
@@ -1237,7 +1237,7 @@ export const PullRequestSummaryTab = memo(function PullRequestSummaryTab({
                 rememberView({ order });
               }}
             >
-              <ArrowDownUpIcon aria-hidden className="size-3" />
+              <ArrowUpDownIcon aria-hidden className="size-3" />
               {commentOrder === "newest" ? gt("Newest first") : gt("Oldest first")}
             </Button>
           </div>

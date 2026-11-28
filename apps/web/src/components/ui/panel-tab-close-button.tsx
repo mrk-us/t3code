@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { XIcon as X } from "~/lib/icons";
 import type { ReactNode } from "react";
 import { SharedTooltipTrigger } from "~/components/ui/shared-tooltip";
 

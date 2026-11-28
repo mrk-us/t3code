@@ -5,7 +5,7 @@ import {
   ChevronsLeftRightEllipsisIcon,
   EllipsisIcon,
   RouteIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useAtomValue } from "@effect/atom-react";
 import { useEffect, useEffectEvent, useState } from "react";
 import {

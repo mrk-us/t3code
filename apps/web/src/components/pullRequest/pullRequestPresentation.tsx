@@ -21,7 +21,7 @@ import {
   UserCheckIcon,
   UserRoundIcon,
   UserRoundXIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, useGT, useMessages } from "gt-react";
 import { Children, type CSSProperties, isValidElement, type ReactNode, useState } from "react";
 

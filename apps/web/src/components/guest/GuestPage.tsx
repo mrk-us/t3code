@@ -16,7 +16,7 @@ import {
 import * as Option from "effect/Option";
 import * as Schema from "effect/Schema";
 import { formatAttachmentSize } from "@t3tools/client-runtime/state/attachments";
-import { ArrowUpIcon, PaperclipIcon, XIcon } from "lucide-react";
+import { ArrowUpIcon, PaperclipIcon, XIcon } from "~/lib/icons";
 import {
   useEffect,
   useReducer,

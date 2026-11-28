@@ -19,7 +19,7 @@ import {
   ListChecksIcon,
   PlayIcon,
   WrenchIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import React, { type FormEvent, type KeyboardEvent, useEffect, useRef, useState } from "react";
 

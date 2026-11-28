@@ -5,7 +5,7 @@ import { assistantCitationsToPlainText } from "@t3tools/shared/assistantCitation
 import { replaceComposerContextReferences } from "@t3tools/shared/composerContextReferences";
 import { composerFileLinksToPlainText } from "@t3tools/shared/composerInlineTokens";
 import { T, useGT, useMessages } from "gt-react";
-import { SquarePenIcon, XIcon } from "lucide-react";
+import { SquarePenIcon, XIcon } from "~/lib/icons";
 import {
   memo,
   useState,
@@ -157,14 +157,19 @@ const SidebarDraftRow = memo(function SidebarDraftRow(props: {
         aria-current={accessibility.current}
         data-testid="sidebar-draft-row"
         className={cn(
-          "group/sidebar-row relative w-full cursor-pointer overflow-hidden rounded-md text-left text-sidebar-foreground outline-none select-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
-          props.isActive ? "bg-sidebar-row-active" : draftSurfaceClassName,
+          "group/sidebar-row relative w-full cursor-pointer overflow-hidden rounded-2xl text-left text-sidebar-foreground outline-none select-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+          props.isActive
+            ? "glass-fill glass-edge"
+            : cn(
+                draftSurfaceClassName,
+                "opacity-80 transition-opacity hover:opacity-100 focus-within:opacity-100 motion-reduce:transition-none",
+              ),
         )}
         onClick={handleActivate}
         onContextMenu={handleContextMenu}
         onKeyDown={handleKeyDown}
       >
-        <div className="relative z-10 h-[4.875rem] px-(--sidebar-row-content-inset) py-(--sidebar-content-inset)">
+        <div className="relative z-10 h-20 px-(--sidebar-row-content-inset) py-(--sidebar-content-inset)">
           <div className="flex h-5 min-w-0 items-center gap-1.5">
             <SquarePenIcon aria-hidden className={draftPenClassName} />
             {props.project ? (

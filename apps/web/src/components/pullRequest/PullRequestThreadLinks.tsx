@@ -5,7 +5,7 @@ import { scopeThreadRef } from "@t3tools/client-runtime/environment";
 import { visibleLinkedThreads } from "@t3tools/client-runtime/state/threads";
 import { settlePromise, squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
 import type { EnvironmentId, PullRequestRef, ScopedThreadRef, ThreadId } from "@t3tools/contracts";
-import { MessageSquareIcon } from "lucide-react";
+import { MessageSquareIcon } from "~/lib/icons";
 import { Branch, msg, T, useGT } from "gt-react";
 import { useState } from "react";
 

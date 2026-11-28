@@ -14,11 +14,11 @@ import type { ClientSettings } from "@t3tools/contracts/settings";
 import * as Option from "effect/Option";
 import type { AtomRegistry } from "effect/reactivity";
 import {
-  CircleAlertIcon,
+  AlertCircleIcon,
   CircleCheckIcon,
-  MessageCircleQuestionIcon,
-  ShieldQuestionIcon,
-} from "lucide-react";
+  MessageCircleQuestionMarkIcon,
+  ShieldQuestionMarkIcon,
+} from "~/lib/icons";
 
 import { getClientSettings, subscribeClientSettings } from "../hooks/useSettings";
 import { isWindowsPlatform } from "../lib/utils";
@@ -179,13 +179,13 @@ export function startThreadNotifications(
             kind === "completion" ? (
               <CircleCheckIcon aria-hidden className="size-4 text-success-foreground" />
             ) : status === "approval" ? (
-              <ShieldQuestionIcon aria-hidden className="size-4 text-warning-foreground" />
+              <ShieldQuestionMarkIcon aria-hidden className="size-4 text-warning-foreground" />
             ) : status === "limited" ? (
-              <CircleAlertIcon aria-hidden className="size-4 text-warning-foreground" />
+              <AlertCircleIcon aria-hidden className="size-4 text-warning-foreground" />
             ) : status === "failed" ? (
-              <CircleAlertIcon aria-hidden className="size-4 text-destructive-foreground" />
+              <AlertCircleIcon aria-hidden className="size-4 text-destructive-foreground" />
             ) : (
-              <MessageCircleQuestionIcon aria-hidden className="size-4 text-info-foreground" />
+              <MessageCircleQuestionMarkIcon aria-hidden className="size-4 text-info-foreground" />
             ),
         },
         actionProps: {

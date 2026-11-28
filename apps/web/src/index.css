@@ -195,6 +195,8 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
   --inset-shadow-control-highlight: 0 1px rgb(255 255 255 / 16%);
   --inset-shadow-control-pressed: 0 1px rgb(0 0 0 / 8%);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  /* Strong ease-out for fades; motion/springs live in lib/motionTokens.ts. */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
   /* The composer's elevation: a soft drop pulled in under the surface, shared
      by the composer, its context strip and attached banners. */
   --shadow-composer: 0 1px 2px rgb(0 0 0 / 5%);
@@ -493,6 +495,26 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
   }
 }
 
+/* dropdown-glass's fill without its border, for rows that gain and lose it. */
+@utility glass-fill {
+  background: color-mix(
+    in srgb,
+    var(--popover) 18%,
+    color-mix(in srgb, var(--popover) var(--glass-opacity), transparent)
+  );
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+
+  @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    background: var(--popover);
+  }
+}
+
+/* dropdown-glass's border drawn inside the box, so toggling it never shifts layout. */
+@utility glass-edge {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--contrast-foreground) 10%, transparent);
+}
+
 @utility topbar-scroll-fade {
   -webkit-mask-image:
     linear-gradient(
@@ -548,31 +570,6 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
   mask-size:
     calc(100% - var(--app-scrollbar-width)) 100%,
     var(--app-scrollbar-width) 100%;
-}
-
-/* Stage-channel art needs a mask and pseudo-element gradient, so keep the
-   behavior composable without tying it to the global components layer. */
-@utility sidebar-stage-backdrop {
-  --stage-fade: var(--sidebar-stage-fade, var(--app-chrome-background));
-  mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
-
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 28%,
-      color-mix(in srgb, var(--stage-fade) 10%, transparent) 40%,
-      color-mix(in srgb, var(--stage-fade) 30%, transparent) 52%,
-      color-mix(in srgb, var(--stage-fade) 58%, transparent) 64%,
-      color-mix(in srgb, var(--stage-fade) 82%, transparent) 75%,
-      color-mix(in srgb, var(--stage-fade) 96%, transparent) 85%,
-      var(--stage-fade) 93%
-    );
-  }
 }
 
 @keyframes live-tool-shine {
@@ -1209,7 +1206,6 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
   --sidebar-row-active: var(--color-white);
   --sidebar-row-selected: var(--color-white);
   --sidebar-border: var(--border);
-  --sidebar-stage-fade: var(--sidebar);
   --code-background: color-mix(in srgb, var(--card) 90%, var(--background));
   --code-foreground: var(--foreground);
   --terminal-background: var(--background);
@@ -1255,7 +1251,6 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
     --sidebar-row-hover: var(--accent);
     --sidebar-row-active: var(--accent);
     --sidebar-row-selected: var(--muted);
-    --sidebar-stage-fade: var(--card);
     --terminal-cursor: rgb(180 203 255);
     --terminal-selection-background: rgb(180 203 255 / 25%);
   }
@@ -1283,7 +1278,6 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
   --sidebar-row-active: var(--color-white);
   --sidebar-row-selected: var(--color-white);
   --sidebar-border: var(--color-zinc-200);
-  --sidebar-stage-fade: var(--sidebar);
 
   @variant dark {
     --background: #000;
@@ -1304,7 +1298,6 @@ html[data-mobile-composer-route-transition="true"]::view-transition-old(t3-mobil
     --sidebar-row-active: color-mix(in srgb, var(--contrast-foreground) 11%, transparent);
     --sidebar-row-selected: color-mix(in srgb, var(--contrast-foreground) 7%, transparent);
     --sidebar-border: var(--border);
-    --sidebar-stage-fade: var(--card);
     /* Row metadata sits a step below read titles (75% white). */
     --secondary-label: #8f8f8f;
   }
@@ -1412,7 +1405,6 @@ html[data-theme-id]:not([data-theme-id=""]) {
   --sidebar-row-active: var(--app-theme-sidebar-row-active);
   --sidebar-row-selected: var(--app-theme-sidebar-row-selected);
   --sidebar-border: var(--app-theme-sidebar-border);
-  --sidebar-stage-fade: var(--app-theme-sidebar);
   --code-background: var(--app-theme-code-background);
   --code-foreground: var(--app-theme-code-foreground);
   --terminal-background: var(--app-theme-terminal-background);
@@ -1604,7 +1596,6 @@ html[data-theme-id] [data-app-sidebar] {
   --sidebar-row-active: var(--app-theme-sidebar-row-active);
   --sidebar-row-selected: var(--app-theme-sidebar-row-selected);
   --sidebar-border: var(--app-theme-sidebar-border);
-  --sidebar-stage-fade: var(--app-theme-sidebar);
   border-color: color-mix(in srgb, var(--contrast-sidebar-foreground) 10%, transparent);
 
   @variant dark {
@@ -1753,14 +1744,6 @@ body {
   font-variant-ligatures: none;
 }
 
-/* Lighter default icon stroke. In the base layer so stroke-* utilities still win; any
-   CSS beats lucide's stroke-width="2" attribute. */
-@layer base {
-  :where(svg.lucide[stroke-width="2"]) {
-    stroke-width: 1.75;
-  }
-}
-
 html,
 body {
   min-height: calc(100svh + env(safe-area-inset-top));
@@ -1886,9 +1869,14 @@ code {
   background: transparent;
 }
 
+/* Scrollbar thumbs show only while the pointer is over their scroll area. */
 :where(:not(iframe))::-webkit-scrollbar-thumb {
-  background: var(--app-scrollbar-thumb);
+  background: transparent;
   border-radius: 3px;
+}
+
+:where(:not(iframe)):hover::-webkit-scrollbar-thumb {
+  background: var(--app-scrollbar-thumb);
 }
 
 :where(:not(iframe))::-webkit-scrollbar-thumb:hover {
@@ -2676,6 +2664,44 @@ code {
   margin: 0;
 }
 
+/* The thread sidebar floats over content. Centered chat moves only as far as it must to clear it,
+   and never further than starting right after it. 100% is the lane's containing block width. */
+@media (min-width: 48rem) {
+  [data-sidebar-panel][data-sidebar-state="expanded"] {
+    --sidebar-panel-clearance: calc(var(--sidebar-width) + 0.5rem);
+  }
+}
+/* Page content clears the floating thread sidebar too; 100% is the page's width, not the container's. */
+.workspace-page-container {
+  --page-pad: calc(var(--spacing) * 5);
+  --page-max-width: var(--container-4xl);
+  padding-inline-start: max(
+    var(--page-pad),
+    calc(var(--sidebar-panel-clearance, 0px) - (100% - var(--page-max-width)) / 2)
+  );
+
+  &[data-workspace-page-width="wide"] {
+    --page-max-width: var(--container-5xl);
+  }
+  &[data-workspace-page-width="expanded"] {
+    --page-max-width: var(--container-6xl);
+  }
+  @media (min-width: 40rem) {
+    --page-pad: calc(var(--spacing) * 6);
+  }
+}
+.chat-composer-lane,
+.messages-timeline-scroll {
+  --chat-sidebar-panel-shift: clamp(
+    0px,
+    calc(
+      2 * var(--sidebar-panel-clearance, 0px) + var(--chat-content-max-width) +
+        var(--chat-lane-inset-end, 0px) - var(--chat-lane-inset-start, 0px) - 100%
+    ),
+    calc(var(--sidebar-panel-clearance, 0px) - 3rem - var(--chat-lane-inset-start, 0px))
+  );
+}
+
 @layer components {
   .chat-composer-lane {
     padding-inline-start: calc(
@@ -2701,13 +2727,15 @@ code {
   @media (min-width: 640px) {
     .chat-composer-lane {
       padding-inline-start: calc(
-        env(safe-area-inset-left) + 3rem + var(--chat-lane-inset-start, 0px)
+        env(safe-area-inset-left) + 3rem + var(--chat-lane-inset-start, 0px) +
+          var(--chat-sidebar-panel-shift)
       );
       padding-inline-end: calc(env(safe-area-inset-right) + 3rem + var(--chat-lane-inset-end, 0px));
     }
     [data-chat-canvas] .messages-timeline-scroll {
       padding-inline-start: calc(
-        3rem + var(--chat-lane-inset-start, 0px) - var(--chat-timeline-gutter, 0px)
+        3rem + var(--chat-lane-inset-start, 0px) - var(--chat-timeline-gutter, 0px) +
+          var(--chat-sidebar-panel-shift)
       );
       padding-inline-end: calc(
         3rem + var(--chat-lane-inset-end, 0px) - var(--chat-timeline-gutter, 0px)
@@ -2732,4 +2760,46 @@ code {
 
 .messages-timeline-scroll:focus-visible {
   outline: none;
+}
+
+/* The timeline's turn markers sit beside the open floating thread sidebar, not under it. */
+[data-timeline-minimap] {
+  left: var(--sidebar-panel-clearance, 0px);
+  transition: left 200ms var(--ease-out-strong) 150ms;
+}
+
+/* Zen mode drops the space the hidden chrome held: titles move to the corner and the
+   composer to the bottom. zenMode.ts animates that shift. */
+:root[data-zen-mode] [data-slot="sidebar-wrapper"] {
+  --workspace-titlebar-content-left: calc(var(--workspace-controls-left) + 0.25rem) !important;
+  --app-toolbar-clearance: 0px !important;
+}
+
+/* Zen mode hides the app chrome, including chrome that mounts while it is on. */
+:root[data-zen-mode] [data-zen-chrome] {
+  opacity: 0;
+}
+:root[data-zen-mode] :is([data-zen-chrome], [data-zen-chrome] *) {
+  pointer-events: none !important;
+}
+
+/* Interactive elements keep the arrow cursor unless the user opts into the hand.
+   Unlayered so it outranks utilities and the cursor rules above. */
+:root[data-pointer-cursor="off"]
+  :is(
+    [class*="cursor-pointer"],
+    a[href],
+    [role="button"],
+    [role="link"],
+    [role="option"],
+    [role="menuitem"],
+    [role="tab"],
+    summary,
+    label,
+    select,
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="range"]
+  ) {
+  cursor: default;
 }

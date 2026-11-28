@@ -61,12 +61,12 @@ import { type ChatFileAttachment, type TurnDiffSummary } from "../../types";
 import {
   ArrowRightIcon,
   BotIcon,
-  CircleAlertIcon,
+  AlertCircleIcon,
   MessagesSquareIcon,
-  Minimize2Icon,
+  Minimize02Icon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { Skeleton } from "../ui/skeleton";
 import { ExpandedImagePreview } from "./ExpandedImagePreview";
 import {
@@ -1789,9 +1789,9 @@ function ContextCompactionTimelineRow({
   const content = (
     <span className="flex min-w-0 items-center gap-1.5">
       {row.failed ? (
-        <CircleAlertIcon aria-hidden="true" className="size-3 shrink-0" />
+        <AlertCircleIcon aria-hidden="true" className="size-3 shrink-0" />
       ) : (
-        <Minimize2Icon aria-hidden="true" className="size-3" />
+        <Minimize02Icon aria-hidden="true" className="size-3" />
       )}
       {row.tokenCounts ? (
         <>

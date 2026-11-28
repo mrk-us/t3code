@@ -15,7 +15,7 @@ import {
   type ProjectGroupUpdate,
 } from "../../hooks/useProjectGroupUpdate";
 import { Navigate, useLocation, useNavigate } from "@tanstack/react-router";
-import { InfoIcon, Trash2Icon } from "lucide-react";
+import { InfoIcon, Delete02Icon } from "~/lib/icons";
 import { lazy, Suspense, useRef, useState, type ReactNode } from "react";
 import { T, useGT, useMessages } from "gt-react";
 
@@ -724,7 +724,7 @@ function ProjectDetail({
                 disabled={!canEditGroup}
                 onClick={() => void removeMembers(group.memberProjects)}
               >
-                <Trash2Icon />
+                <Delete02Icon />
                 {hasOtherMembers
                   ? gt("Remove checkout")
                   : group.memberProjects.length > 1

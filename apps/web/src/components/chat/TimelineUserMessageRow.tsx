@@ -36,12 +36,12 @@ import {
   ChevronDownIcon,
   DownloadIcon,
   EyeIcon,
-  type LucideIcon,
+  type IconComponent,
   MessagesSquareIcon,
-  Redo2Icon,
+  Redo02Icon,
   PencilIcon,
   LinkIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { Button, InlineButton } from "../ui/button";
 import { FreshSessionRow, ModelSwitchRow } from "./V2LifecycleRow";
 import { useAssetUrlRefresh, useAssetUrls, useAssetUrlState } from "../../assets/assetUrls";
@@ -401,7 +401,7 @@ export function useScheduledTaskTitle(
 }
 
 export function FoldedMessageHeader(props: {
-  icon: LucideIcon;
+  icon: IconComponent;
   label: string;
   /** A generic label (not a thread title) never truncates, whatever its length in the UI language. */
   fitLabel?: boolean;
@@ -1162,7 +1162,7 @@ function UserMessageIntentMarker({
             : gt("Steered the active turn")
       }
     >
-      <Redo2Icon aria-hidden="true" className="size-3" />
+      <Redo02Icon aria-hidden="true" className="size-3" />
       {unread
         ? gt("Steer · waiting to be read")
         : gt("Steer", { $context: "noun, a message that steers the running turn" })}

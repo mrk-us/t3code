@@ -5,7 +5,7 @@ import { connectionStatusTitle } from "@t3tools/client-runtime/connection";
 import { AsyncResult } from "effect/reactivity";
 import {
   ChevronDownIcon,
-  Clock3Icon,
+  Clock03Icon,
   CopyIcon,
   InboxIcon,
   MessageSquareIcon,
@@ -13,8 +13,8 @@ import {
   PencilIcon,
   PlayIcon,
   PlusIcon,
-  Trash2Icon,
-} from "lucide-react";
+  Delete02Icon,
+} from "~/lib/icons";
 import { type ReactNode, useRef, useState } from "react";
 import type {
   EnvironmentId,
@@ -272,7 +272,7 @@ function WebhookFiltersField({
               aria-label={gt("Remove filter {number}", { number: index + 1 })}
               onClick={() => onChange(removeWebhookFilterDraft(filters, filter.id))}
             >
-              <Trash2Icon />
+              <Delete02Icon />
             </Button>
           </div>
           <div className="flex items-center gap-2">
@@ -490,7 +490,7 @@ export function ScheduledTasksSettings(target: {
           <Empty>
             <EmptyHeader>
               <EmptyMedia variant="icon">
-                <Clock3Icon />
+                <Clock03Icon />
               </EmptyMedia>
               <EmptyTitle>
                 <T>No environments available</T>
@@ -941,7 +941,7 @@ function ScheduledTaskRow({
               )}
               <MenuSeparator />
               <MenuItem onClick={() => void act("delete")}>
-                <Trash2Icon />
+                <Delete02Icon />
                 Delete
               </MenuItem>
             </MenuPopup>

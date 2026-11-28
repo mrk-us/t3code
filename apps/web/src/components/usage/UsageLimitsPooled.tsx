@@ -15,7 +15,7 @@ import {
 import { T, Var, useGT, useMessages } from "gt-react";
 import type { Popover as PopoverPrimitive } from "@base-ui/react/popover";
 import { normalizeProviderAccentColor } from "@t3tools/client-runtime/state/provider-instance-display";
-import { AlertTriangleIcon, ExternalLinkIcon, TicketIcon } from "lucide-react";
+import { TriangleAlertIcon, ExternalLinkIcon, TicketIcon } from "~/lib/icons";
 import {
   createContext,
   Fragment,
@@ -103,7 +103,7 @@ function AccountAvatar({
   return account.email ? <AccountChip email={account.email} /> : null;
 }
 
-function AccountName({
+export function AccountName({
   account,
   className,
 }: {
@@ -791,7 +791,7 @@ function LimitNotices({ notices }: { readonly notices: readonly string[] }) {
   if (notices.length === 0) return null;
   return (
     <Alert variant="warning" controlAlignment="first-line">
-      <AlertTriangleIcon />
+      <TriangleAlertIcon />
       {notices.map((notice) => (
         <AlertTitle key={notice} className="break-words">
           {notice}

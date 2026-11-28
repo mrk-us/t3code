@@ -1,7 +1,7 @@
 import { useLegendListRef } from "~/hooks/useLegendListRef";
 import { LegendList, type LegendListRef } from "@legendapp/list/react";
 import { T, useGT } from "gt-react";
-import { CheckIcon } from "lucide-react";
+import { CheckIcon } from "~/lib/icons";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   displayFontFamily,

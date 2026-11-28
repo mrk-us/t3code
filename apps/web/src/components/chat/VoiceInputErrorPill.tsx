@@ -1,7 +1,7 @@
 import { msg, useGT, useMessages } from "gt-react";
 import type { VoiceInputErrorCode } from "@t3tools/client-runtime/voice-input";
 import { useNavigate } from "@tanstack/react-router";
-import { CircleAlertIcon, XIcon } from "lucide-react";
+import { AlertCircleIcon, XIcon } from "~/lib/icons";
 
 import { Button } from "../ui/button";
 import { VoiceInputPill } from "./VoiceInputPill";
@@ -82,7 +82,7 @@ export function VoiceInputErrorPill(props: {
         }
         label={message}
       >
-        <CircleAlertIcon aria-hidden className="size-3.5 shrink-0" />
+        <AlertCircleIcon aria-hidden className="size-3.5 shrink-0" />
         <span className="truncate">{errorLabel ? m(errorLabel) : gt("Voice input failed")}</span>
       </SharedTooltipTrigger>
       {props.errorAction ? (

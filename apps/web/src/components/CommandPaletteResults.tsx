@@ -3,7 +3,7 @@ import { useLegendListRef } from "~/hooks/useLegendListRef";
 import { useStableCallback } from "~/hooks/useStableCallback";
 import { type ResolvedKeybindingsConfig } from "@t3tools/contracts";
 import { LegendList, type LegendListRef } from "@legendapp/list/react";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon } from "~/lib/icons";
 import { type ReactNode, type RefObject, useState } from "react";
 import { T } from "gt-react";
 import { cn } from "~/lib/utils";

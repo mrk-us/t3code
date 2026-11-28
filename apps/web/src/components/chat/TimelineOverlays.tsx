@@ -1,5 +1,5 @@
 import { T } from "gt-react";
-import { ChevronDownIcon, PaperclipIcon } from "lucide-react";
+import { ChevronDownIcon, PaperclipIcon } from "~/lib/icons";
 
 import { Button } from "../ui/button";
 

@@ -1,6 +1,6 @@
 import type { SnapShotSource } from "@t3tools/contracts";
 import { T, useGT } from "gt-react";
-import { CheckIcon, CopyIcon, ImageIcon, TextIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, ImageIcon, TextIcon } from "~/lib/icons";
 import { Suspense, useRef, useState } from "react";
 
 import { useRenderedAppearance } from "../../hooks/useTheme";

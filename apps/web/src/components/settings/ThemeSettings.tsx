@@ -6,9 +6,9 @@ import {
   PenLineIcon,
   PlusIcon,
   SunIcon,
-  Trash2Icon,
+  Delete02Icon,
   UploadIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useState, type ReactElement } from "react";
 import { useEnvironmentThemeDefinitions } from "../../hooks/useEnvironmentTheme";
 import { readThemeHalvesRaw } from "../../hooks/useTheme";
@@ -435,7 +435,7 @@ function ThemeLibraryCard({
                           onRemove();
                         }}
                       >
-                        <Trash2Icon />
+                        <Delete02Icon />
                       </Button>
                     }
                     label={variantNavigation ? gt("Remove themes") : gt("Remove theme")}

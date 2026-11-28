@@ -61,6 +61,7 @@ const PREVIEW_FORWARDED_COMMANDS = [
   "workspace.focusNext",
   "workspace.focusPrevious",
   "sidebar.toggle",
+  "zenMode.toggle",
   "rightPanel.toggle",
   "rightPanel.toggleMaximized",
   "rightPanel.new",

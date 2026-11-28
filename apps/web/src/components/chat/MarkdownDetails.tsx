@@ -1,5 +1,5 @@
 import { useGT } from "gt-react";
-import { ChevronRightIcon } from "lucide-react";
+import { ChevronRightIcon } from "~/lib/icons";
 import { flushSync } from "react-dom";
 import {
   Children,

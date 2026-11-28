@@ -1,6 +1,6 @@
 import { EnvironmentId } from "@t3tools/contracts";
 import { T, useGT } from "gt-react";
-import { LayersIcon } from "lucide-react";
+import { LayersIcon } from "~/lib/icons";
 
 import { Button } from "../ui/button";
 import { ProjectSettingsPanel } from "./ProjectSettingsPanel";

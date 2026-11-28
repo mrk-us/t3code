@@ -77,16 +77,16 @@ import {
   MessageSquareIcon,
   PaletteIcon,
   RotateCcwIcon,
-  SettingsIcon,
+  Settings02Icon,
   MonitorIcon,
   PinIcon,
   PinOffIcon,
   PlugIcon,
-  SquarePenIcon,
+  PlusIcon,
   TextSearchIcon,
   UserPlusIcon,
   WorkflowIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { openThreadFind } from "./chat/threadFindStore";
 import { dispatchPreviewAction } from "./preview/previewActionBus";
 import { previewBridge } from "./preview/previewBridge";
@@ -318,7 +318,7 @@ function openIntentView(
       };
     case "new-thread-in":
       return {
-        addonIcon: <SquarePenIcon className={ADDON_ICON_CLASS} />,
+        addonIcon: <PlusIcon className={ADDON_ICON_CLASS} />,
         groups: [{ value: NEW_THREAD_IN_GROUP, label: resolve(msg("Projects")), items: [] }],
       };
     case "change-theme":
@@ -1343,7 +1343,7 @@ function OpenCommandPaletteDialog(props: {
                 searchTerms: ["connect", "environment", "connection", "settings"],
                 title: gt("Connect an environment"),
                 description: gt("No connected environment can add a project"),
-                icon: <SettingsIcon className={ITEM_ICON_CLASS} />,
+                icon: <Settings02Icon className={ITEM_ICON_CLASS} />,
                 keepOpen: true,
                 run: async () => {
                   openConnectionSettings();
@@ -1394,7 +1394,7 @@ function OpenCommandPaletteDialog(props: {
           </T>
         ),
         searchTitle: gt("New thread in {project}", { project: activeProjectTitle }),
-        icon: <SquarePenIcon className={ITEM_ICON_CLASS} />,
+        icon: <PlusIcon className={ITEM_ICON_CLASS} />,
         shortcutCommand: "chat.newLocal",
         run: async () => {
           await startNewThreadFromContext({
@@ -1412,8 +1412,8 @@ function OpenCommandPaletteDialog(props: {
       value: "action:new-thread-in",
       searchTerms: ["new thread", "project", "pick", "choose", "select"],
       title: gt("New thread in..."),
-      icon: <SquarePenIcon className={ITEM_ICON_CLASS} />,
-      addonIcon: <SquarePenIcon className={ADDON_ICON_CLASS} />,
+      icon: <PlusIcon className={ITEM_ICON_CLASS} />,
+      addonIcon: <PlusIcon className={ADDON_ICON_CLASS} />,
       groups: [{ value: NEW_THREAD_IN_GROUP, label: gt("Projects"), items: projectThreadItems }],
     });
   }
@@ -1834,7 +1834,7 @@ function OpenCommandPaletteDialog(props: {
     value: "action:settings",
     searchTerms: ["settings", "preferences", "configuration", "keybindings"],
     title: gt("Open settings"),
-    icon: <SettingsIcon className={ITEM_ICON_CLASS} />,
+    icon: <Settings02Icon className={ITEM_ICON_CLASS} />,
     run: async () => {
       await navigate({ to: "/settings" });
     },

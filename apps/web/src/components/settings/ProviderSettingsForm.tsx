@@ -13,7 +13,7 @@ import {
   type SecretReference,
 } from "@t3tools/contracts";
 import { msg, T, useGT, useMessages } from "gt-react";
-import { PlusIcon, XIcon } from "lucide-react";
+import { PlusIcon, XIcon } from "~/lib/icons";
 
 import { m, type MessageResolver } from "../../i18n/messages";
 import { cn } from "../../lib/utils";

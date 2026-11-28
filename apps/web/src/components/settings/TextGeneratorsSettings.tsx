@@ -11,7 +11,7 @@ import { pickModelSelection } from "@t3tools/shared/model";
 import { AsyncResult } from "effect/reactivity";
 import * as Option from "effect/Option";
 import * as Schema from "effect/Schema";
-import { CheckIcon, MoreVertical, PlusIcon, ServerIcon } from "lucide-react";
+import { CheckIcon, MoreVerticalIcon as MoreVertical, PlusIcon, ServerIcon } from "~/lib/icons";
 import { useId, useState } from "react";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 

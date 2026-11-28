@@ -2,7 +2,7 @@ import type { ScopedThreadRef } from "@t3tools/contracts";
 import { contextMenuSourceOf } from "../../contextMenuSource";
 import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
 import { T, useGT } from "gt-react";
-import { ArrowLeftIcon, ExternalLinkIcon } from "lucide-react";
+import { ArrowLeftIcon, ExternalLinkIcon } from "~/lib/icons";
 import type { MouseEvent as ReactMouseEvent } from "react";
 
 import { useOpenLink } from "~/browser/useOpenLink";

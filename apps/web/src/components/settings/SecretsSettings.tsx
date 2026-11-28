@@ -1,5 +1,5 @@
 import type { EnvironmentId, SecretProviderConfig, SecretProviderId } from "@t3tools/contracts";
-import { PlusIcon } from "lucide-react";
+import { PlusIcon } from "~/lib/icons";
 import { useState } from "react";
 import { T, useGT, useMessages, Var } from "gt-react";
 

@@ -1,5 +1,5 @@
 import { T, useGT, useMessages } from "gt-react";
-import { BookmarkIcon, CheckIcon, ChevronDownIcon, PlusIcon } from "lucide-react";
+import { BookmarkIcon, CheckIcon, ChevronDownIcon, PlusIcon } from "~/lib/icons";
 import { useId, useState } from "react";
 import type * as Schema from "effect/Schema";
 import {

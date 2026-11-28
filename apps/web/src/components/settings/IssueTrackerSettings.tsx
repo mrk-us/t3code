@@ -10,7 +10,7 @@ import {
 } from "@t3tools/client-runtime/state/issue-trackers";
 import { squashAtomCommandFailure } from "@t3tools/client-runtime/state/runtime";
 import { T, useGT, useMessages } from "gt-react";
-import { ChevronDownIcon, ExternalLinkIcon, PlusIcon, XIcon } from "lucide-react";
+import { ChevronDownIcon, ExternalLinkIcon, PlusIcon, XIcon } from "~/lib/icons";
 import { useState, type ElementType } from "react";
 import type {
   EnvironmentId,

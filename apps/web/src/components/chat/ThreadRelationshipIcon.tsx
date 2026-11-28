@@ -1,6 +1,6 @@
 import type { ProviderDriverKind, ServerProvider } from "@t3tools/contracts";
 import { msg } from "gt-react";
-import { BotIcon, type LucideIcon } from "lucide-react";
+import { BotIcon, type IconComponent } from "~/lib/icons";
 import { m, type MessageResolver } from "../../i18n/messages";
 import { cn } from "../../lib/utils";
 import {
@@ -66,7 +66,7 @@ export function ThreadRelationshipIcon({
   /** For rows that can't take `providerEntries` but sit in the same list as rows that do. */
   anyInstanceBadge?: boolean;
   status: string | null;
-  fallbackIcon?: LucideIcon;
+  fallbackIcon?: IconComponent;
 }) {
   const iconClassName = "size-4 shrink-0 text-muted-foreground";
   const entry = driver

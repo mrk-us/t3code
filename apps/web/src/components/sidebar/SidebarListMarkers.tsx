@@ -111,26 +111,27 @@ export function SidebarDragBoundary(props: {
 }
 
 export function SidebarSectionHeader(props: {
-  marker: "working-header" | "snoozed-header" | "settled-header";
+  marker: "pinned-header" | "working-header" | "snoozed-header" | "settled-header";
   label: string;
   /** A muted trailing count. */
   count: number;
-  className?: string;
   dragging?: boolean;
   isDropTarget?: boolean;
   toggle: { expanded: boolean; onToggle: () => void };
 }) {
   const shelf =
-    props.marker === "working-header"
-      ? "working"
-      : props.marker === "snoozed-header"
-        ? "snoozed"
-        : "settled";
+    props.marker === "pinned-header"
+      ? "pinned"
+      : props.marker === "working-header"
+        ? "working"
+        : props.marker === "snoozed-header"
+          ? "snoozed"
+          : "settled";
   return (
     <SortableSidebarMarker
       marker={props.marker}
       data-testid={`sidebar-${props.marker}`}
-      className={cn("relative mx-0.5 h-8", props.className)}
+      className="relative mx-0.5 h-8"
     >
       <CollapsibleSectionHeader
         data-sidebar-row={`shelf:${shelf}`}

@@ -1,6 +1,6 @@
 import { useAtomCommand } from "~/state/use-atom-command";
 import type { EnvironmentId, PullRequestRef, PullRequestReviewVerdict } from "@t3tools/contracts";
-import { CheckIcon, MessageSquareIcon, XCircleIcon } from "lucide-react";
+import { CheckIcon, MessageSquareIcon, CircleXIcon } from "~/lib/icons";
 import { msg, useGT, useMessages } from "gt-react";
 import { useEffect, useState, type ReactNode, type RefObject } from "react";
 
@@ -55,7 +55,7 @@ const VERDICTS: ReadonlyArray<{
     value: "request-changes",
     label: msg("Request changes"),
     sent: () => m(msg("Changes requested")),
-    icon: <XCircleIcon className="size-3" />,
+    icon: <CircleXIcon className="size-3" />,
   },
 ];
 

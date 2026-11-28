@@ -17,7 +17,7 @@ import {
   ArrowRightIcon,
   CheckIcon,
   ChevronDownIcon,
-  Columns2Icon,
+  LayoutTwoColumnIcon,
   FlaskConicalOffIcon,
   FolderTreeIcon,
   PilcrowIcon,
@@ -25,8 +25,8 @@ import {
   TextWrapIcon,
   ChevronRightIcon,
   ChevronsDownUpIcon,
-  ChevronsUpDownIcon,
-} from "lucide-react";
+  UnfoldMoreIcon,
+} from "~/lib/icons";
 import * as Schema from "effect/Schema";
 import { type MouseEvent, useEffect, useRef, useState } from "react";
 import { useCodeViewFileReveal } from "./diffs/useCodeViewFileReveal";
@@ -1435,7 +1435,7 @@ export default function DiffPanel({
             label={allDiffFilesCollapsed ? gt("Expand all files") : gt("Collapse all files")}
           >
             {allDiffFilesCollapsed ? (
-              <ChevronsUpDownIcon className="size-3.5" />
+              <UnfoldMoreIcon className="size-3.5" />
             ) : (
               <ChevronsDownUpIcon className="size-3.5" />
             )}
@@ -1458,7 +1458,7 @@ export default function DiffPanel({
               <Rows3Icon className="size-3.5" />
             </Toggle>
             <Toggle aria-label={gt("Split diff view")} value="split">
-              <Columns2Icon className="size-3.5" />
+              <LayoutTwoColumnIcon className="size-3.5" />
             </Toggle>
           </ToggleGroup>
         </span>

@@ -1,5 +1,5 @@
 import { T, useGT } from "gt-react";
-import { PlusIcon, XIcon } from "lucide-react";
+import { PlusIcon, XIcon } from "~/lib/icons";
 import { useRef, useState, type PointerEvent } from "react";
 
 import { hexToHsv, hsvToHex, type HsvColor } from "../../lib/color";

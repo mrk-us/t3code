@@ -16,7 +16,7 @@ import {
   type ThreadId,
 } from "@t3tools/contracts";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
-import { GitBranchIcon } from "lucide-react";
+import { GitBranchIcon } from "~/lib/icons";
 import {
   useEffect,
   useEffectEvent,

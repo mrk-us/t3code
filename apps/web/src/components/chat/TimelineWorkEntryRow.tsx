@@ -41,11 +41,11 @@ import { McpSignInAction } from "./McpSignInAction";
 import * as DateTime from "effect/DateTime";
 import {
   ChevronRightIcon,
-  CircleAlertIcon,
+  AlertCircleIcon,
   ExternalLinkIcon,
   XIcon,
   RotateCcwIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { Button, InlineButton } from "../ui/button";
 import { useAssetUrls } from "../../assets/assetUrls";
 import { observeResize } from "../../lib/observeResize";
@@ -371,7 +371,7 @@ function WorkEntryLogRow(props: WorkEntryRowProps) {
         data-v2-item-visibility={workEntry.projectedItem?.visibility}
         wrapLabel
         icon={
-          <CircleAlertIcon
+          <AlertCircleIcon
             className={cn("size-4", warning ? "text-warning" : "text-destructive")}
           />
         }

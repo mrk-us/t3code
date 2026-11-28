@@ -1,5 +1,5 @@
 import { useGT } from "gt-react";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon } from "~/lib/icons";
 import type { ReactNode } from "react";
 
 import { cn } from "~/lib/utils";

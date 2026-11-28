@@ -22,7 +22,7 @@ import {
   AppWindowIcon,
   ArrowUpDownIcon,
   CheckIcon,
-  CircleHelpIcon,
+  HelpCircleIcon,
   CloudIcon,
   GlobeIcon,
   MaximizeIcon,
@@ -33,7 +33,7 @@ import {
   UnfoldVerticalIcon,
   FoldVerticalIcon,
   XIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import {
   memo,
   type FocusEvent,
@@ -981,7 +981,7 @@ function FleetCanvas({
             <PopoverTrigger
               render={
                 <Button size="icon-xs" variant="ghost" aria-label={gt("How to use the map")}>
-                  <CircleHelpIcon />
+                  <HelpCircleIcon />
                 </Button>
               }
             />

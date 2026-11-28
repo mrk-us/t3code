@@ -1,5 +1,5 @@
 import { useScopedSettingsWriteAllowed } from "./useScopedSettings";
-import { SettingsIcon } from "lucide-react";
+import { Settings02Icon } from "~/lib/icons";
 import { msg, T, useGT, useMessages } from "gt-react";
 import { useState } from "react";
 import { type BackgroundActivityProfile } from "@t3tools/contracts";
@@ -469,7 +469,7 @@ export function BackgroundActivitySettingsRow() {
                   aria-label={gt("Configure advanced background activity")}
                   onClick={() => setBackgroundActivityDialogOpen(true)}
                 >
-                  <SettingsIcon className="size-4" />
+                  <Settings02Icon className="size-4" />
                 </Button>
               }
               label={

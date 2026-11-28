@@ -6,7 +6,7 @@ import type {
   PullRequestRef,
 } from "@t3tools/contracts";
 import { msg, useGT, useLocale, useMessages } from "gt-react";
-import { SmilePlusIcon } from "lucide-react";
+import { SmilePlusIcon } from "~/lib/icons";
 import { useState } from "react";
 
 import { m } from "~/i18n/messages";

@@ -9,7 +9,7 @@ import {
 } from "@t3tools/client-runtime/state/runtime";
 import { useBlocker } from "@tanstack/react-router";
 import { T, useGT, Var } from "gt-react";
-import { FileCode2Icon, PlusIcon } from "lucide-react";
+import { FileCodeIcon, PlusIcon } from "~/lib/icons";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 
@@ -549,7 +549,7 @@ export default function WorkflowDefinitionEditor({
                     className="flex w-full items-center gap-3 px-3 py-2.5 text-start hover:bg-accent/50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                     onClick={() => open(candidate.name)}
                   >
-                    <FileCode2Icon className="size-4 shrink-0 text-muted-foreground" />
+                    <FileCodeIcon className="size-4 shrink-0 text-muted-foreground" />
                     <span className="min-w-0 flex-1">
                       <span className="block truncate font-mono text-sm">{candidate.name}</span>
                       <span className="block truncate text-xs text-muted-foreground">

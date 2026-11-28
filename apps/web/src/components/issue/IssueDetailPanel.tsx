@@ -34,7 +34,7 @@ import {
   TagIcon,
   UserPlusIcon,
   UsersIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { useContext, useState, type ReactNode } from "react";
 

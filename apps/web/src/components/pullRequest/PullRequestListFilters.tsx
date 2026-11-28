@@ -20,7 +20,7 @@ import {
   SearchIcon,
   TagIcon,
   UserRoundIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages } from "gt-react";
 import { type ElementType, useState } from "react";
 

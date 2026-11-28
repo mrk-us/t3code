@@ -5,7 +5,7 @@ import {
   type ScopedThreadRef,
 } from "@t3tools/contracts";
 import { useGT } from "gt-react";
-import { QuoteIcon } from "lucide-react";
+import { QuoteIcon } from "~/lib/icons";
 import { use, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import {

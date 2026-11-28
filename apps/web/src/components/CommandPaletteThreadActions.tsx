@@ -8,7 +8,7 @@ import {
   FolderPlusIcon,
   GitBranchIcon,
   HashIcon,
-  type LucideIcon,
+  type IconComponent,
   MailOpenIcon,
   MessageSquareIcon,
   MessageSquarePlusIcon,
@@ -16,8 +16,8 @@ import {
   PinOffIcon,
   RefreshCwIcon,
   TimerIcon,
-  Trash2Icon,
-} from "lucide-react";
+  Delete02Icon,
+} from "~/lib/icons";
 
 import { useThreadActionMenu } from "../hooks/useThreadActionMenu";
 import {
@@ -28,7 +28,7 @@ import {
 } from "./CommandPalette.logic";
 import type { ThreadActionMenuId } from "./threadActionMenu.logic";
 
-const ICONS: Record<string, LucideIcon> = {
+const ICONS: Record<string, IconComponent> = {
   archive: ArchiveIcon,
   "circle-check": CircleCheckIcon,
   clock: ClockIcon,
@@ -44,7 +44,7 @@ const ICONS: Record<string, LucideIcon> = {
   "pin-off": PinOffIcon,
   "refresh-cw": RefreshCwIcon,
   timer: TimerIcon,
-  trash: Trash2Icon,
+  trash: Delete02Icon,
 };
 
 // The palette has its own rows for these, and no inline title editor for rename.

@@ -32,6 +32,10 @@ In the model picker, use `Left`/`Shift+Tab` to move to the provider list, `Right
 
 Remap under **Copy Link or Thread** and **Copy Number** in **Settings → Keybindings**.
 
+## Zen mode
+
+`zenMode.toggle` (default `mod+.`, web and desktop) turns on zen mode: everything except the thread breadcrumb and the message box hides, including the sidebar, thread details, right panel, terminal drawer, and toolbars. Press it again to bring back the panels that were open.
+
 ## Find
 
 - **Current thread** (`chat.find`, default `mod+f` outside terminals/previews): Searches all messages and plans in the thread (requires an up-to-date server). Use `Enter` / `Shift+Enter` to step through matches and `Esc` to close.

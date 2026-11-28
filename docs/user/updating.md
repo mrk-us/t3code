@@ -1,10 +1,10 @@
 # Updating T3 Code
 
-T3 Code clients and servers can run on different machines and must share a compatible orchestration protocol. When a server or provider is behind, the sidebar update button and **Settings → Environments** handle updates.
+T3 Code clients and servers can run on different machines and must share a compatible orchestration protocol. When a server or provider is behind, the **Update** button and **Settings → Environments** handle updates.
 
 ## Update everything at once
 
-Click the **Update** button at the bottom of the sidebar (web or desktop) to update outdated providers, behind servers, and the desktop app in one step.
+Click the **Update** button at the bottom left of the window (web or desktop) to update outdated providers, behind servers, and the desktop app in one step.
 
 - Hover to preview what will update; click while running to view per-machine progress or retry failures.
 - Confirmation dialogs show which machines are skipped (offline or manual-only) and how many active threads will pause/resume.

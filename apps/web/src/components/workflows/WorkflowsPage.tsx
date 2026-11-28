@@ -2,7 +2,7 @@ import { workflowReferenceThreadId } from "@t3tools/client-runtime/workflows";
 import { EnvironmentId, type WorkflowRunSubject } from "@t3tools/contracts";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { T, useGT } from "gt-react";
-import { FileCode2Icon } from "lucide-react";
+import { FileCodeIcon } from "~/lib/icons";
 import { lazy, Suspense, useState, type MouseEvent } from "react";
 
 import { isElectron } from "~/env";
@@ -247,7 +247,7 @@ export function WorkflowsPage() {
             )}
             {environmentId === null || editing ? null : (
               <Button size="sm" variant="outline" onClick={() => openDefinitions(null)}>
-                <FileCode2Icon />
+                <FileCodeIcon />
                 <T context="workflow definition files">Definitions</T>
               </Button>
             )}

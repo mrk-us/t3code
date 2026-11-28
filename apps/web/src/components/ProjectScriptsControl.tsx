@@ -14,7 +14,7 @@ import {
   squashAtomCommandFailure,
 } from "@t3tools/client-runtime/state/runtime";
 import { projectScriptMenuLabel } from "@t3tools/shared/projectScriptsCopy";
-import { ChevronDownIcon, DownloadIcon, PlusIcon, SettingsIcon, WrenchIcon } from "lucide-react";
+import { ChevronDownIcon, DownloadIcon, PlusIcon, Settings02Icon, WrenchIcon } from "~/lib/icons";
 import React, { useState } from "react";
 import { T, useGT, useMessages, Var } from "gt-react";
 
@@ -253,7 +253,7 @@ export default function ProjectScriptsControl({
                     openEditDialog(script);
                   }}
                 >
-                  <SettingsIcon className="size-3.5" />
+                  <Settings02Icon className="size-3.5" />
                 </Button>
               </span>
             </span>

@@ -56,7 +56,7 @@ import {
   PlusIcon,
   SquareIcon,
   UnplugIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { useRef, useState, type ReactNode } from "react";
 import type { MessageResolver } from "~/i18n/messages";

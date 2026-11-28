@@ -5,7 +5,7 @@ import { worktreeSetupStageLabel } from "@t3tools/client-runtime/contract-labels
 import { formatDuration } from "@t3tools/shared/orchestrationTimingCopy";
 import {
   CheckIcon,
-  CircleAlertIcon,
+  AlertCircleIcon,
   CircleIcon,
   LaptopIcon,
   MinusIcon,
@@ -13,7 +13,7 @@ import {
   XIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { useState, type ReactNode } from "react";
 
 import { Button } from "~/components/ui/button";
@@ -74,7 +74,7 @@ function StageIcon({ status }: { status: WorktreeSetupStage["status"] }) {
     case "failed":
       return <XIcon aria-hidden className={className} />;
     case "warning":
-      return <CircleAlertIcon aria-hidden className={className} />;
+      return <AlertCircleIcon aria-hidden className={className} />;
     case "skipped":
       return <MinusIcon aria-hidden className={className} />;
     case "pending":

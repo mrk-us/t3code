@@ -1,5 +1,5 @@
 import { T, useGT, Var } from "gt-react";
-import { ExternalLinkIcon, PaperclipIcon } from "lucide-react";
+import { ExternalLinkIcon, PaperclipIcon } from "~/lib/icons";
 import { markdownImageSourceFragment } from "@t3tools/client-runtime/markdown-images";
 import { sourceControlClients } from "@t3tools/client-runtime/source-control-clients";
 import {

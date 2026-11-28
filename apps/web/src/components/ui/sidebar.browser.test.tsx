@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vite-plus/test";
 
 import "~/index.css";
 
+import { __setClientSettingsForTests, getClientSettings } from "~/hooks/useSettings";
 import { render } from "../../../test/render";
 import { Sidebar, SidebarProvider, SidebarRail, SidebarTrigger, useSidebar } from "./sidebar";
 
@@ -304,6 +305,10 @@ it("keeps closed mobile sheet contents mounted and reports the sheet only while 
 });
 
 it("opens the mobile sheet without a transition while panel animations are off", async () => {
+  using stack = new DisposableStack();
+  const previousSettings = getClientSettings();
+  stack.defer(() => __setClientSettingsForTests(previousSettings));
+  __setClientSettingsForTests({ ...previousSettings, panelAnimationsEnabled: false });
   await page.viewport(390, 844);
   await using screen = await render(
     <div data-panel-animations="false">

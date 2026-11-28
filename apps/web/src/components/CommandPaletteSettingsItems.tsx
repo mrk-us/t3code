@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { decodeMsg, useGT, useMessages } from "gt-react";
-import { SettingsIcon } from "lucide-react";
+import { Settings02Icon } from "~/lib/icons";
 
 import { ITEM_ICON_CLASS, type CommandPaletteActionItem } from "./CommandPalette.logic";
 import { settingsForThisPlatform, SETTINGS_SECTION_LABELS } from "./settings/settingsSearch";
@@ -36,7 +36,7 @@ export function useCommandPaletteSettingsItems(
       section: messages(SETTINGS_SECTION_LABELS[item.to]),
     }),
     ...(item.secondary ? { secondary: true } : {}),
-    icon: <SettingsIcon className={ITEM_ICON_CLASS} />,
+    icon: <Settings02Icon className={ITEM_ICON_CLASS} />,
     run: async () => {
       await navigate({
         to: item.to,

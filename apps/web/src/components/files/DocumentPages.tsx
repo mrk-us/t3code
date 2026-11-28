@@ -1,5 +1,5 @@
 import DOMPurify from "dompurify";
-import { MinusIcon, PlusIcon, RotateCcwIcon } from "lucide-react";
+import { MinusIcon, PlusIcon, RotateCcwIcon } from "~/lib/icons";
 import { FileSurfaceAction } from "./fileSurfaceChrome";
 import { useGT } from "gt-react";
 import { useEffect, useRef, useState } from "react";

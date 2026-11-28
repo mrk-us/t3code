@@ -22,17 +22,17 @@ import type {
 } from "@t3tools/contracts";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import {
-  ArrowDownUpIcon,
+  ArrowUpDownIcon,
   AtSignIcon,
   CalendarArrowDownIcon,
   CircleCheckIcon,
   ClockIcon,
   LayersIcon,
   PenLineIcon,
-  Plug2Icon,
+  Plug02Icon,
   UserCheckIcon,
   UsersIcon,
-} from "lucide-react";
+} from "~/lib/icons";
 import { msg, T, useGT, useMessages, Var } from "gt-react";
 import { Fragment, useEffect, useEffectEvent, useState, type ReactNode } from "react";
 
@@ -165,10 +165,10 @@ function hostOptionsFor(
       hosts.set(tracker.host, tracker);
   }
   return [
-    { value: "", label: resolve(msg("All", { $context: "issue filter" })), Icon: Plug2Icon },
+    { value: "", label: resolve(msg("All", { $context: "issue filter" })), Icon: Plug02Icon },
     // A remembered host no project is on any more stays listed, so the filter can be taken off.
     ...(chosen !== undefined && !hosts.has(chosen)
-      ? [{ value: chosen, label: chosen, Icon: Plug2Icon }]
+      ? [{ value: chosen, label: chosen, Icon: Plug02Icon }]
       : []),
     ...[...hosts.values()].map((tracker) => ({
       value: tracker.host,
@@ -681,6 +681,7 @@ export function IssuesPage() {
             <div
               className="flex items-center gap-1 [-webkit-app-region:no-drag]"
               data-workspace-titlebar-controls
+              data-zen-chrome="top"
             >
               <PanelLayoutControls
                 showTerminalControl={false}
@@ -720,7 +721,7 @@ export function IssuesPage() {
                 </div>
                 <PullRequestCompactFilterMenu
                   label={gt("Sort issues")}
-                  triggerIcon={<ArrowDownUpIcon aria-hidden className="size-4" />}
+                  triggerIcon={<ArrowUpDownIcon aria-hidden className="size-4" />}
                   triggerLabel={gt("Sort", { $context: "verb, button that sorts a list" })}
                   outlined
                   value={search.order ?? "updated"}

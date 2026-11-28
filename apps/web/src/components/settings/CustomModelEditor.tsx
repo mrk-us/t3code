@@ -1,4 +1,4 @@
-import { PlusIcon, XIcon } from "lucide-react";
+import { PlusIcon, XIcon } from "~/lib/icons";
 import { T, useGT, useMessages } from "gt-react";
 import { useState, type SetStateAction } from "react";
 import type { ProviderDriverKind, ServerProviderModel } from "@t3tools/contracts";

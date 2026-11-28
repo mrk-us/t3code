@@ -16,7 +16,7 @@ import {
   THREAD_DETAILS_PANEL_SELECT_LABEL_CLASS,
   THREAD_DETAILS_PANEL_SELECT_ICON_CLASS,
 } from "./threadDetailsPanelStyles";
-import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
+import { ChevronDownIcon, ChevronUpIcon } from "~/lib/icons";
 
 const parts = {
   row: THREAD_DETAILS_PANEL_ROW_CLASS,
